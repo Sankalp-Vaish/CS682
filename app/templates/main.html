@@ -1,0 +1,32 @@
+
+{% extends "master.html" %}
+
+{% block title %}
+  Main
+
+  
+{% endblock %}
+
+
+{% block content %}
+
+<div class="main">
+  <h1>Real time investment</h1>
+
+  {% if user.is_authenticated %}
+    Hi {{ user.username }}!
+    <p><a href="{% url 'logout' %}">Log Out</a></p>
+  {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+  {% endif %}
+
+
+  <button onclick="myFunction()">Click me!</button>
+
+  <h3>Welcome</h3>
+
+</div>
+
+  
+{% endblock %}

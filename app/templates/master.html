@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+<script>
+  function sub(){
+    alert(" Nice ");
+}
+</script>  
+
+</head>
+<script src="{% static 'app.js' %}"></script>
+<link rel="stylesheet" href="{% static 'myfirst.css' %}">
+<body>
+
+<div>
+  <a href="/home">HOME</a>
+</div>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
