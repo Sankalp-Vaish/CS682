@@ -44,8 +44,8 @@ def about(request):
   template = loader.get_template('about.html')
   return HttpResponse(template.render())
 
-def mortage(request):
-  template = loader.get_template('about.html')
+def mortgage(request):
+  template = loader.get_template('mortgage.html')
   return HttpResponse(template.render())
 
 def test(request):
