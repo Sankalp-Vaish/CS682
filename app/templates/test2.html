@@ -1,0 +1,47 @@
+{% extends "master.html" %}
+
+{% block title %}
+  testing
+{% endblock %}
+
+
+{% block content %}
+
+<div class="main">
+  <h1>Real time investment</h1>
+  <h3>test2</h3>
+  
+ City- {{ r.city }}
+
+ <br><br>
+ <form action="" method="POST">
+    {% csrf_token %}
+    <label for="state">Choose a State:</label>
+    <select name="state" id="state" multiple>
+      <option value="AZ">Arizona</option>
+      <option value="MA">Massachusetts</option>
+    </select>
+    <br><br>
+
+    <label for="city">Choose a State:</label>
+    <select name="city" id="city" multiple>
+      <option name="city" id="city" value="Mesa">Mesa</option>
+      <option name="city" value="Tempe">Tempe</option>
+      <option name="city" value="Phoenix">Phoenix</option>
+      <option name="city" value="Sun City">Sun City</option>
+    </select>
+    <br><br>
+    <button >Submit </button>
+  </form>
+
+  {% if flag == "False" %}
+    post
+  {% else %}
+    pre
+  {% endif %}
+  
+
+</div>
+
+  
+{% endblock %}

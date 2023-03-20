@@ -1,0 +1,71 @@
+{% extends "master.html" %}
+
+{% block title %}
+  testing
+{% endblock %}
+
+
+{% block content %}
+
+<div class="main">
+  <h1>Real time investment</h1>
+  <h3>test3</h3>
+  
+
+ <br><br>
+
+
+  {% if flag == "False" %}
+    pre
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="state">Choose a State:</label>
+        <select name="state" id="state" multiple>
+            {% for state in s %}
+            <option value={{state}}>{{state}}</option>
+            <br>
+            {% endfor %}
+        </select>
+        <br><br>
+        
+
+        <label for="city">Choose a City:</label>
+        <select name="city" id="city" multiple>
+        {% for city in c %}
+        <option value={{city}}>{{city}}</option>
+        <br>
+        {% endfor %}
+        </select>
+        <br><br>
+        <button >Submit </button>
+      </form>
+
+
+
+
+
+  {% else %}
+
+    <br><br>
+    <h2> Retrieved data</h2>
+
+    {% for house in r %}
+    city:  {{ house.city }}
+    price:  {{ house.price }}
+    lotAreaValue:  {{ house.lotAreaValue }}
+    zipcode:  {{ house.zipcode}}
+    homeType:  {{ house.homeType}}
+    bedrooms:  {{ house.bedrooms}}
+
+<br><br>
+    {% endfor %}
+
+<br>
+
+  {% endif %}
+  
+
+</div>
+
+  
+{% endblock %}

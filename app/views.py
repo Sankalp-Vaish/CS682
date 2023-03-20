@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .forms import firstform
-from . import hello
+from . import hello, test2
 #from .models import ToDoList
 
 from django.contrib.auth.forms import UserCreationForm
@@ -15,16 +15,8 @@ def main(request):
 
 def home(request):
   
-  if request.method== "POST":
-    result  = hello.printHello() 
-    template = loader.get_template('img.html')
-    context = {
-    's': result,
-    }
-    return HttpResponse(template.render(context, request))
-  else:
-    template = loader.get_template('Home.html')
-    return HttpResponse(template.render())
+  template = loader.get_template('Home.html')
+  return HttpResponse(template.render())
 
 def form(request):
   if request.method== "POST":
@@ -50,3 +42,32 @@ def test(request):
   result  = hello.printHello() 
   template = loader.get_template('test.html')
   return HttpResponse(template.render({"r":result}, request))
+
+
+def test2(request):
+  result  = hello.fetch()
+  template = loader.get_template('test2.html')
+  return HttpResponse(template.render({"r":result[0]}, request))
+
+def test3(request):
+  template = loader.get_template('test3.html')
+
+  if request.method== "POST":
+    result  = hello.read_with_prams(request.POST.get('state'), request.POST.get('city'))
+    context = {
+    "r":result,
+    "flag":"True",
+    }
+    print(request.POST.get('state'))
+    print(request.POST.get('city'))
+    return HttpResponse(template.render(context, request))
+  else:
+    print(request)
+    cities=hello.read_city()
+    states=hello.read_state()
+    context = {
+    "c":cities,
+    "s":states,
+    "flag":"False"
+    }
+    return HttpResponse(template.render(context, request))
