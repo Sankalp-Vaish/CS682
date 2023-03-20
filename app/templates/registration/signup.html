@@ -3,11 +3,13 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
+<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
   <h2>Sign up</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     
-    <button type="submit">Sign Up</button>
+    <button class="btn btn-dark" type="submit">Sign Up</button>
   </form>
+</div>
 {% endblock %}

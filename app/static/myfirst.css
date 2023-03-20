@@ -1,4 +1,9 @@
 body {
-    background-color: lightblue;
     font-family: verdana;
+  }
+
+  img {
+    width: 100%;
+    opacity: 0.5;
+    max-height: 500px;
   }
