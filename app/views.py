@@ -36,7 +36,17 @@ class SignUpView(generic.CreateView):
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
 
+def help(request):
+  template = loader.get_template('ContactUs.html')
+  return HttpResponse(template.render())
 
+def about(request):
+  template = loader.get_template('about.html')
+  return HttpResponse(template.render())
+
+def mortage(request):
+  template = loader.get_template('about.html')
+  return HttpResponse(template.render())
 
 def test(request):
   result  = hello.printHello() 
