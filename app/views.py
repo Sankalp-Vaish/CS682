@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from .forms import firstform
+from .forms import firstform, Customizedsignupform
 from . import hello, test2
+from django.contrib.auth.decorators import login_required
 #from .models import ToDoList
 
 from django.contrib.auth.forms import UserCreationForm
@@ -32,7 +33,7 @@ def form(request):
     return HttpResponse(template.render({"form":f}, request))
   
 class SignUpView(generic.CreateView):
-    form_class = UserCreationForm
+    form_class = Customizedsignupform
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
 
@@ -44,6 +45,8 @@ def about(request):
   template = loader.get_template('about.html')
   return HttpResponse(template.render())
 
+
+@login_required(login_url="/accounts/login/")
 def mortgage(request):
   template = loader.get_template('mortgage.html')
   return HttpResponse(template.render())
@@ -59,6 +62,7 @@ def test2(request):
   template = loader.get_template('test2.html')
   return HttpResponse(template.render({"r":result[0]}, request))
 
+@login_required(login_url="/accounts/login/")
 def test3(request):
   template = loader.get_template('test3.html')
 

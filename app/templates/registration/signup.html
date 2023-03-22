@@ -3,13 +3,30 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
-  <h2>Sign up</h2>
+<div class= "gradient-background">
+<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+	<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<h3 id="form-title">REGISTER ACCOUNT</h3>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    
+    <div class="justify-content-center">
+    {{ form.username.label }}
+    <p>
+    {{ form.username }}</p>
+    {{ form.email.label}}
+    <p>{{ form.email}}</p>
+    {{ form.password1.label}}
+    <p>{{ form.password1}}</p>
+    {{ form.password2.label}}
+    <p>{{ form.password2}}</p>
+  </div>
     <button class="btn btn-dark" type="submit">Sign Up</button>
-  </form>
-</div>
+  </form></div>
+</div></div></div></div></div>
 {% endblock %}
