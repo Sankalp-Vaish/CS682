@@ -50,13 +50,21 @@
     <h2> Retrieved data</h2>
 
     {% for house in r %}
-    city:  {{ house.city }}
-    price:  {{ house.price }}
-    lotAreaValue:  {{ house.lotAreaValue }}
-    zipcode:  {{ house.zipcode}}
-    homeType:  {{ house.homeType}}
-    bedrooms:  {{ house.bedrooms}}
 
+    
+    <div class="box-wrapper" id="box">
+      <img id="img_data" src= "{{house.link}}" >
+    city:  {{ house.city }}
+    status:  {{ house.status}}
+    year_built:  {{ house.year_built}}
+    bath:  {{ house.bath}}
+    beds:  {{ house.beds}}
+    stories:  {{ house.stories}}
+    list_price:  {{ house.list_price}}
+    unit:  {{ house.unit }}
+    postal_code:  {{ house.postal_code }}
+    street_name:  {{ house.street_name }} 
+  </div>
 <br><br>
     {% endfor %}
 

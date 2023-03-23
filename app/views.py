@@ -68,12 +68,28 @@ def test3(request):
 
   if request.method== "POST":
     result  = hello.read_with_prams(request.POST.get('state'), request.POST.get('city'))
+    l=[]
+    r=dict()
+    for house in result:
+      r["city"]=house["data"]["home"]["location"]["address"]["city"] 
+      r["status"]=house["data"]["home"]["status"]
+      r["year_built"]=house["data"]["home"]["description"]["year_built"]
+      r["baths"]=house["data"]["home"]["description"]["baths"]
+      r["beds"]=house["data"]["home"]["description"]["beds"]
+      r["stories"]=house["data"]["home"]["description"]["stories"]
+      r["list_price"]=house["data"]["home"]["list_price"]
+      r["unit"]=house["data"]["home"]["location"]["address"]["unit"] 
+      r["postal_code"]=house["data"]["home"]["location"]["address"]["postal_code"]
+      r["street_name"]=house["data"]["home"]["location"]["address"]["street_name"]
+      r["link"]=house["data"]["home"]["photos"][0]["href"] 
+      #print(house["data"]["home"]["description"]["year_built"])
+      l.append(r)
+      r=dict()
     context = {
-    "r":result,
+    "r":l,
     "flag":"True",
     }
-    print(request.POST.get('state'))
-    print(request.POST.get('city'))
+    #print(result[0]["data"]["home"]["location"]["address"]["city"])
     return HttpResponse(template.render(context, request))
   else:
     print(request)
