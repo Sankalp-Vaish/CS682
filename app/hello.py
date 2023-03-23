@@ -45,7 +45,15 @@ def read_state():
         state.append(house["data"]["home"]["location"]["address"]['state'])
     return set(state)
 
-def read_with_prams(search_state, search_city): 
+def read_street_name(): 
+    
+    d=json.load(open(r"app\data_file.json"))
+    street_name=[]
+    for house in d:
+        street_name.append(house["data"]["home"]["location"]["address"]['street_name'])
+    return set(street_name)
+
+def read_with_prams(search_state, search_city, street_name): 
     
     d=json.load(open(r"app\data_file.json"))
 
@@ -55,7 +63,8 @@ def read_with_prams(search_state, search_city):
             #print(search_city,  house["data"]["home"]["location"]["address"]["city"])
             if house["data"]["home"]["location"]["address"]["city"]=="Los Angeles":
                 #print("city in")
-                house_list.append(house)
+                if house["data"]["home"]["location"]["address"]["street_name"]==street_name:
+                    house_list.append(house)
     return house_list
 
 

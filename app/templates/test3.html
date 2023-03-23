@@ -37,6 +37,17 @@
         {% endfor %}
         </select>
         <br><br>
+
+        <label for="street_name">Choose a Street Name:</label>
+        <select name="street_name" id="street_name" multiple>
+        {% for sn in street_name %}
+        <option value={{sn}}>{{sn}}</option>
+        <br>
+        {% endfor %}
+        </select>
+        <br><br>
+
+
         <button >Submit </button>
       </form>
 

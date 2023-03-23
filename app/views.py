@@ -67,7 +67,7 @@ def test3(request):
   template = loader.get_template('test3.html')
 
   if request.method== "POST":
-    result  = hello.read_with_prams(request.POST.get('state'), request.POST.get('city'))
+    result  = hello.read_with_prams(request.POST.get('state'), request.POST.get('city'), request.POST.get('street_name'))
     l=[]
     r=dict()
     for house in result:
@@ -95,9 +95,11 @@ def test3(request):
     print(request)
     cities=hello.read_city()
     states=hello.read_state()
+    street_name=hello.read_street_name()
     context = {
     "c":cities,
     "s":states,
+    "street_name":street_name,
     "flag":"False"
     }
     return HttpResponse(template.render(context, request))
