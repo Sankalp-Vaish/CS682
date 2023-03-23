@@ -6,23 +6,24 @@ import json
 
 
 def printHello(): 
-    url = "https://zillow56.p.rapidapi.com/property"
+    url = "https://realty-in-us.p.rapidapi.com/properties/v3/detail"
 
-    querystring = {"zpid":"7594920"}
+    querystring = {"property_id":"2186526216"}
 
     headers = {
-        "X-RapidAPI-Key": "2e7b06639bmshe0265e0dddf1f4fp17f3aajsn65bb8c0da710",
-        "X-RapidAPI-Host": "zillow56.p.rapidapi.com"
+        "X-RapidAPI-Key": "ea8552e940msh3f14dc78146fae7p16308ejsn1bedafc35b28",
+        "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com"
     }
+
     response = requests.request("GET", url, headers=headers, params=querystring)
 
     #print(response.text)
     d=dict(response.json())
     path=d['hugePhotos'][0]['url']
-    response = urlopen(path)
+    """response = urlopen(path)
     image_data = response.read()
     image_data = BytesIO(image_data)
-    image = Image.open(image_data)
+    image = Image.open(image_data)"""
 
     #return d["address"]["city"]
     return path
