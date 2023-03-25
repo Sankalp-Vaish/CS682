@@ -1,12 +1,59 @@
-{% extends 'master.html' %}
+{% extends "master.html" %}
 
-{% block title %}Mortgage{% endblock %}
+{% block title %}
+  testing
+{% endblock %}
+
 
 {% block content %}
-
 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-  <h4>Mortgage</h4>
-  --------
-</div>
+<div class="main">
+  <h1>Real time investment</h1>
+  <h3>Mortgage</h3>
+  
 
+ <br><br>
+
+
+  {% if flag == "False" %}
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h4>Enter pincode</h4>
+        <input type="text" name="pincode">
+        <button >Submit </button>
+      </form>
+
+  {% else %}
+
+    <br><br>
+    <h2> Retrieved data</h2>
+
+    {% for house in r %}
+
+    
+    <div class="box-wrapper" id="box">
+      <img id="img_data" src= "{{house.link}}" >
+    city:  {{ house.city }}
+    status:  {{ house.status}}
+    year_built:  {{ house.year_built}}
+    bath:  {{ house.bath}}
+    beds:  {{ house.beds}}
+    stories:  {{ house.stories}}
+    list_price:  {{ house.list_price}}
+    unit:  {{ house.unit }}
+    postal_code:  {{ house.postal_code }}
+    street_name:  {{ house.street_name }} 
+  </div>
+<br><br>
+    {% endfor %}
+
+<br>
+
+  {% endif %}
+  
+
+</div>
+</div>
+  
 {% endblock %}

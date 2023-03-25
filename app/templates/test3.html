@@ -64,7 +64,10 @@
 
     
     <div class="box-wrapper" id="box">
-      <img id="img_data" src= "{{house.link}}" >
+      <a href="{% url 'house_details' 2012 %}">2012 Archive</a>
+      <!-- <a href="/details"> -->
+      <a href="{% url 'house_details' house %}"
+      <img id="img_data" src= "{{house.link}}" > </a>
     city:  {{ house.city }}
     status:  {{ house.status}}
     year_built:  {{ house.year_built}}
