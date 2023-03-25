@@ -6,10 +6,12 @@
 
 
 {% block content %}
-<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+<div style="position: absolute; top: 50%; left: 40%; transform: translate(-50%, -50%);">
 <div class="main">
+  <div style="position: relative; top: 50%; left: 30%;">
   <h1>Real time investment</h1>
   <h3>Home Estimate</h3>
+  </div>
   
 
  <br><br>
@@ -19,36 +21,49 @@
     
     <form action="" method="POST">
         {% csrf_token %}
-        <label for="state">Choose a State:</label>
-        <select name="state" id="state" multiple>
-            {% for state in s %}
-            <option value={{state}}>{{state}}</option>
-            <br>
-            {% endfor %}
-        </select>
-        <br><br>
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm-3">
+              <label for="state">Choose a State:</label>
+              <select class="form-select" name="state" id="state">
+                  {% for state in s %}
+                  <option value={{state}}>{{state}}</option>
+                  <br>
+                  {% endfor %}
+              </select>
+            </div>
+        <!-- <br><br> -->
         
 
-        <label for="city">Choose a City:</label>
-        <select name="city" id="city" multiple>
-        {% for city in c %}
-        <option value={{city}}>{{city}}</option>
-        <br>
-        {% endfor %}
-        </select>
-        <br><br>
+            <div class="col-sm-3">
+              <label for="city">Choose a City:</label>
+              <select class="form-select" name="city" id="city">
+              {% for city in c %}
+              <option value={{city}}>{{city}}</option>
+              <br>
+              {% endfor %}
+              </select>
+            </div>
+        <!-- <br><br> -->
 
-        <label for="street_name">Choose a Street Name:</label>
-        <select name="street_name" id="street_name" multiple>
-        {% for sn in street_name %}
-        <option value={{sn}}>{{sn}}</option>
-        <br>
-        {% endfor %}
-        </select>
-        <br><br>
+            <div class="col-sm-5">
+              <label for="street_name">Choose a Street Name:</label>
+              <select class="form-select" name="street_name" id="street_name">
+              {% for sn in street_name %}
+              <option value={{sn}}>{{sn}}</option>
+              <br>
+              {% endfor %}
+              </select>
+            </div>
+        <!-- <br><br> -->
 
-
-        <button >Submit </button>
+            <div class="col-sm-1">
+              <label></label>
+              <button class="btn btn-dark">Submit </button>
+            </div>
+          </div>
+        
+        </div>
       </form>
 
 
@@ -66,7 +81,7 @@
     <div class="box-wrapper" id="box">
       <a href="{% url 'house_details' 2012 %}">2012 Archive</a>
       <!-- <a href="/details"> -->
-      <a href="{% url 'house_details' house %}"
+       <a href="{% url 'house_details' 2012 %}">
       <img id="img_data" src= "{{house.link}}" > </a>
     city:  {{ house.city }}
     status:  {{ house.status}}
