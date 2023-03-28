@@ -11,13 +11,16 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 def main(request):
+  user = request.user
+  context = {'user': user}
   template = loader.get_template('main.html')
-  return HttpResponse(template.render())
+  return HttpResponse(template.render(context, request))
 
 def home(request):
-  
+  user = request.user
+  context = {'user': user}
   template = loader.get_template('Home.html')
-  return HttpResponse(template.render())
+  return HttpResponse(template.render(context, request))
 
 def form(request):
   if request.method== "POST":
@@ -38,12 +41,16 @@ class SignUpView(generic.CreateView):
     template_name = "registration/signup.html"
 
 def help(request):
+  user = request.user
+  context = {'user': user}
   template = loader.get_template('ContactUs.html')
-  return HttpResponse(template.render())
+  return HttpResponse(template.render(context, request))
 
 def about(request):
+  user = request.user
+  context = {'user': user}
   template = loader.get_template('about.html')
-  return HttpResponse(template.render())
+  return HttpResponse(template.render(context, request))
 
 
 @login_required(login_url="/accounts/login/")
@@ -93,6 +100,7 @@ def test3(request):
     cities=hello.read_city()
     states=hello.read_state()
     street_name=hello.read_street_name()
+    print("hi")
     context = {
     "c":cities,
     "s":states,

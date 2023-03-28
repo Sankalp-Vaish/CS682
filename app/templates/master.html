@@ -16,7 +16,7 @@
 <script src="{% static 'app.js' %}"></script>
 <script type="text/javascript" src="{% static 'jquery-3.6.0.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'myfirst.css' %}">
-<body>
+<body class="gradient-background">
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <div class="container-fluid">
@@ -55,13 +55,16 @@
 </nav>
 
 
-<div style="position: relative;">
+
  <!-- <img class="back" src="http://trumpwallpapers.com/wp-content/uploads/Real-Estate-Wallpaper-12-1920x1080-1.jpg" alt="image">   -->
- <div class="gradient-background"></div>
- <div style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, -50%);">
-  </div>
+ <footer class="panel-footer">
+  <div class="container">
+    <div class="row">
+<div style="position: relative; left: 35%;">
     <h3>Investment made Simple!</h3>
-</div>
+</div></div></div>
+</footer>
+
 
 {% block content %}
 {% endblock %}
