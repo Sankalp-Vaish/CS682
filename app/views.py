@@ -127,3 +127,8 @@ def house_details(request, id):
     }
   return HttpResponse(template.render(context, request))
 
+
+def displayPage(request):
+  template = loader.get_template('displayPage.html')
+  return HttpResponse(template.render())
+
