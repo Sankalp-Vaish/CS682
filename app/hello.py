@@ -135,17 +135,36 @@ def get_dict(result):
     r=dict()
     for house in result:
       r["city"]=house["data"]["home"]["location"]["address"]["city"] 
-      r["status"]=house["data"]["home"]["status"]
-      r["year_built"]=house["data"]["home"]["description"]["year_built"]
-      r["baths"]=house["data"]["home"]["description"]["baths"]
-      r["beds"]=house["data"]["home"]["description"]["beds"]
-      r["stories"]=house["data"]["home"]["description"]["stories"]
       r["list_price"]=house["data"]["home"]["list_price"]
-      r["unit"]=house["data"]["home"]["location"]["address"]["unit"] 
       r["postal_code"]=house["data"]["home"]["location"]["address"]["postal_code"]
       r["street_name"]=house["data"]["home"]["location"]["address"]["street_name"]
       r["link"]=house["data"]["home"]["photos"][0]["href"] 
+      r["property_id"]=house["data"]["home"]["property_id"]
       l.append(r)
       r=dict()
     
     return l
+
+
+def get_details(id):
+    print("in first")
+    r=dict()
+    d=json.load(open(r"app\data_file.json"))
+    for house in d:
+        #print("house ", type(house["data"]["home"]["property_id"]))
+        if house["data"]["home"]["property_id"]==str(id):
+            print("in")
+            r["city"]=house["data"]["home"]["location"]["address"]["city"] 
+            r["status"]=house["data"]["home"]["status"]
+            r["year_built"]=house["data"]["home"]["description"]["year_built"]
+            r["baths"]=house["data"]["home"]["description"]["baths"]
+            r["beds"]=house["data"]["home"]["description"]["beds"]
+            r["stories"]=house["data"]["home"]["description"]["stories"]
+            r["list_price"]=house["data"]["home"]["list_price"]
+            r["unit"]=house["data"]["home"]["location"]["address"]["unit"] 
+            r["postal_code"]=house["data"]["home"]["location"]["address"]["postal_code"]
+            r["street_name"]=house["data"]["home"]["location"]["address"]["street_name"]
+            r["link"]=house["data"]["home"]["photos"][0]["href"] 
+            r["property_id"]=house["data"]["home"]["property_id"]
+            print(r["city"])
+    return r

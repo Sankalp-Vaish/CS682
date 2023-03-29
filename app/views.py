@@ -59,11 +59,18 @@ def mortgage(request):
   if request.method== "POST":
     id = hello.get_houses_id(request.POST.get('pincode'))
     result = hello.get_house_list(id)
-    l=hello.get_dict(result)
-    context = {
-    "r":l,
-    "flag":"True",
-    }
+    if result==None:
+      l=hello.get_dict(result)
+      context = {
+      "r":l,
+      "z":"",
+      "flag":"True",
+      }
+    else:
+      context = {
+      "z":"No houses found",
+      "flag":"True",
+      }
     return HttpResponse(template.render(context, request))
   else:
     context = {
@@ -110,10 +117,13 @@ def test3(request):
     return HttpResponse(template.render(context, request))
   
 
-def house_details(request, year):
+def house_details(request, id):
   template = loader.get_template('house_details.html')
+  house=hello.get_details(id)
   context = {
     "flag":"True",
-    "y" : year
+    "y" : id,
+    "house" : house
     }
   return HttpResponse(template.render(context, request))
+

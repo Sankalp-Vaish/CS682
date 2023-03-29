@@ -28,6 +28,9 @@
 
     <br><br>
     <h2> Retrieved data</h2>
+    {% if z == "No houses found" %}
+    <p>{{z}}</p>
+    {% endif %}
 
     {% for house in r %}
 

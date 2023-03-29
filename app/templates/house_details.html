@@ -7,6 +7,20 @@
 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
   <h4>Details</h4>
   <div> {{ y }}</div>
+  <div class="box-wrapper" id="box">
+
+    <img id="img_data" src= "{{house.link}}" > 
+  city:  {{ house.city }}
+  status:  {{ house.status}}
+  year_built:  {{ house.year_built}}
+  bath:  {{ house.bath}}
+  beds:  {{ house.beds}}
+  stories:  {{ house.stories}}
+  list_price:  {{ house.list_price}}
+  unit:  {{ house.unit }}
+  postal_code:  {{ house.postal_code }}
+  street_name:  {{ house.street_name }} 
+</div>
 </div>
 
 {% endblock %}
