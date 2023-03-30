@@ -1,15 +1,15 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 {% extends "master.html" %}
 
 {% block title %}
-<head>
-  <title>Awesome Search Box</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-</head>
+Awesome Search Box
+  
 {% endblock %}
 
 {% block content %}
@@ -32,6 +32,21 @@
     <div class="centered">
       <h5></h5>
       <p>Info of properties</p>
+      First_Mtg_LTV= {{ calc.First_Mtg_LTV }}
+    First_Mtg_LTPP = {{ calc.First_Mtg_LTPP }}
+    Second_Mtg_LTV = {{ calc.Second_Mtg_LTV }}
+    Second_Mtg_LTPP = {{ calc.Second_Mtg_LTPP }}
+    CapRate_on_PP = {{ calc.CapRate_on_PP}}
+    CapRate_on_FMV = {{ calc.CapRate_on_FMV }}
+    Average_Rent = {{ calc.Average_Rent }}
+    GRM = {{ calc.GRM }}
+    DCR = {{ calc.DCR }}
+    Cash_On_Cash_ROI = {{ calc.Cash_On_Cash_ROI}}
+    Equity_ROI = {{ calc.Equity_ROI}}
+    Appreciation_ROI = {{ calc.Appreciation_ROI}}
+    Total_ROI = {{ calc.Total_ROI }}
+    Forced_App_ROI = {{ calc.Forced_App_ROI}}
+    Expense_to_income_ratio = {{ calc.Expense_to_income_ratio}}
     </div>
   </div>
 {% endblock %}

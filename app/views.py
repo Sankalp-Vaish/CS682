@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .forms import firstform, Customizedsignupform
-from . import hello, test2
+from . import hello, Calculator
 from django.contrib.auth.decorators import login_required
 #from .models import ToDoList
 
@@ -120,15 +120,22 @@ def test3(request):
 def house_details(request, id):
   template = loader.get_template('house_details.html')
   house=hello.get_details(id)
+  result=Calculator.calculator(house["list_price"])
   context = {
     "flag":"True",
     "y" : id,
-    "house" : house
+    "house" : house,
+    "calc" : result
     }
   return HttpResponse(template.render(context, request))
 
 
 def displayPage(request):
   template = loader.get_template('displayPage.html')
-  return HttpResponse(template.render())
+  result=Calculator.calculator()
+  context = {
+    "calc" : result
+    }
+  return HttpResponse(template.render(context, request))
+
 
