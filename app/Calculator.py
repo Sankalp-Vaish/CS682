@@ -1,6 +1,6 @@
 import numpy as np
 
-def calculator(Fair_Market_Value=374000.00, Number_of_Units=6):
+def calculator(Fair_Market_Value, Number_of_Units, Property_Taxes, insurance_rate):
     # -------------------------
     # Property Info	
     # Address	91 Bellevue Rd
@@ -69,9 +69,13 @@ def calculator(Fair_Market_Value=374000.00, Number_of_Units=6):
     Effective_Gross_Income	= Total_Income - Vacancy_Loss
 
     # -------------------------
-    # Operating Expenses (Annual)		
-    Property_Taxes = 5400.00 #must fetch from the api
-    Insurance = 1800.00 #must fetch from the api 
+    # Operating Expenses (Annual)	
+    if Property_Taxes==None:	
+        Property_Taxes=5400.00
+    Property_Taxes = float(Property_Taxes) #must fetch from the api
+    if insurance_rate==None:
+        insurance_rate=0.003
+    Insurance = float(insurance_rate)*Fair_Market_Value #must fetch from the api 
     Repairs	= (5.00/100)*Gross_Rents
     Electricity = 0.00
     Gas = 0.00 

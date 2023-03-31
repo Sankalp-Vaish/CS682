@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 import json
 import time
 
-
+First_Mtg_Interest_Rate=0.001
 def printHello(): 
     url = "https://realty-in-us.p.rapidapi.com/properties/v3/detail"
 
@@ -130,7 +130,7 @@ def get_house_list(property_id):
 
     return prop_list
  
-def get_dict(result):
+def get_dict(result, rate):
     l=[]
     r=dict()
     for house in result:
@@ -140,6 +140,7 @@ def get_dict(result):
       r["street_name"]=house["data"]["home"]["location"]["address"]["street_name"]
       r["link"]=house["data"]["home"]["photos"][0]["href"] 
       r["property_id"]=house["data"]["home"]["property_id"]
+
       l.append(r)
       r=dict()
     
@@ -165,6 +166,9 @@ def get_details(id):
             r["street_name"]=house["data"]["home"]["location"]["address"]["street_name"]
             r["link"]=house["data"]["home"]["photos"][0]["href"] 
             r["property_id"]=house["data"]["home"]["property_id"]
-            r["tax"]=house["data"]['home']['tax_history'][0]
+            r["tax"]=house["data"]['home']['tax_history'][0]["tax"]
+            r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
+            r["First_Mtg_Interest_Rate"]=First_Mtg_Interest_Rate
+            print(r["tax"])
             #print(r["city"])
     return r

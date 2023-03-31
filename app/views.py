@@ -98,7 +98,9 @@ def test3(request):
 
   if request.method== "POST":
     result  = hello.read_with_prams(request.POST.get('state'), request.POST.get('city'), request.POST.get('street_name'))
-    l=hello.get_dict(result)
+    rate=request.POST.get("First_Mtg_Interest_Rate")
+    print(rate)
+    l=hello.get_dict(result, rate)
     context = {
     "r":l,
     "flag":"True",
@@ -122,7 +124,7 @@ def test3(request):
 def house_details(request, id):
   template = loader.get_template('house_details.html')
   house=hello.get_details(id)
-  result=Calculator.calculator(house["list_price"], house["unit"])
+  result=Calculator.calculator(house["list_price"], house["unit"], house["tax"], house["insurance_rate"])
   context = {
     "flag":"True",
     "y" : id,
