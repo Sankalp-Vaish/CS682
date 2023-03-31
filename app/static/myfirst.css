@@ -89,7 +89,8 @@ body {
     }
 
 .gradient-background {
-  background: linear-gradient(60deg, rgba(1 127 164), rgba(241, 240, 221, 0));
+  /*background: linear-gradient(60deg, rgba(1 127 164), rgba(241, 240, 221, 0));*/
+  background: radial-gradient(401px at 50.6% -0.3%, rgba(255, 255, 255, 0.31) 1.2%, rgb(36, 212, 219) 100.2%);
   height: 100vh;
   width: 100vw;
 }
@@ -136,18 +137,19 @@ body {
 
 
 .panel-footer{
-  position: relative;
-  bottom: -70%; 
-  /*   */
-  /* transform: translate(-50%, -50%); */
-	margin-top: 30px;
-	padding-top: 35px;
-	padding-bottom: 30px;
+  position: absolute;
+  bottom: 0; 
 	background-color: #222;
-	border-top: 0;
+  color: whitesmoke;
+	width: 100%;
+  text-align: center;
 }
 .panel-footer div.row{
 	/* margin-bottom: 25px; */
   color: whitesmoke;
   left: 50%;
+}
+
+.house-card {
+  margin-bottom: 5px;
 }

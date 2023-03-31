@@ -8,6 +8,8 @@
 {% block content %}
 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
 <div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak"></script>
+
   <h1>Real time investment</h1>
   <h3>Home</h3>
   Hi {{ user.username }}!
@@ -20,6 +22,16 @@
   <p>Did you Login?</p>
   {% endif %}
 
+  <div style="height: 50%; width: 50%;">
+    <div id="map" style="height: 100%; width: 100%;">map click</div>
+  </div>
+  <script>
+    var mapElement = document.getElementById('map');
+
+    mapElement.addEventListener('click', function() {
+      setLocation();
+    });
+  </script>
 </div></div>
 
   

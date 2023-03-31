@@ -35,3 +35,26 @@ function myFunction2() {
     }
   }
 }
+
+function setLocation() {
+  var directionsDisplay = new google.maps.DirectionsRenderer;
+  var mapElement = document.getElementById('map');
+
+  // mapElement.addEventListener('click', function() {
+  //   myFunction();
+  // });
+
+  let map = new google.maps.Map(mapElement, {
+    center: {lat: 37.42, lng:  -122.08},
+    zoom: 8
+  });
+  directionsDisplay.setMap(map);
+
+  // var marker = new google.maps.Marker({
+  //   position: {lat: 37.77, lng: -122.41},
+  //   map: map,
+  //   title: 'San Francisco'
+  // });
+  
+  // return marker;
+}

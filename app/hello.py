@@ -32,7 +32,7 @@ def printHello():
 
 def read_city(): 
     
-    d=json.load(open(r"app\data_file.json"))
+    d=json.load(open(r"app/data_file.json"))
     city=[]
     for house in d:
         city.append(house["data"]["home"]["location"]["address"]['city'])
@@ -40,7 +40,7 @@ def read_city():
 
 def read_state(): 
     
-    d=json.load(open(r"app\data_file.json"))
+    d=json.load(open(r"app/data_file.json"))
     state=[]
     for house in d:
         state.append(house["data"]["home"]["location"]["address"]['state'])
@@ -48,7 +48,7 @@ def read_state():
 
 def read_street_name(): 
     
-    d=json.load(open(r"app\data_file.json"))
+    d=json.load(open(r"app/data_file.json"))
     street_name=[]
     for house in d:
         street_name.append(house["data"]["home"]["location"]["address"]['street_name'])
@@ -56,7 +56,7 @@ def read_street_name():
 
 def read_with_prams(search_state, search_city, street_name): 
     
-    d=json.load(open(r"app\data_file.json"))
+    d=json.load(open(r"app/data_file.json"))
 
     house_list=[]
     for house in d:
