@@ -1,6 +1,6 @@
 import numpy as np
 
-def calculator(Fair_Market_Value=374000.00):
+def calculator(Fair_Market_Value=374000.00, Number_of_Units=6):
     # -------------------------
     # Property Info	
     # Address	91 Bellevue Rd
@@ -8,7 +8,9 @@ def calculator(Fair_Market_Value=374000.00):
     Vacancy_Rate = 5.00/100 
     Management_Rate = 5.00/100
     Advertizing_Cost_per_Vacancy = 100.00 
-    Number_of_Units	= 6 #need to fetch from the api
+    if Number_of_Units==None:
+        Number_of_Units=6
+    Number_of_Units	= int(Number_of_Units) #need to fetch from the api
     Annual_Appreciation_Rate = 3.00/100
     Average_rent_per_unit = 800.00 #This is set at by intuition and taken reference from the given calculator. This must be somehow given to the user to feed the app.
 

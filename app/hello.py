@@ -125,7 +125,7 @@ def get_house_list(property_id):
 
         response = requests.request("GET", url, headers=headers, params=querystring)
 
-        print(response.text)
+        #print(response.text)
         prop_list.append(response.json())
 
     return prop_list
@@ -147,7 +147,6 @@ def get_dict(result):
 
 
 def get_details(id):
-    print("in first")
     r=dict()
     d=json.load(open(r"app\data_file.json"))
     for house in d:
@@ -161,10 +160,11 @@ def get_details(id):
             r["beds"]=house["data"]["home"]["description"]["beds"]
             r["stories"]=house["data"]["home"]["description"]["stories"]
             r["list_price"]=house["data"]["home"]["list_price"]
-            r["unit"]=house["data"]["home"]["location"]["address"]["unit"] 
+            r["unit"]=house["data"]['home']['description']['units']
             r["postal_code"]=house["data"]["home"]["location"]["address"]["postal_code"]
             r["street_name"]=house["data"]["home"]["location"]["address"]["street_name"]
             r["link"]=house["data"]["home"]["photos"][0]["href"] 
             r["property_id"]=house["data"]["home"]["property_id"]
-            print(r["city"])
+            r["tax"]=house["data"]['home']['tax_history'][0]
+            #print(r["city"])
     return r
