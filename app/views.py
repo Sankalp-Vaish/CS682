@@ -59,9 +59,8 @@ def mortgage(request):
   if request.method== "POST":
     id = hello.get_houses_id(request.POST.get('pincode'))
     result = hello.get_house_list(id)
-    print(result)
+    #print(result)
     if result==[]:
-      print("no")
       context = {
       "z":"No houses found",
       "flag":"True",
