@@ -85,15 +85,33 @@
 
     {% for house in r %}
 
+    <div class="card house-card">
+      <div class="card-body" style="width: 100%;">
+        <div style="width: 50%; float: left;">
+          <a href="{% url 'house_details' house.property_id %}">
+          <img id="img_data" src= "{{house.link}}" ></a>
+        </div>
+        <div style="width: 50%; float: left;">
+          <h4>{{ house.street_name }}, {{ house.city }}, {{ house.postal_code }}</h4>
+          <span>{{ house.stories }} Story built in {{ house.year_built }}</span>
+          <br>
+          <span>Unit: {{ house.unit }} | {{ house.beds }}B {{ house.baths }}B</span>
+          <br>
+          <span>Listed price: ${{ house.list_price}}</span>
+          <br>
+          <!-- <span>Status: {{ house.status}}</span> -->
+        </div>
+      </div>
+    </div>
     
-    <div class="box-wrapper" id="box">
+    <!-- <div class="box-wrapper" id="box">
       <a href="{% url 'house_details' house.property_id %}">
       <img id="img_data" src= "{{house.link}}" > </a>
     city:  {{ house.city }}
     list_price:  {{ house.list_price}}
     postal_code:  {{ house.postal_code }}
     street_name:  {{ house.street_name }} 
-  </div>
+  </div> -->
 <br><br>
     {% endfor %}
 
