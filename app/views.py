@@ -3,11 +3,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
 from Realtime import settings
-from .forms import firstform, Customizedsignupform
+from .forms import firstform, Customizedsignupform, rent_per_unit
 from . import hello, Calculator
 from django.contrib.auth.decorators import login_required
 #from .models import ToDoList
 
+from .models import User_details
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -112,9 +113,11 @@ def test3(request):
 
   if request.method== "POST":
     result  = hello.read_with_prams(request.POST.get('state'), request.POST.get('city'), request.POST.get('street_name'))
-    rate=request.POST.get("First_Mtg_Interest_Rate")
-    print(rate)
-    l=hello.get_dict(result, rate)
+    User_details.First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate")
+    User_details.Average_rent_per_unit= request.POST.get("rent")
+    
+    print(User_details.Average_rent_per_unit, User_details.First_Mtg_Interest_Rate)
+    l=hello.get_dict(result)
     context = {
     "r":l,
     "flag":"True",
@@ -125,12 +128,12 @@ def test3(request):
     cities=hello.read_city()
     states=hello.read_state()
     street_name=hello.read_street_name()
-    print("hi")
     context = {
     "c":cities,
     "s":states,
     "street_name":street_name,
-    "flag":"False"
+    "flag":"False",
+    "rent": rent_per_unit()
     }
     return HttpResponse(template.render(context, request))
   
@@ -138,7 +141,7 @@ def test3(request):
 def house_details(request, id):
   template = loader.get_template('house_details.html')
   house=hello.get_details(id)
-  result=Calculator.calculator(house["list_price"], house["unit"], house["tax"], house["insurance_rate"])
+  result=Calculator.calculator(house["list_price"], house["unit"], house["tax"], house["insurance_rate"], User_details.First_Mtg_Interest_Rate, User_details.Average_rent_per_unit)
   context = {
     "flag":"True",
     "y" : id,
@@ -150,10 +153,10 @@ def house_details(request, id):
 
 def displayPage(request):
   template = loader.get_template('displayPage.html')
-  result=Calculator.calculator()
-  context = {
-    "calc" : result
-    }
-  return HttpResponse(template.render(context, request))
+  # result=Calculator.calculator()
+  # context = {
+  #   "calc" : result
+  #   }
+  return HttpResponse(template.render(None, request))
 
 

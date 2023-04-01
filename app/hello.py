@@ -130,7 +130,7 @@ def get_house_list(property_id):
 
     return prop_list
  
-def get_dict(result, rate):
+def get_dict(result):
     l=[]
     r=dict()
     for house in result:

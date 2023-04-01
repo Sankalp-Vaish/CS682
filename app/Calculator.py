@@ -1,6 +1,6 @@
 import numpy as np
 
-def calculator(Fair_Market_Value, Number_of_Units, Property_Taxes, insurance_rate):
+def calculator(Fair_Market_Value, Number_of_Units, Property_Taxes, insurance_rate, First_Mtg_Interest_Rate, Average_rent_per_unit):
     # -------------------------
     # Property Info	
     # Address	91 Bellevue Rd
@@ -12,7 +12,9 @@ def calculator(Fair_Market_Value, Number_of_Units, Property_Taxes, insurance_rat
         Number_of_Units=6
     Number_of_Units	= int(Number_of_Units) #need to fetch from the api
     Annual_Appreciation_Rate = 3.00/100
-    Average_rent_per_unit = 800.00 #This is set at by intuition and taken reference from the given calculator. This must be somehow given to the user to feed the app.
+    if Average_rent_per_unit=="":
+        Average_rent_per_unit=800.00
+    Average_rent_per_unit = float(Average_rent_per_unit) #800.00 This is set at by intuition and taken reference from the given calculator. This must be somehow given to the user to feed the app.
 
     # --------------------------
     # Purchase Info	
@@ -33,7 +35,9 @@ def calculator(Fair_Market_Value, Number_of_Units, Property_Taxes, insurance_rat
     # ----------------------------
     # Financing (Monthly)	
     First_Mtg_Principle_Borrowed = Offer_Price*0.95
-    First_Mtg_Interest_Rate	= 0.08 #need to give an option to be user defined
+    if First_Mtg_Interest_Rate=="":
+        First_Mtg_Interest_Rate=0.08
+    First_Mtg_Interest_Rate	= float(First_Mtg_Interest_Rate) #need to give an option to be user defined 0.08
     First_Mtg_Amortization_Period = 30 # in years
     First_Mtg_CMHC_Fee = 0.00
     First_Mtg_Total_Principle_Incl_CMHC_Fees = First_Mtg_Principle_Borrowed + First_Mtg_CMHC_Fee
