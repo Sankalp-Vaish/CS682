@@ -1,0 +1,41 @@
+{% extends 'master.html' %}
+
+{% block title %}Currency{% endblock %}
+
+{% block content %}
+
+<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+  
+
+
+
+
+
+<div class="container mt-3">
+    <!--  -->
+    <form action="{% url 'prefrences' %}" method="post">
+        {% csrf_token %}
+    <div class="col-sm-5">
+        <label for="Currency">Choose a Currency:</label>
+        <select class="form-select" name="Currency" id="Currency">
+        {% if user_pref.currency %}
+            <option name="Currency" selected value="{{user_pref.currency}}">{{user_pref.currency}}</option>
+        {% endif %}
+        
+        
+            {% for cur,value in c %}
+        <option value="{{cur}} - {{value}}">{{cur}} - {{value}}</option>
+        <br>
+        {% endfor %}
+        </select>
+        <br>
+        <div class="col-sm-1">
+            <button class="btn btn-dark">Submit </button>
+          </div>
+      </div>
+    </form>
+    </div>
+</div>
+
+
+{% endblock %}

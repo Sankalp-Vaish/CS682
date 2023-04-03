@@ -142,7 +142,7 @@ def get_dict(result):
       r["baths"]=house["data"]["home"]["description"]["baths"]
       r["beds"]=house["data"]["home"]["description"]["beds"]
       r["stories"]=house["data"]["home"]["description"]["stories"]
-
+      r["unit"]=house["data"]['home']['description']['units']
       r["link"]=house["data"]["home"]["photos"][0]["href"] 
       r["property_id"]=house["data"]["home"]["property_id"]
 
@@ -177,3 +177,45 @@ def get_details(id):
             print(r["tax"])
             #print(r["city"])
     return r
+
+
+def get_details_by_pin(id):
+    r=dict()
+    url = "https://realty-in-us.p.rapidapi.com/properties/v3/detail"
+
+    querystring = {"property_id":"2186526216"}
+
+    headers = {
+        "X-RapidAPI-Key": "ea8552e940msh3f14dc78146fae7p16308ejsn1bedafc35b28",
+        "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    house=response.json()
+    #print("in")
+    r["city"]=house["data"]["home"]["location"]["address"]["city"] 
+    r["status"]=house["data"]["home"]["status"]
+    r["year_built"]=house["data"]["home"]["description"]["year_built"]
+    r["baths"]=house["data"]["home"]["description"]["baths"]
+    r["beds"]=house["data"]["home"]["description"]["beds"]
+    r["stories"]=house["data"]["home"]["description"]["stories"]
+    r["list_price"]=house["data"]["home"]["list_price"]
+    r["unit"]=house["data"]['home']['description']['units']
+    r["postal_code"]=house["data"]["home"]["location"]["address"]["postal_code"]
+    r["street_name"]=house["data"]["home"]["location"]["address"]["street_name"]
+    r["link"]=house["data"]["home"]["photos"][0]["href"] 
+    r["property_id"]=house["data"]["home"]["property_id"]
+    r["tax"]=house["data"]['home']['tax_history'][0]["tax"]
+    r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
+    r["First_Mtg_Interest_Rate"]=First_Mtg_Interest_Rate
+    print(r["tax"])
+    #print(r["city"])
+    return r
+
+
+def get_id_list():
+    d=json.load(open(r"app\data_file.json"))
+    l=[]
+    for i in d:
+        l.append(i["data"]["home"]["property_id"])
+    return l

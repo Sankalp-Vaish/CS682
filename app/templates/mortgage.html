@@ -24,6 +24,33 @@
             <label for="state">Enter pincode:</label>
             <input type="text" name="pincode" class="form-control" placeholder="e.g: 02125">
           </div>
+
+
+          <div class="col-sm-5">
+            <label for="First_Mtg_Interest_Rate">Enter a First_Mtg_Interest_Rate:</label>
+            <!-- <select class="form-select" name="First_Mtg_Interest_Rate" id="First_Mtg_Interest_Rate"> -->
+              {% if details.First_Mtg_Interest_Rate %}
+              <input name="First_Mtg_Interest_Rate" value="{{details.First_Mtg_Interest_Rate}}">
+              {% else %}
+            <input name="First_Mtg_Interest_Rate">
+            {% endif %}
+            </select>
+          </div>
+
+          <div class="col-sm-5">
+            <label for="Average_rent_per_unit">Choose a Average</label>
+            <div>
+            {% if details.Average_rent_per_unit %}
+            <option name="rent" selected value="{{details.Average_rent_per_unit}}">{{details.Average_rent_per_unit}}</option>
+            {% endif %}
+            
+              {{ rent }}
+            </div>
+            </select>
+          </div>
+
+
+
           <div class="col-sm-4">
             <label></label>
             <button class="btn btn-dark" style="margin-top: 18%;">Submit</button>
@@ -40,44 +67,32 @@
     <h2> Retrieved data</h2>
     {% if z == "No houses found" %}
     <p>{{z}}</p>
-    {% endif %}
+
+    {% else %}
+    
 
     {% for house in r %}
 
     <div class="card house-card">
       <div class="card-body" style="width: 100%;">
         <div style="width: 50%; float: left;">
-          <img id="img_data" src= "{{house.link}}" >
+          <a href="{% url 'house_details' house.property_id %}">
+          <img id="img_data" src= "{{house.link}}" ></a>
         </div>
         <div style="width: 50%; float: left;">
           <h4>{{ house.street_name }}, {{ house.city }}, {{ house.postal_code }}</h4>
-          <span>{{ house.stories}} Story built in {{ house.year_built}}</span>
+          <span>{{ house.stories }} Story built in {{ house.year_built }}</span>
           <br>
-          <span>Unit: {{ house.unit }} | {{ house.beds }}B {{ house.bath }}B</span>
+          <span>Unit: {{ house.unit }} | {{ house.beds }}B {{ house.baths }}B</span>
           <br>
           <span>Listed price: ${{ house.list_price}}</span>
           <br>
-          <span>Status: {{ house.status}}</span>
         </div>
       </div>
     </div>
-    
-    <!-- <div class="box-wrapper" id="box">
-      <img id="img_data" src= "{{house.link}}" >
-    city:  {{ house.city }}
-    status:  {{ house.status}}
-    year_built:  {{ house.year_built}}
-    bath:  {{ house.bath}}
-    beds:  {{ house.beds}}
-    stories:  {{ house.stories}}
-    list_price:  {{ house.list_price}}
-    unit:  {{ house.unit }}
-    postal_code:  {{ house.postal_code }}
-    street_name:  {{ house.street_name }} 
-  </div> -->
 <br><br>
     {% endfor %}
-
+    {% endif %}
 <br>
 
   {% endif %}

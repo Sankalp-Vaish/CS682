@@ -60,18 +60,23 @@
             <div class="col-sm-5">
               <label for="First_Mtg_Interest_Rate">Enter a First_Mtg_Interest_Rate:</label>
               <!-- <select class="form-select" name="First_Mtg_Interest_Rate" id="First_Mtg_Interest_Rate"> -->
+                {% if details.First_Mtg_Interest_Rate %}
+                <input name="First_Mtg_Interest_Rate" value="{{details.First_Mtg_Interest_Rate}}">
+                {% else %}
               <input name="First_Mtg_Interest_Rate">
+              {% endif %}
               </select>
             </div>
 
             <div class="col-sm-5">
-              
               <label for="Average_rent_per_unit">Choose a Average</label>
               <div>
+              {% if details.Average_rent_per_unit %}
+              <option name="rent" selected value="{{details.Average_rent_per_unit}}">{{details.Average_rent_per_unit}}</option>
+              {% endif %}
+              
                 {{ rent }}
               </div>
-              
-              
               </select>
             </div>
 

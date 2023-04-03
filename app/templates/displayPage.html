@@ -15,6 +15,7 @@ Awesome Search Box
 {% block content %}
 <div class="split left" >
   <!-- search bar -->
+  <form action="{% url 'displayPage' %}" method="post">
   <div class="container h-100">
     <div class="d-flex justify-content-center h-100">
       <div class="searchbar" style="position: absolute; top:2%;">
@@ -22,7 +23,7 @@ Awesome Search Box
         <a href="#" class="search_icon"><i class="fas fa-search" style='font-size:18px;color:rgb(255, 255, 255)'></i></a>
       </div>
     </div>
-  </div>
+  </div></form>
     <div class="centered" style="position:absolute; top:50%;">      
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11800.165492683938!2d-71.03787925!3d42.320316299999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1679608178866!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>

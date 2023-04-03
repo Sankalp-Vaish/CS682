@@ -1,6 +1,6 @@
 import numpy as np
 
-def calculator(Fair_Market_Value, Number_of_Units, Property_Taxes, insurance_rate, First_Mtg_Interest_Rate, Average_rent_per_unit):
+def calculator(Fair_Market_Value=374000.00, Number_of_Units=6, Property_Taxes=5400.00, insurance_rate=0.003, First_Mtg_Interest_Rate=0.08, Average_rent_per_unit=800):
     # -------------------------
     # Property Info	
     # Address	91 Bellevue Rd

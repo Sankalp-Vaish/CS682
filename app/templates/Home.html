@@ -13,11 +13,11 @@
   <h1>Real time investment</h1>
   <h3>Home</h3>
   Hi {{ user.username }}!
-  <button onclick ="sub();return false;">Check </button>
+  <button class="btn btn-dark" onclick ="sub();return false;">Check </button>
 
   {% if user.is_authenticated %}
     <p><a href="{% url 'logout' %}">Log Out</a></p>
-    <button onclick="location.href='/test'">Click To Execute Script</button>
+    <button class="btn btn-dark" onclick="location.href='/test'">Click To Execute Script</button>
   {% else %}
   <p>Did you Login?</p>
   {% endif %}
