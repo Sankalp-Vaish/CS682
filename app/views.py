@@ -13,11 +13,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 
-#from django_google_maps import fields as map_fields
-import googlemaps
-
-gmaps = googlemaps.Client(key='AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak')
-
 def main(request):
   user = request.user
   context = {'user': user}
@@ -27,13 +22,7 @@ def main(request):
 def home(request):
   user = request.user
   my_location = {'latitude': 37.4224764, 'longitude': -122.0842499}
-  geocode_result = gmaps.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
-  location = geocode_result[0]['geometry']['location']
-  latitude = location['lat']
-  longitude = location['lng']
-  context = {'user': user, 'my_location': my_location, 'geocode_result': geocode_result, 'google_api_key': settings.GOOGLE_MAPS_API_KEY}
-  # address = map_fields.AddressField(max_length=200)
-  # geolocation = map_fields.GeoLocationField(max_length=100)
+  context = {'user': user, 'my_location': my_location, 'google_api_key': settings.GOOGLE_MAPS_API_KEY}
   template = loader.get_template('Home.html')
   return HttpResponse(template.render(context, request))
 

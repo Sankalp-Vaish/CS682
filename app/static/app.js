@@ -36,25 +36,23 @@ function myFunction2() {
   }
 }
 
-function setLocation() {
-  var directionsDisplay = new google.maps.DirectionsRenderer;
-  var mapElement = document.getElementById('map');
+async function setLocation() {
+  const position = { lat: 37.42, lng: -122.08 };
+  // Request needed libraries.
+  const { Map } = await google.maps.importLibrary("maps");
+  const { Marker } = await google.maps.importLibrary("marker");
 
-  // mapElement.addEventListener('click', function() {
-  //   myFunction();
-  // });
-
-  let map = new google.maps.Map(mapElement, {
-    center: {lat: 37.42, lng:  -122.08},
-    zoom: 8
+  let map = new Map(document.getElementById("map-element"), {
+    zoom: 8,
+    center: position,
+    mapId: "DEMO_MAP_ID",
   });
-  directionsDisplay.setMap(map);
 
-  // var marker = new google.maps.Marker({
-  //   position: {lat: 37.77, lng: -122.41},
-  //   map: map,
-  //   title: 'San Francisco'
-  // });
-  
-  // return marker;
+  const marker = new Marker({
+    position: position,
+    map: map,
+    title: "San Jose",
+  });
+
+  marker.setMap(map);
 }
