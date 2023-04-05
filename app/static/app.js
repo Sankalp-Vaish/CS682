@@ -35,3 +35,24 @@ function myFunction2() {
     }
   }
 }
+
+async function setLocation() {
+  const position = { lat: 37.42, lng: -122.08 };
+  // Request needed libraries.
+  const { Map } = await google.maps.importLibrary("maps");
+  const { Marker } = await google.maps.importLibrary("marker");
+
+  let map = new Map(document.getElementById("map-element"), {
+    zoom: 8,
+    center: position,
+    mapId: "DEMO_MAP_ID",
+  });
+
+  const marker = new Marker({
+    position: position,
+    map: map,
+    title: "San Jose",
+  });
+
+  marker.setMap(map);
+}
