@@ -6,6 +6,7 @@
 
 
 {% block content %}
+<<<<<<< HEAD
 <div
   style="
     position: absolute;
@@ -16,6 +17,11 @@
 >
   <div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak"></script>
+=======
+<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+<div>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak"></script> -->
+>>>>>>> 9a090483376cc20a4455518f25f36083cba18f01
 
     <h1>Real time investment</h1>
     <h3>Home</h3>
@@ -33,6 +39,7 @@
         <p>Did you Login?</p>
         {% endif %}
 
+<<<<<<< HEAD
         <div style="height: 50%; width: 50%">
           <div id="map" style="height: 100%; width: 100%">map click</div>
         </div>
@@ -43,6 +50,21 @@
 
 <script>
   var mapElement = document.getElementById("map");
+=======
+  <div style="height: 500px; width: 500px;">
+    <div id="map-element" style="height: 100%; width: 100%;">map click</div>
+    <!-- prettier-ignore -->
+    <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+      ({key: "AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak", v: "weekly"});
+      var mapElement = document.getElementById('map-element');
+
+      mapElement.addEventListener('load', function() {
+        setLocation();
+      });
+    </script>
+  </div>
+</div></div>
+>>>>>>> 9a090483376cc20a4455518f25f36083cba18f01
 
   mapElement.addEventListener("click", function () {
     setLocation();
