@@ -11,15 +11,15 @@
   <form method="post">
     {% csrf_token %}
     <div class="justify-content-center">
-      {{ form.username.label }}
+      <b>{{ form.username.label }}</b>
       <p>
       {{ form.username }}</p>
       {{ form.password.label}}
       <p>{{ form.password}}</p>
     </div>
-    <p>
-      <a class="btn btn-outline-secondary" href="{% url 'signup' %}">New User</a>
-      <button class="btn btn-outline-light text-light" type="submit">Log In</button>
+    <p style="margin-top: 7%;">
+      <a class="btn btn-outline-primary" href="{% url 'signup' %}">New User</a>
+      <button class="btn btn-outline-primary" type="submit">Log In</button>
     </p>
     
   </form></div></div>

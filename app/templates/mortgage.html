@@ -8,15 +8,15 @@
 {% block content %}
 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
 <div class="main">
-  <h1>Real time investment</h1>
-  <h3>Mortgage</h3>
+  <!-- <h1>Real time investment</h1> -->
+  <!-- <h3>Mortgage</h3> -->
   
-
  <br><br>
 
 
   {% if flag == "False" %}
-    
+  <div class="container mort_back">
+    <div>
     <form action="" method="POST">
         {% csrf_token %}
         <div class="row"> 
@@ -51,16 +51,16 @@
 
 
 
-          <div class="col-sm-4">
+          <div class="submit">
             <label></label>
-            <button class="btn btn-dark" style="margin-top: 18%;">Submit</button>
+            <button class="btn btn-dark" >Submit</button>
           </div>
         </div>
         <!-- <h4>Enter pincode</h4>
         <input type="text" name="pincode">
         <button >Submit </button> -->
       </form>
-
+    </div></div>
   {% else %}
 
     <br><br>
@@ -100,5 +100,5 @@
 
 </div>
 </div>
-  
+ 
 {% endblock %}

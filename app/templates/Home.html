@@ -13,17 +13,21 @@
       defer
     ></script>
 
-  <h1>Real time investment</h1>
-  <h3>Home</h3>
-  Hi {{ user.username }}!
-  <button class="btn btn-dark" onclick ="sub();return false;">Check </button>
+    <h1>Real time investment</h1>
+    <h3>Home</h3>
+    <div class="container">
+      <div class="home_back">
+        Hi {{ user.username }}!
+        <div><button class="btn btn-dark submit" onclick="sub();return false;">
+          Check
+        </button></div>
 
-  {% if user.is_authenticated %}
-    <p><a href="{% url 'logout' %}">Log Out</a></p>
-    <button class="btn btn-dark" onclick="location.href='/test'">Click To Execute Script</button>
-  {% else %}
-  <p>Did you Login?</p>
-  {% endif %}
+        {% if user.is_authenticated %}
+        <p><a href="{% url 'logout' %}">Log Out</a></p>
+        <!-- <button class="btn btn-dark" onclick="location.href='/test'">Click To Execute Script</button> -->
+        {% else %}
+        <p>Did you Login?</p>
+        {% endif %}
 
   <div id="pac-container">
     <input id="pac-input" type="text" placeholder="Enter a location" />

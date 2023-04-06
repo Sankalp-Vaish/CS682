@@ -14,14 +14,14 @@
   </div>
   
 
- <br><br>
 
 
   {% if flag == "False" %}
-    
+  <div class="container est_back">
+    <div>
     <form action="" method="POST">
         {% csrf_token %}
-        <div class="container">
+        <div>
           <div class="row">           
             <div class="col-sm-3">
               <label for="state">Choose a State:</label>
@@ -46,7 +46,7 @@
             </div>
         <!-- <br><br> -->
 
-            <div class="col-sm-5">
+            <div class="col-sm-3">
               <label for="street_name">Choose a Street Name:</label>
               <select class="form-select" name="street_name" id="street_name">
               {% for sn in street_name %}
@@ -71,9 +71,9 @@
             <div class="col-sm-5">
               <label for="Average_rent_per_unit">Choose a Average</label>
               <div>
-              {% if details.Average_rent_per_unit %}
+              <!-- {% if details.Average_rent_per_unit %}
               <option name="rent" selected value="{{details.Average_rent_per_unit}}">{{details.Average_rent_per_unit}}</option>
-              {% endif %}
+              {% endif %} -->
               
                 {{ rent }}
               </div>
@@ -81,14 +81,17 @@
             </div>
 
 
-            <div class="col-sm-1">
+            <div class="submit">
               <label></label>
               <button class="btn btn-dark">Submit </button>
             </div>
-          </div>
+          <!-- </div> -->
         
         </div>
       </form>
+    </div>
+  </div>
+ 
 
 
 
