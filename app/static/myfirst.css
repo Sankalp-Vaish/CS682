@@ -133,8 +133,10 @@
 
 
 .panel-footer{
-  position: absolute;
-  bottom: 0; 
+  flex: 0 0 50px;/*or just height:50px;*/
+  margin-top: auto;
+  bottom: 0;
+  position: fixed;
   size: 10px;
 	background-color: #222;
   color: whitesmoke;
@@ -147,15 +149,35 @@
   margin-bottom: 1%;
 }
 
+.anchor {
+  display: inline-block;
+  /* padding-top: 90px; */
+}
+
+.header{
+  position: relative;
+  padding-bottom: 8%;
+  overflow-y: hidden;
+  width: 100%;
+  top: 0;
+  /* flex: 0 0 50px; */
+  margin-bottom: -4%;
+}
 
 
 .house-card {
   margin-bottom: 5px;
+  left: 35%;
+  width: 40%;
 }
 
 body {
   font-family: 'Times New Roman', serif;
   font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 #form-title{
@@ -172,6 +194,7 @@ body {
 .home_back{
   text-align: center;
   background-color: #ffffff;
+  max-width: 50%;
 
 }
 
@@ -181,8 +204,8 @@ body {
   width: 100%;
   position: relative;
   top: 50%;
-  max-width: 62%;
-  left: 14%
+  max-width: 50%;
+  left: 10%
 }
 
 .mort_back{
@@ -191,10 +214,36 @@ body {
   width: 100%;
   position: relative;
   top: 50%;
-  max-width: 62%;
+  max-width: 50%;
+}
+
+.back_details{
+  text-align: center;
+  background-color: #ffffff;
+  width: 100%;
+  position: relative;
+  top: 50%;
+  max-width: 50%;
+}
+
+.info_details{
+  text-align: center;
+  background-color: #ffffff;
+  width: 100%;
+  position: relative;
+  top: 50%;
+  max-width: 50%;
 }
 
 .col-sm-3{
+  width: 95%;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.col-sm-8{
   width: 95%;
   margin-left: 1%;
   margin-right: 1%;
@@ -255,4 +304,65 @@ body {
 .desc {
   padding: 15px;
   text-align: center;
+}
+
+
+
+
+
+
+
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  /* max-width: 1000px; */
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 635px;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+.main_b {
+    
+  overflow: auto;
+  position: relative;
+  top: 28%;
+  left: 66%;
+  margin-top: 12%;
+  transform: translate(-50%, -50%);
 }

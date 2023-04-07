@@ -6,7 +6,7 @@
 
 
 {% block content %}
-<div style="position: absolute; top: 50%; left: 40%; transform: translate(-50%, -50%);">
+<div style="position: relative; top: 50%; left: 40%; transform: translate(-50%, -50%);">
 <div class="main">
   <div style="position: relative; top: 50%; left: 30%;">
   <h1>Real time investment</h1>
@@ -100,7 +100,7 @@
   {% else %}
 
     <br><br>
-    <h2> Retrieved data</h2>
+    <h2 style="left: 35%; position: relative;"> Retrieved data</h2>
 
     {% for house in r %}
 
@@ -139,7 +139,7 @@
   {% endif %}
   
 
-</div>
-</div>
+</div></div>
+<br><br><br><br>
   
 {% endblock %}
