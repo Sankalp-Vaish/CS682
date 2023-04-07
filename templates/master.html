@@ -24,9 +24,11 @@
 <header class="header">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">RTInvest</a>
+      <a class="navbar-brand" href="/" style="position: absolute;">RTInvest</a>
+
+      {% if user.is_authenticated %}
       <div class="container">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" style="margin-left: 65px;">
           <li class="nav-item">
             <a class="nav-link link-light" href="/home">HOME</a>
           </li>
@@ -38,7 +40,6 @@
           </li>
         </ul>
       </div>
-      {% if user.is_authenticated %}
       <div style="width: 20%; float: right">
         <li class="dropdown">
           <a data-toggle="dropdown" href="/" style="color: white;">Account <span class="caret"></span></a>
@@ -53,7 +54,7 @@
             </li>
             <li>
               <a href="/help">
-                <span class="glyphicon glyphicon-shopping-cart"></span> CONTACT US</a>
+                <span class="glyphicon glyphicon-envelope"></span> CONTACT US</a>
             </li>
             <li>
               <a href="/about">
@@ -65,13 +66,13 @@
 
 
       {% else %}
-      <div style="width: 20%; float: right">
+      <div style="margin-left: 80%; float: right; text-align: right;">
         <li class="dropdown">
           <a data-toggle="dropdown" href="/main">More<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li class="">
               <a href="/help">
-                <span class="glyphicon glyphicon-shopping-cart"></span> CONTACT US</a>
+                <span class="glyphicon glyphicon-envelope"></span> CONTACT US</a>
             </li>
             <li>
               <a href="/about">
