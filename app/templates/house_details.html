@@ -4,66 +4,92 @@
 
 {% block content %}
 
-<div class="main_b anchor">
-  <h4>Details</h4>
-  <div> {{ y }}</div>
-  <div>
+<div class="marq">
+<marquee id="abcd" scrollamount="10" onmouseover="this.stop()" onmouseout="this.start()">
+  {% for i in house.link %}
+    <img id={{forloop.counter}} src={{i.href}} height="150px">
+  {% endfor %}
+  </marquee>
+</div>
 
+<div class="main_b">
+  <div>
+    
     <!-- <img id="img_data" src= "{{house.link}}" >  -->
     <div class="container">
       <div class="back_details">
+        <div style="text-align: center;">
+        <h3>Details</h3>
         <h4>{{ house.street_name }}, {{ house.city }}, {{ house.postal_code }}</h4>
-        <span>{{ house.stories }} Story built in {{ house.year_built }}</span>
+        <span>{{ house.stories }} Story house built in {{ house.year_built }}</span>
         <br>
-        <span>Unit: {{ house.unit }} | {{ house.beds }}B {{ house.baths }}B</span>
-        <br>
-        <span>Listed price: ${{ house.list_price}}</span>
-        <br>
-        <span>status:  {{ house.status}}</span><br>
-        <span>unit:  {{ house.unit }}</span><br>
-        <span>postal_code:  {{ house.postal_code }}</span><br>
-        <span>street_name:  {{ house.street_name }} </span><br>
-        <span>tax: {{ house.tax }}</span><br>
+        <span>{{ house.beds }}B {{ house.baths }}B</span>
+        </div>
+        <span class="label_house">Listed price:</span>  <span class="val">${{ house.list_price}}</span><br>
+        <span class="label_house">status:</span>  <span class="val">{{ house.status}}</span><br>
+        <span class="label_house">unit: </span>  <span class="val"> {{ house.unit }}</span><br>
+        <span class="label_house">postal_code: </span>  <span class="val"> {{ house.postal_code }}</span><br>
+        <span class="label_house">street_name: </span>  <span class="val"> {{ house.street_name }} </span><br>
+        <span class="label_house">tax: </span>  <span class="val"> {{ house.tax }}</span><br>
       </div>
     </div>
     <br><br>
     <div class="container">
       <div class="info_details">
-        <p>Info of properties</p>
-        First_Mtg_LTV= {{ calc.First_Mtg_LTV }} <br>
-        First_Mtg_LTPP = {{ calc.First_Mtg_LTPP }}<br>
-        Second_Mtg_LTV = {{ calc.Second_Mtg_LTV }}<br>
-        Second_Mtg_LTPP = {{ calc.Second_Mtg_LTPP }}<br>
-        CapRate_on_PP = {{ calc.CapRate_on_PP}}<br>
-        CapRate_on_FMV = {{ calc.CapRate_on_FMV }}<br>
-        Average_Rent = {{ calc.Average_Rent }}<br>
-        GRM = {{ calc.GRM }}<br>
-        DCR = {{ calc.DCR }}<br>
-        Cash_On_Cash_ROI = {{ calc.Cash_On_Cash_ROI}}<br>
-        Equity_ROI = {{ calc.Equity_ROI}}<br>
-        Appreciation_ROI = {{ calc.Appreciation_ROI}}<br>
-        Total_ROI = {{ calc.Total_ROI }}<br>
-        Forced_App_ROI = {{ calc.Forced_App_ROI}}<br>
-        Expense_to_income_ratio = {{ calc.Expense_to_income_ratio}}<br>
+        <h3 style="text-align: center;">Quick Analysis</h3>
+        <div><span class="label_house">First_Mtg_LTV: </span>  <span class="val">{{ calc.First_Mtg_LTV }} %</span> </div>
+        <div><span class="label_house">First_Mtg_LTPP: </span>  <span class="val">{{ calc.First_Mtg_LTPP }} %</span></div>
+        <div><span class="label_house">Second_Mtg_LTV: </span>  <span class="val">{{ calc.Second_Mtg_LTV }} %</span></div>
+        <div><span class="label_house">Second_Mtg_LTPP: </span>  <span class="val">{{ calc.Second_Mtg_LTPP }} %</span></div>
+        <div><span class="label_house">CapRate_on_PP: </span>  <span class="val">{{ calc.CapRate_on_PP}} %</span></div>
+        <div><span class="label_house">CapRate_on_FMV: </span>  <span class="val">{{ calc.CapRate_on_FMV }} %</span></div>
+        <div><span class="label_house">Average_Rent: </span>  <span class="val">${{ calc.Average_Rent }}</span></div>
+        <div><span class="label_house">GRM: </span>  <span class="val result">{{ calc.GRM }}</span></div>
+        <div><span class="label_house">DCR: </span>  <span class="val result">{{ calc.DCR }}</span></div>
+        <div><span class="label_house">Cash_On_Cash_ROI: </span>  <span class="val result">{{ calc.Cash_On_Cash_ROI}}</span>%</div>
+        <div><span class="label_house">Equity_ROI: </span>  <span class="val result">{{ calc.Equity_ROI}}</span>%</div>
+        <div><span class="label_house">Appreciation_ROI: </span>  <span class="val result">{{ calc.Appreciation_ROI}}</span>%</div>
+        <div><span class="label_house">Total_ROI: </span>  <span class="val result">{{ calc.Total_ROI }}</span>%</div>
+        <div><span class="label_house">Forced_App_ROI: </span>  <span class="val result">{{ calc.Forced_App_ROI}}</span>%</div>
+        <div><span class="label_house">Expense_to_income_ratio: </span>  <span class="val result">{{ calc.Expense_to_income_ratio}}</span>%</div>
       </div>
     </div>
 
+    <br><br>
+    <div class="container">
+      <div class="info_details">
+        <h3 style="text-align: center;">Cashflow Analysis</h3>
+        <div><span class="label_house">Total_Monthly_Profit_or_Loss: </span>  <span class="val result">{{ calc.Total_Monthly_Profit_or_Loss }}</span></div>
+        <div><span class="label_house">Cashflow per unit per month: </span>  <span class="val result">{{ calc.Cashflow_per_unit_per_month }}</span></div>
+      </div>
+    </div><br>
+    
+    
+    <div class="container">
+    <div class="details_map" onClick="setLocation({{house.lat}}, {{house.lon}})" >
+      <div id="map-element" class="btn btn-dark submit">View Location</div>
+      <!-- prettier-ignore -->
+      <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+        ({key: "AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak", v: "weekly"});
+        var mapElement = document.getElementById('map-element');
+  
+        mapElement.addEventListener('load', function() {
+          // setLocation();
+        });
+      </script>
+    </div></div>
+
 
   <!-- Slideshow container -->
-  <div class="slideshow-container">
+  <!-- <div class="slideshow-container">
     {% for i in house.link %}
-    
-    <!-- Full-width images with number and caption text -->
     <div class="mySlides">
       <img src={{i.href}}>
     </div>
-
     {% endfor %}
-
-    <!-- Next and previous buttons -->
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
-  </div>
+  </div> -->
   <br>
 
 

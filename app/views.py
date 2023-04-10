@@ -160,6 +160,7 @@ def test3(request):
 
 def house_details(request, id):
   template = loader.get_template('house_details.html')
+  print("before",id)
   l=hello.get_id_list()
   house=None
   for i in l:
@@ -167,8 +168,10 @@ def house_details(request, id):
       #print("Yes")
       house=hello.get_details(id)
   if house==None:
-    #print("No")
+    print("No")
     house=hello.get_details_by_pin(id)
+    print(house["city"])
+    print("after",house["property_id"])
   details=User_details.objects.get(user=request.user)
   print(details.First_Mtg_Interest_Rate)
   result=Calculator.calculator(house["list_price"], house["unit"], house["tax"], house["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)

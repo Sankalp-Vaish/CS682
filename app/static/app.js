@@ -36,8 +36,11 @@ function myFunction2() {
   }
 }
 
-async function setLocation() {
-  const position = { lat: 37.42, lng: -122.08 };
+//house details map
+async function setLocation(lati, lon) {
+  $("#map-element").css({"height": "400px", "width": "550px"});
+  console.log(lati);
+  const position = { lat: lati, lng: lon };
   // Request needed libraries.
   const { Map } = await google.maps.importLibrary("maps");
   const { Marker } = await google.maps.importLibrary("marker");
@@ -51,12 +54,10 @@ async function setLocation() {
   const marker = new Marker({
     position: position,
     map: map,
-    title: "San Jose",
   });
 
   marker.setMap(map);
 }
-
 
 let map, infoWindow;
 
@@ -82,7 +83,6 @@ async function initMap_cp() {
           const pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-            
           };
 
           infoWindow.setPosition(pos);
@@ -167,31 +167,108 @@ function initMap() {
 
 
 
-let slideIndex = 1
-showSlides(slideIndex);
+// let slideIndex = 1
+// showSlides(slideIndex);
 
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
+// // Next/previous controls
+// function plusSlides(n) {
+//   showSlides(slideIndex += n);
+// }
+
+// // Thumbnail image controls
+// function currentSlide(n) {
+//   showSlides(slideIndex = n);
+// }
+
+// function showSlides(n) {
+//   let i;
+//   let slides = document.getElementsByClassName("mySlides");
+//   let dots = document.getElementsByClassName("dot");
+//   if (n > slides.length) {slideIndex = 1}
+//   if (n < 1) {slideIndex = slides.length}
+//   for (i = 0; i < slides.length; i++) {
+//     slides[i].style.display = "none";
+//   }
+//   for (i = 0; i < dots.length; i++) {
+//     dots[i].className = dots[i].className.replace(" active", "");
+//   }
+//   slides[slideIndex-1].style.display = "block";
+//   dots[slideIndex-1].className += " active";
+// }
+
+
+$(document).ready(function(){
+  console.log("in1");
+  $("marquee img").mouseenter(function(){
+    i=this.id;
+    $("#"+String(i)).animate({height: '200px'});
+    console.log("in");
+  });
+});
+
+
+$(document).ready(function(){
+  $("marquee img").mouseleave(function(){
+    i=this.id;
+    $("#"+String(i)).animate({height: '150px'});
+
+  });
+});
+
+
+$(document).ready(function(){
+  $(".result").each(function(i, obj){
+    if ($(obj).text() >0){
+      $(obj).css({"color": "green"})
+    }
+    else{
+      $(obj).css({"color": "red"})
+      $(obj).parent().css({"font-weight": "bold"})
+    }
+  });
+
+});
+
+
+// current location map
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+async function success(pos) {
+  const crd = pos.coords;
+
+  console.log("Your current position is:");
+  console.log(crd.latitude);
+  console.log(`Longitude: ${crd.longitude}`);
+  console.log(`More or less ${crd.accuracy} meters.`);
+
+
+  const position = { lat: crd.latitude, lng: crd.longitude };
+  // Request needed libraries.
+  const { Map } = await google.maps.importLibrary("maps");
+  const { Marker } = await google.maps.importLibrary("marker");
+
+  let map = new Map(document.getElementById("map-element-main"), {
+    zoom: 8,
+    center: position,
+    mapId: "DEMO_MAP_ID",
+  });
+
+  const marker = new Marker({
+    position: position,
+    map: map,
+  });
+
+  marker.setMap(map);
 }
 
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
+function test(){
+  navigator.geolocation.getCurrentPosition(success, error, options);
 }

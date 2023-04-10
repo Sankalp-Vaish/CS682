@@ -199,20 +199,22 @@ def calculator(Fair_Market_Value=374000.00, Number_of_Units=6, Property_Taxes=54
     "Expense_to_income_ratio " , Expense_to_income_ratio, "\n")"""
 
     d=dict()
-    d["First_Mtg_LTV"] =First_Mtg_LTV
-    d["First_Mtg_LTPP"] = First_Mtg_LTPP
-    d["Second_Mtg_LTV"] = Second_Mtg_LTV 
-    d["Second_Mtg_LTPP"] = Second_Mtg_LTPP 
-    d["CapRate_on_PP"] = CapRate_on_PP
-    d["CapRate_on_FMV"] = CapRate_on_FMV
-    d["Average_Rent"] = Average_Rent 
-    d["GRM"] = GRM 
-    d["DCR"] = DCR 
-    d["Cash_On_Cash_ROI"] = Cash_On_Cash_ROI
-    d["Equity_ROI"] = Equity_ROI
-    d["Appreciation_ROI"] = Appreciation_ROI
-    d["Total_ROI"] = Total_ROI 
-    d["Forced_App_ROI"] = Forced_App_ROI
-    d["Expense_to_income_ratio"] = Expense_to_income_ratio
+    d["Total_Monthly_Profit_or_Loss"]= "{:.2f}".format(Total_Monthly_Profit_or_Loss)
+    d["Cashflow_per_unit_per_month"]= "{:.2f}".format(Cashflow_per_unit_per_month)
+    d["First_Mtg_LTV"] ="{:.2f}".format(First_Mtg_LTV)
+    d["First_Mtg_LTPP"] = "{:.2f}".format(First_Mtg_LTPP)
+    d["Second_Mtg_LTV"] = "{:.2f}".format(Second_Mtg_LTV) 
+    d["Second_Mtg_LTPP"] ="{:.2f}".format(Second_Mtg_LTPP)
+    d["CapRate_on_PP"] = "{:.2f}".format(CapRate_on_PP)
+    d["CapRate_on_FMV"] = "{:.2f}".format(CapRate_on_FMV)
+    d["Average_Rent"] = "{:.2f}".format(Average_Rent )
+    d["GRM"] = "{:.2f}".format(GRM )
+    d["DCR"] = "{:.2f}".format(DCR )
+    d["Cash_On_Cash_ROI"] = "{:.2f}".format(Cash_On_Cash_ROI)
+    d["Equity_ROI"] = "{:.2f}".format(Equity_ROI)
+    d["Appreciation_ROI"] = "{:.2f}".format(Appreciation_ROI)
+    d["Total_ROI"] = "{:.2f}".format(Total_ROI )
+    d["Forced_App_ROI"] = "{:.2f}".format(Forced_App_ROI)
+    d["Expense_to_income_ratio"] = "{:.2f}".format(Expense_to_income_ratio)
 
     return d
