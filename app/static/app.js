@@ -154,6 +154,7 @@ function initMap() {
     }
 
     marker.setPosition(place.geometry.location);
+    console.log(place.geometry.location.lat(), place.geometry.location.lng());
     marker.setVisible(true);
     // infowindowContent.children["place-name"].textContent = place.name;
     // infowindowContent.children["place-address"].textContent = place.formatted_address;

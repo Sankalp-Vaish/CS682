@@ -28,11 +28,17 @@
         {% else %}
         <p>Did you Login?</p>
         {% endif %}
-
+  
+  <form action="" method="POST">
+    {% csrf_token %}
   <div id="pac-container">
-    <input id="pac-input" type="text" placeholder="Enter a location" />
+    <input name="address" id="pac-input" type="text" placeholder="Enter a location" />
+  </div>
+  <div class="submit">
+    <button class="btn btn-dark">Submit </button>
   </div>
   <div id="map" style="height: 300px; width: 500px;"></div>
+  </form>
 </div></div>
 </div></div>
   
