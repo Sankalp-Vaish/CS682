@@ -273,3 +273,48 @@ function error(err) {
 function test(){
   navigator.geolocation.getCurrentPosition(success, error, options);
 }
+
+function initMapHomeEstimate() {
+  const latvalues = document.getElementsByClassName("lat-value");
+  const lonvalues = document.getElementsByClassName("lon-value");
+
+  let coordinates = [];
+
+  for (let i=0; i<latvalues.length; i++) {
+    coordinates.push([latvalues[i].attributes.value.value, lonvalues[i].attributes.value.value]);
+  }
+
+  console.log(coordinates);
+
+  const map = new google.maps.Map(document.getElementById("map-home-estimate"), {
+    center: { lat: parseInt(coordinates[0][0]), lng: parseInt(coordinates[0][1]) },
+    zoom: 15,
+    mapTypeControl: false,
+  });
+  //const input = document.getElementById("pac-input");
+  const options = {
+    fields: ["formatted_address", "geometry", "name"],
+    strictBounds: false,
+    types: ["address"],
+  };
+  //const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+  setMarkers(map, coordinates);
+
+}
+
+function setMarkers(map, coordinates) {
+
+  for (let i = 0; i < coordinates.length; i++) {
+    const coordinate = coordinates[i];
+    new google.maps.Marker({
+      map,
+      //anchorPoint: new google.maps.Point(0, -29),
+      position: { lat: parseInt(coordinate[0]), lng: parseInt(coordinate[1]) },
+      title: i.toString(),
+      label: i.toString(),
+    });
+  }
+}
+
+window.initMapHomeEstimate = initMapHomeEstimate;
