@@ -145,6 +145,8 @@ def get_dict(result):
       r["unit"]=house["data"]['home']['description']['units']
       r["link"]=house["data"]["home"]["photos"][0]["href"] 
       r["property_id"]=house["data"]["home"]["property_id"]
+      r["lat"]= house["data"]['home']["location"]["address"]["coordinate"]["lat"]
+      r["lon"]= house["data"]['home']["location"]["address"]["coordinate"]["lon"]
       r["latitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lat"]
       r["longitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lon"]
 
@@ -171,11 +173,14 @@ def get_details(id):
             r["unit"]=house["data"]['home']['description']['units']
             r["postal_code"]=house["data"]["home"]["location"]["address"]["postal_code"]
             r["street_name"]=house["data"]["home"]["location"]["address"]["street_name"]
-            #for j in house["data"]['home']['photos']:
-            #    r["link"]=j['href']
+            r["lat"]= house["data"]['home']["location"]["address"]["coordinate"]["lat"]
+            r["lon"]= house["data"]['home']["location"]["address"]["coordinate"]["lon"]
             r["link"]=house["data"]["home"]["photos"] 
             r["property_id"]=house["data"]["home"]["property_id"]
-            r["tax"]=house["data"]['home']['tax_history'][0]["tax"]
+            if house["data"]['home']['tax_history']:
+                r["tax"]=house["data"]['home']['tax_history'][0]["tax"]
+            else:
+                r["tax"]=None
             r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
             r["First_Mtg_Interest_Rate"]=First_Mtg_Interest_Rate
             print(r["tax"])
@@ -187,7 +192,7 @@ def get_details_by_pin(id):
     r=dict()
     url = "https://realty-in-us.p.rapidapi.com/properties/v3/detail"
 
-    querystring = {"property_id":"2186526216"}
+    querystring = {"property_id":id}
 
     headers = {
         "X-RapidAPI-Key": "ea8552e940msh3f14dc78146fae7p16308ejsn1bedafc35b28",
@@ -208,8 +213,13 @@ def get_details_by_pin(id):
     r["postal_code"]=house["data"]["home"]["location"]["address"]["postal_code"]
     r["street_name"]=house["data"]["home"]["location"]["address"]["street_name"]
     r["link"]=house["data"]["home"]["photos"]
+    r["lat"]= house["data"]['home']["location"]["address"]["coordinate"]["lat"]
+    r["lon"]= house["data"]['home']["location"]["address"]["coordinate"]["lon"]
     r["property_id"]=house["data"]["home"]["property_id"]
-    r["tax"]=house["data"]['home']['tax_history'][0]["tax"]
+    if house["data"]['home']['tax_history']:
+        r["tax"]=house["data"]['home']['tax_history'][0]["tax"]
+    else:
+        r["tax"]=None
     r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
     r["First_Mtg_Interest_Rate"]=First_Mtg_Interest_Rate
     print(r["tax"])
