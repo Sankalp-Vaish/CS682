@@ -39,9 +39,9 @@
           </li>
         </ul>
       </div>
-      <div style="width: 20%; float: right">
+      <div style="width: 20%; float: right; left: 5%; position: relative;">
         <li class="dropdown">
-          <a data-toggle="dropdown" href="/" style="color: white;">Account <span class="caret"></span></a>
+          <a class="glyphicon glyphicon-user" data-toggle="dropdown" href="/" style="color: white;"><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li class=" active">
               <p style="float: left; margin: 2%; position: relative; left: 26%;">
@@ -59,7 +59,7 @@
               <a href="/about">
                 <span class="glyphicon glyphicon-info-sign"></span> About</a>
             </li>
-            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> LogOut</a></li>
+            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
           </ul>
         </li></div>
 
