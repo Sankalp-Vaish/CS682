@@ -145,6 +145,8 @@ def get_dict(result):
       r["unit"]=house["data"]['home']['description']['units']
       r["link"]=house["data"]["home"]["photos"][0]["href"] 
       r["property_id"]=house["data"]["home"]["property_id"]
+      r["latitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lat"]
+      r["longitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lon"]
 
       l.append(r)
       r=dict()
@@ -154,7 +156,7 @@ def get_dict(result):
 
 def get_details(id):
     r=dict()
-    d=json.load(open(r"app\data_file.json"))
+    d=json.load(open(r"app/data_file.json"))
     for house in d:
         #print("house ", type(house["data"]["home"]["property_id"]))
         if house["data"]["home"]["property_id"]==str(id):
@@ -216,7 +218,7 @@ def get_details_by_pin(id):
 
 
 def get_id_list():
-    d=json.load(open(r"app\data_file.json"))
+    d=json.load(open(r"app/data_file.json"))
     l=[]
     for i in d:
         l.append(i["data"]["home"]["property_id"])

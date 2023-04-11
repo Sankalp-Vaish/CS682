@@ -18,14 +18,14 @@
 
 /* Control the left side */
 .left {
-  position: absolute; top: 10%; left: 50%;
+  position: absolute; left: 50%;
   left: 0;
   background-color: #f3baba;
 }
 
 /* Control the right side */
 .right {
-  position: absolute; top: 10%; left: 50%;
+  position: absolute; left: 50%;
   right: 0;
   background-color: rgb(109, 197, 203);
   overflow-y: scroll;
@@ -167,8 +167,7 @@
 
 .house-card {
   margin-bottom: 5px;
-  left: 35%;
-  width: 40%;
+  width: 500px;
 }
 
 body {
@@ -206,6 +205,13 @@ body {
   top: 50%;
   max-width: 50%;
   left: 10%
+}
+
+.est_result_back {
+  width: 100%;
+  position: relative;
+  left: 10%;
+  height: 500px;
 }
 
 .mort_back{
