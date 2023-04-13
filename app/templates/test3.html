@@ -86,7 +86,6 @@
 
 
             <div class="submit">
-              <label></label>
               <button class="btn btn-dark">Submit </button>
             </div>
           <!-- </div> -->
@@ -123,16 +122,23 @@
           <div id="map-home-estimate" style="height: 300px; width: 500px;"></div>
         </div>
       </form> -->
-      <form action="" method="POST">
-        {% csrf_token %}
-      <div id="pac-container">
-        <input name="address" id="pac-input" type="text" placeholder="Enter a location" />
-      </div>
-      <div class="submit">
+      <!-- <form action="" method="POST">
+        {% csrf_token %} -->
+        <div class="container centered h-100">
+          <div class="d-flex justify-content-center h-100">
+            <div id="pac-container" class="searchbar" style="position: absolute; top:2%;">
+                <input class="search_input" name="address" id="pac-input" type="text" placeholder="Enter a location" />
+                <a href="#" class="search_icon"><i class="fas fa-search" style='font-size:18px;color:rgb(255, 255, 255)'></i></a>
+            </div>
+          </div>
+        </div>
+      <!-- <div class="submit">
         <button class="btn btn-dark">Submit </button>
+      </div> -->
+      <div class="centered" style="position:absolute; top:50%;"> 
+      <div id="map-home-estimate" style="height: 300px; width: 500px;margin-top: 8%;"></div>
       </div>
-      <div id="map" style="height: 300px; width: 500px;"></div>
-      </form>
+      <!-- </form> -->
     </div>
 
 

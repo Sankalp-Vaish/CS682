@@ -80,17 +80,32 @@ def mortgage(request):
   
   if request.method== "POST":
 
-    if exists:
-      print(request.POST.get("First_Mtg_Interest_Rate"))
-      if request.POST.get("First_Mtg_Interest_Rate")!= "":
-        details.First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate")
-      if request.POST.get("rent")!="":
-        details.Average_rent_per_unit= request.POST.get("rent")
-      details.save()
+    if "address" in request.POST:
+      print("Gotcha")
+      add=request.POST.get("address")
+      print(add)
+      geolocator = Nominatim(user_agent="geoapi")
+      try:
+        location = geolocator.geocode(add, timeout=10) 
+        data = location.raw
+        loc_data = data['display_name'].split()
+        print(loc_data[-3][:-1])
+        pin=(loc_data[-3][:-1])
+      except:
+        print("some error")
     else:
-      User_details.objects.create(user=request.user, Average_rent_per_unit=request.POST.get("rent"), First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate"))
-    
-    id = hello.get_houses_id(request.POST.get('pincode'))
+      if exists:
+        print(request.POST.get("First_Mtg_Interest_Rate"))
+        if request.POST.get("First_Mtg_Interest_Rate")!= "":
+          details.First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate")
+        if request.POST.get("rent")!="":
+          details.Average_rent_per_unit= request.POST.get("rent")
+        details.save()
+      else:
+        User_details.objects.create(user=request.user, Average_rent_per_unit=request.POST.get("rent"), First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate"))   
+      pin=request.POST.get('pincode')
+    print(pin)
+    id = hello.get_houses_id(pin)
     result = hello.get_house_list(id)
     #print(result)
     if result==[]:
@@ -119,7 +134,7 @@ def mortgage(request):
 
 
 def test(request):
-  result  = hello.printHello() 
+  result  = None#hello.printHello() 
   template = loader.get_template('test.html')
   return HttpResponse(template.render({"r":result}, request))
 
@@ -137,22 +152,41 @@ def test3(request):
   if exists:
     details=User_details.objects.get(user=request.user)
   if request.method== "POST":
-    if exists:
-      print(request.POST.get("First_Mtg_Interest_Rate"))
-      if request.POST.get("First_Mtg_Interest_Rate")!= "":
-        details.First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate")
-      if request.POST.get("rent")!="":
-        details.Average_rent_per_unit= request.POST.get("rent")
-      details.save()
+    if "address" in request.POST:
+      print("Gotcha")
+      add=request.POST.get("address")
+      print(add)
+      geolocator = Nominatim(user_agent="geoapi")
+      try:
+        location = geolocator.geocode(add, timeout=10) 
+        data = location.raw
+        loc_data = data['display_name'].split()
+        print(loc_data[-3][:-1])
+        pin=int(loc_data[-3][:-1])
+      except:
+        print("some error")
     else:
-      User_details.objects.create(user=request.user, Average_rent_per_unit=request.POST.get("rent"), First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate"))
+      if exists:
+        print(request.POST.get("First_Mtg_Interest_Rate"))
+        if request.POST.get("First_Mtg_Interest_Rate")!= "":
+          details.First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate")
+        if request.POST.get("rent")!="":
+          details.Average_rent_per_unit= request.POST.get("rent")
+        details.save()
+      else:
+        User_details.objects.create(user=request.user, Average_rent_per_unit=request.POST.get("rent"), First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate"))
     result  = hello.read_with_prams(request.POST.get('state'), request.POST.get('city'), request.POST.get('street_name'))
     #print(details.Average_rent_per_unit, details.First_Mtg_Interest_Rate)
     l=hello.get_dict(result)
+    my_location = {'latitude': 37.4224764, 'longitude': -122.0842499}
+    user = request.user
     context = {
     "r":l,
     "flag":"True",
-    "details":details
+    "details":details,
+    'user': user,
+    'my_location': my_location,
+    'google_api_key': settings.GOOGLE_MAPS_API_KEY
     }
     return HttpResponse(template.render(context, request))
   else:

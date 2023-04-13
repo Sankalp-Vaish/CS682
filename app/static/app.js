@@ -115,9 +115,21 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 window.initMap_cp = initMap_cp;
 
 function initMap() {
-  const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 40.749933, lng: -73.98633 },
-    zoom: 13,
+  console.log("118");
+  console.log("1");
+  const latvalues = document.getElementsByClassName("lat-value");
+  const lonvalues = document.getElementsByClassName("lon-value");
+  console.log("2");
+  let coordinates = [];
+
+  for (let i=0; i<latvalues.length; i++) {
+    coordinates.push([latvalues[i].attributes.value.value, lonvalues[i].attributes.value.value]);
+    console.log([latvalues[i].attributes.value.value, lonvalues[i].attributes.value.value]);
+  }
+  console.log(coordinates);
+  const map = new google.maps.Map(document.getElementById("map-home-estimate"), {
+    center: { lat: parseFloat(coordinates[0][0]), lng: parseFloat(coordinates[0][1]) },
+    zoom: 10,
     mapTypeControl: false,
   });
   const input = document.getElementById("pac-input");
@@ -126,13 +138,33 @@ function initMap() {
     strictBounds: false,
     types: ["address"],
   };
+  console.log("130");
   const autocomplete = new google.maps.places.Autocomplete(input, options);
 
   const marker = new google.maps.Marker({
     map,
     anchorPoint: new google.maps.Point(0, -29),
   });
+  console.log("137");
+  for (let i = 0; i < coordinates.length; i++) {
+    const coordinate = coordinates[i];
+    console.log(coordinate);
+    new google.maps.Marker({
+      map,
+      //anchorPoint: new google.maps.Point(0, -29),
+      position: { lat: parseFloat(coordinate[0]), lng: parseFloat(coordinate[1]) },
+      title: i.toString(),
+      label: i.toString(),
+    });
+    map.setZoom(13);
+    //var myLatlng = new google.maps.LatLng(parseFloat(coordinate[0]),parseFloat(coordinate[1]));
+    //marker.setPosition(myLatlng);
+    //marker.setVisible(true);
+    //marker.setMap(map);
+  }
 
+
+  
   autocomplete.addListener("place_changed", () => {
     marker.setVisible(false);
 
@@ -144,23 +176,30 @@ function initMap() {
       window.alert("No details available for input: '" + place.name + "'");
       return;
     }
-
+    console.log("149");
     // If the place has a geometry, then present it on a map.
     if (place.geometry.viewport) {
       map.fitBounds(place.geometry.viewport);
     } else {
       map.setCenter(place.geometry.location);
-      map.setZoom(17);
+      map.setZoom(10);
     }
 
-    marker.setPosition(place.geometry.location);
-    console.log(place.geometry.location.lat(), place.geometry.location.lng());
-    marker.setVisible(true);
+
+    //marker.setPosition(place.geometry.location);
+    // console.log(place.geometry.location.lat(), place.geometry.location.lng());
+    //marker.setVisible(true);
     // infowindowContent.children["place-name"].textContent = place.name;
     // infowindowContent.children["place-address"].textContent = place.formatted_address;
     // infowindow.open(map, marker);
-    marker.setMap(map);
+    //marker.setMap(map);
+    //initMapHomeEstimate()
   });
+}
+
+function functionx(){
+  console.log("ITs Here");
+  window.location.href = "http://www.w3schools.com";
 }
 
 
@@ -199,7 +238,7 @@ function initMap() {
 
 
 $(document).ready(function(){
-  console.log("in1");
+  //console.log("in1");
   $("marquee img").mouseenter(function(){
     i=this.id;
     $("#"+String(i)).animate({height: '200px'});
@@ -241,10 +280,10 @@ const options = {
 async function success(pos) {
   const crd = pos.coords;
 
-  console.log("Your current position is:");
-  console.log(crd.latitude);
-  console.log(`Longitude: ${crd.longitude}`);
-  console.log(`More or less ${crd.accuracy} meters.`);
+  // console.log("Your current position is:");
+  // console.log(crd.latitude);
+  // console.log(`Longitude: ${crd.longitude}`);
+  // console.log(`More or less ${crd.accuracy} meters.`);
 
 
   const position = { lat: crd.latitude, lng: crd.longitude };
@@ -274,34 +313,36 @@ function test(){
   navigator.geolocation.getCurrentPosition(success, error, options);
 }
 
-function initMapHomeEstimate() {
-  const latvalues = document.getElementsByClassName("lat-value");
-  const lonvalues = document.getElementsByClassName("lon-value");
+// function initMapHomeEstimate() {
+//   console.log("blue");
+//   const latvalues = document.getElementsByClassName("lat-value");
+//   const lonvalues = document.getElementsByClassName("lon-value");
 
-  let coordinates = [];
+//   let coordinates = [];
 
-  for (let i=0; i<latvalues.length; i++) {
-    coordinates.push([latvalues[i].attributes.value.value, lonvalues[i].attributes.value.value]);
-  }
+//   for (let i=0; i<latvalues.length; i++) {
+//     coordinates.push([latvalues[i].attributes.value.value, lonvalues[i].attributes.value.value]);
+//     console.log([latvalues[i].attributes.value.value, lonvalues[i].attributes.value.value]);
+//   }
 
-  console.log(coordinates);
+//   console.log(coordinates);
 
-  const map = new google.maps.Map(document.getElementById("map-home-estimate"), {
-    center: { lat: parseInt(coordinates[0][0]), lng: parseInt(coordinates[0][1]) },
-    zoom: 15,
-    mapTypeControl: false,
-  });
-  //const input = document.getElementById("pac-input");
-  const options = {
-    fields: ["formatted_address", "geometry", "name"],
-    strictBounds: false,
-    types: ["address"],
-  };
-  //const autocomplete = new google.maps.places.Autocomplete(input, options);
+//   const map = new google.maps.Map(document.getElementById("map-home-estimate"), {
+//     center: { lat: parseInt(coordinates[0][0]), lng: parseInt(coordinates[0][1]) },
+//     zoom: 15,
+//     mapTypeControl: false,
+//   });
+//   //const input = document.getElementById("pac-input");
+//   const options = {
+//     fields: ["formatted_address", "geometry", "name"],
+//     strictBounds: false,
+//     types: ["address"],
+//   };
+//   //const autocomplete = new google.maps.places.Autocomplete(input, options);
 
-  setMarkers(map, coordinates);
+//   setMarkers(map, coordinates);
 
-}
+// }
 
 function setMarkers(map, coordinates) {
 
@@ -317,4 +358,4 @@ function setMarkers(map, coordinates) {
   }
 }
 
-window.initMapHomeEstimate = initMapHomeEstimate;
+//window.initMapHomeEstimate = initMapHomeEstimate;
