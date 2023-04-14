@@ -16,8 +16,10 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
-
+{% block styles %}
 <link rel="stylesheet" href="{% static 'myfirst.css' %}">
+{% endblock %}
+
 <body class="gradient-background" onload="test();initMap();">
 
 <header class="header">
@@ -49,7 +51,7 @@
               </p></li>
             <li>
               <a href="/prefrence">
-                <span class="glyphicon glyphicon-home"></span> USER PREFERENCES</a>
+                <span class="glyphicon glyphicon-user"></span> USER PREFERENCES</a>
             </li>
             <li>
               <a href="/help">
@@ -98,4 +100,6 @@
   
 </body>
 <script src="{% static 'app.js' %}"></script>
+<script src="{% static 'mortgage.js' %}"></script>
+<script src="{% static 'house_details.js' %}"></script>
 </html>

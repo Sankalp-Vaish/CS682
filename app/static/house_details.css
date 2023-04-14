@@ -1,0 +1,52 @@
+.marq{
+    position: relative;
+    margin-top: -16%;
+    margin-bottom: 14%;
+  }
+
+.back_details{
+  /* text-align: center; */
+  background-color: #ffffff;
+  width: 100%;
+  position: relative;
+  top: 50%;
+  max-width: 50%;
+  padding: inherit;
+  padding-top: 1px;
+  padding-bottom: 14px;
+  border-radius: 12px;
+}
+
+.info_details{
+  /* text-align: center; */
+  background-color: #ffffff;
+  width: 100%;
+  position: relative;
+  top: 50%;
+  max-width: 50%;
+  padding: inherit;
+  padding-top: 1px;
+  padding-bottom: 14px;
+  border-radius: 12px;
+}
+
+.details_map{
+  text-align: center;
+  width: 100%;
+  position: relative;
+  top: 50%;
+  max-width: 50%;
+}
+
+.label_house{
+  position: relative;
+  float: left;
+  margin-left: 10px;
+  width:75%;
+}
+
+.val{
+  position: relative;
+  /* float: right; */
+  margin-right: 10px;
+}

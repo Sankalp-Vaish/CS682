@@ -1,9 +1,10 @@
 {% extends 'master.html' %}
-
+{% load static %}
 {% block title %}About{% endblock %}
 
 {% block content %}
-
+<link rel="stylesheet" href="{% static 'house_details.css' %}">
+<div>
 <div class="marq">
 <marquee id="abcd" scrollamount="10" onmouseover="this.stop()" onmouseout="this.start()">
   {% for i in house.link %}
@@ -12,7 +13,7 @@
   </marquee>
 </div>
 
-<div class="main_b" style="top: 25%;">
+<div class="main_b" style="top: 25%;margin-top: 35%;">
   <div>
     
     <!-- <img id="img_data" src= "{{house.link}}" >  -->
@@ -78,24 +79,12 @@
         });
       </script>
     </div></div>
-
-
-  <!-- Slideshow container -->
-  <!-- <div class="slideshow-container">
-    {% for i in house.link %}
-    <div class="mySlides">
-      <img src={{i.href}}>
-    </div>
-    {% endfor %}
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-  </div> -->
   <br>
 
 
 
 
 </div>
-</div>
+</div></div>
 
 {% endblock %}
