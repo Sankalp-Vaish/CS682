@@ -13,6 +13,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from geopy.geocoders import Nominatim
+import threading
 
 def main(request):
   user = request.user
@@ -106,7 +107,19 @@ def mortgage(request):
       pin=request.POST.get('pincode')
     print(pin)
     id = hello.get_houses_id(pin)
-    result = hello.get_house_list(id)
+    lock = threading.Lock()
+    t=[]
+    c=0
+    for i in range(0,3,2):
+      t.append(threading.Thread(target=hello.get_house_list, name='t'+str(c+1), args=(id[i:(i+2)],lock,)))
+      t[c].start()
+      c=c+1
+      # if i ==2:
+      #   break
+    for i in range(2):
+      t[i].join()
+
+    result = hello.get_prop_list()
     #print(result)
     if result==[]:
       context = {
@@ -115,7 +128,7 @@ def mortgage(request):
       }
       
     else:
-      l=hello.get_dict(result)
+      l=hello.get_dict(result, request)
       context = {
       "r":l,
       "z":"",
@@ -177,7 +190,11 @@ def test3(request):
         User_details.objects.create(user=request.user, Average_rent_per_unit=request.POST.get("rent"), First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate"))
     result  = hello.read_with_prams(request.POST.get('state'), request.POST.get('city'), request.POST.get('street_name'))
     #print(details.Average_rent_per_unit, details.First_Mtg_Interest_Rate)
-    l=hello.get_dict(result)
+    l=hello.get_dict(result, request)
+    # cash=[]
+    # for house in l:
+    #   calc=Calculator.calculator(house["list_price"], house["unit"], house["tax"], house["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
+    #   cash.append(calc["Cashflow_per_unit_per_month"])
     my_location = {'latitude': 37.4224764, 'longitude': -122.0842499}
     user = request.user
     context = {

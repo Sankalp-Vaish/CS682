@@ -28,7 +28,7 @@
   position: absolute; left: 50%;
   right: 0;
   background-color: rgb(110 161 172 / 88%);
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   /* padding-top: 55%;
   padding-bottom: 5%; */
 }
@@ -39,6 +39,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centered_right {
+  position: absolute;
+  margin-top: 2%;
+  margin-left: 12%;
   text-align: center;
 }
 
@@ -153,17 +160,18 @@
 
 .anchor {
   display: inline-block;
+  margin-bottom: 5%;
   /* padding-top: 90px; */
 }
 
 .header{
   position: relative;
-  padding-bottom: 13%;
+  padding-bottom: 0%;
   /* overflow-y: hidden; */
   width: 100%;
   top: 0;
   /* flex: 0 0 50px; */
-  margin-bottom: 5%;
+  margin-bottom: 0%;
 }
 
 
@@ -320,15 +328,23 @@ body {
 
 
 
-.main_b {
+/* .main_b {
     
   overflow: visible;
   position: relative;
   top: 12%;
   left: 66%;
-  margin-top: 12%;
+  margin-top: 66%;
   transform: translate(-50%, -50%);
-}
+} */
 
+.home_b {
+    
+  position: relative;
+  top: 12%;
+  left: 15%;
+  margin-top: 5%;
+
+}
 
 

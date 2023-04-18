@@ -1,7 +1,7 @@
 .marq{
     position: relative;
-    margin-top: -16%;
-    margin-bottom: 14%;
+    margin-top: 0%;
+    margin-bottom: 0%;
   }
 
 .back_details{
@@ -10,11 +10,14 @@
   width: 100%;
   position: relative;
   top: 50%;
-  max-width: 50%;
+  max-width: 37%;
   padding: inherit;
   padding-top: 1px;
   padding-bottom: 14px;
   border-radius: 12px;
+  padding-left: 2%;
+  /* margin-top: 40%; */
+  margin-left: 13%;
 }
 
 .info_details{
@@ -50,3 +53,19 @@
   /* float: right; */
   margin-right: 10px;
 }
+
+.graph{
+  position: relative;
+  top: 50%;
+  max-width: 50%;
+  left: 10%
+}
+
+
+.house_main{    
+  overflow: visible;
+  position: relative;
+  top: 12%;
+  left: 18%;
+  margin-bottom: 1%;
+  }

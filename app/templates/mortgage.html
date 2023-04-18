@@ -6,7 +6,7 @@
 
 
 {% block content %}
-<div style="position: relative; top: 35%; left: 50%; transform: translate(-50%, -50%);">
+<div style="position: relative; top: 35%;left: 0%;margin-top: 8%;">
 <div class="main">
   <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak&callback=initMapHomeEstimate&libraries=places&v=weekly"
@@ -66,9 +66,7 @@
       </form>
     </div></div>
   {% else %}
-
-    <br><br>
-    <div class="container mort_result_back">
+    <div class="container mort_result_back"  style="margin-top: -7%;">
       <div class="split left" >
       <form action="" method="POST">
         {% csrf_token %}
@@ -87,7 +85,7 @@
       </form>
     </div>
     <div class="split right">
-      <div class="centered">
+      <div class="centered_right">
     <h2 style="left: 5%; position: relative;"> Retrieved data</h2>
     {% if z == "No houses found" %}
     <p>{{z}}</p>
@@ -112,7 +110,8 @@
           <span>Listed price: ${{ house.list_price}}</span>
           <br>
           <span class="lat-value" value="{{ house.latitude }}"></span>
-              <span class="lon-value" value="{{ house.longitude }}"></span>
+          <span class="lon-value" value="{{ house.longitude }}"></span>
+          <span class="cashflow" value="{{ house.cash }}"></span>
         </div>
       </div>
     </div>

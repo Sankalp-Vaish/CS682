@@ -4,6 +4,10 @@ from six import BytesIO #Used internally by PIL
 from PIL import Image, ImageDraw, ImageFont
 import json
 import time
+import plotly.express as px
+import plotly
+from . import Calculator
+from .models import User_details
 
 First_Mtg_Interest_Rate=0.001
 def printHello(): 
@@ -93,7 +97,7 @@ def get_houses_id(pincode):
     }
     headers = {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "ea8552e940msh3f14dc78146fae7p16308ejsn1bedafc35b28",
+        "X-RapidAPI-Key": "26ae97eb9emshad0cd9d923c9392p1e08b4jsna0070d71438f",
         "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com"
     }
 
@@ -106,11 +110,13 @@ def get_houses_id(pincode):
     
     return property_id
 
-def get_house_list(property_id):
+
+prop_list=[]
+def get_house_list(property_id, lock):
     url = "https://realty-in-us.p.rapidapi.com/properties/v3/detail"
-    prop_list=[]
+    global prop_list
     c=0
-    for i in property_id[:2]:
+    for i in property_id:
         """c=c+1
         if c==4:
             c=0
@@ -119,19 +125,23 @@ def get_house_list(property_id):
         querystring = {"property_id":i}
 
         headers = {
-            "X-RapidAPI-Key": "2e7b06639bmshe0265e0dddf1f4fp17f3aajsn65bb8c0da710",
+            "X-RapidAPI-Key": "26ae97eb9emshad0cd9d923c9392p1e08b4jsna0070d71438f",
             "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com"
         }
 
         response = requests.request("GET", url, headers=headers, params=querystring)
 
         #print(response.text)
+        lock.acquire()
         prop_list.append(response.json())
+        lock.release()
 
+def get_prop_list():
     return prop_list
- 
-def get_dict(result):
+
+def get_dict(result, request):
     l=[]
+    details=User_details.objects.get(user=request.user)
     r=dict()
     for house in result:
       r["city"]=house["data"]["home"]["location"]["address"]["city"] 
@@ -149,7 +159,13 @@ def get_dict(result):
       r["lon"]= house["data"]['home']["location"]["address"]["coordinate"]["lon"]
       r["latitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lat"]
       r["longitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lon"]
-
+      r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
+      if house["data"]['home']['tax_history']:
+        r["tax"]=house["data"]['home']['tax_history'][0]["tax"]
+      else:
+        r["tax"]=None
+      calc=Calculator.calculator(r["list_price"], r["unit"], r["tax"], r["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
+      r["cash"]=int(float(calc["Cashflow_per_unit_per_month"]))
       l.append(r)
       r=dict()
     
@@ -184,6 +200,15 @@ def get_details(id):
             r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
             r["First_Mtg_Interest_Rate"]=First_Mtg_Interest_Rate
             print(r["tax"])
+            y=[]
+            t=[]
+            if house["data"]["home"]["tax_history"]:
+                for i in house["data"]["home"]["tax_history"]:
+                    t.append(i["tax"])
+                    y.append(i["year"])
+                fig=px.line(x=y, y=t, labels={ "x": "year", "y":"tax($)"})
+                #plotly.offline.plot(fig, filename=r'images/fig1.jpeg')
+                fig.write_image(r"app/static/images/tax.jpeg")
             #print(r["city"])
     return r
 

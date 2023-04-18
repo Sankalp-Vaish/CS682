@@ -1,6 +1,8 @@
 function initMap() {
-    console.log("118");
-    console.log("1");
+    const cash =document.getElementsByClassName("cashflow");
+    for (let i=0; i<cash.length; i++) {
+      console.log(cash[i].attributes.value.value);
+    }
     const latvalues = document.getElementsByClassName("lat-value");
     const lonvalues = document.getElementsByClassName("lon-value");
     console.log("2");
@@ -8,9 +10,9 @@ function initMap() {
   
     for (let i=0; i<latvalues.length; i++) {
       coordinates.push([latvalues[i].attributes.value.value, lonvalues[i].attributes.value.value]);
-      console.log([latvalues[i].attributes.value.value, lonvalues[i].attributes.value.value]);
+      // console.log([latvalues[i].attributes.value.value, lonvalues[i].attributes.value.value]);
     }
-    console.log(coordinates);
+    // console.log(coordinates);
     const map = new google.maps.Map(document.getElementById("map-home-estimate"), {
       center: { lat: parseFloat(coordinates[0][0]), lng: parseFloat(coordinates[0][1]) },
       zoom: 10,
@@ -22,23 +24,21 @@ function initMap() {
       strictBounds: false,
       types: ["address"],
     };
-    console.log("130");
     const autocomplete = new google.maps.places.Autocomplete(input, options);
   
     const marker = new google.maps.Marker({
       map,
       anchorPoint: new google.maps.Point(0, -29),
     });
-    console.log("137");
     for (let i = 0; i < coordinates.length; i++) {
       const coordinate = coordinates[i];
-      console.log(coordinate);
+      // console.log(coordinate);
       new google.maps.Marker({
         map,
         //anchorPoint: new google.maps.Point(0, -29),
         position: { lat: parseFloat(coordinate[0]), lng: parseFloat(coordinate[1]) },
         title: i.toString(),
-        label: i.toString(),
+        label: (cash[i].attributes.value.value).toString(),
       });
       map.setZoom(13);
       //var myLatlng = new google.maps.LatLng(parseFloat(coordinate[0]),parseFloat(coordinate[1]));

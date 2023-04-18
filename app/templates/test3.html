@@ -6,8 +6,8 @@
 
 
 {% block content %}
-<div style="position: relative; top: 40%; left: 40%; transform: translate(-50%, -50%);">
-<div class="main">
+<div>
+<div class="main" style="position: relative; top: 40%; left: -10%;margin-top: 8%;">
   <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak&callback=initMapHomeEstimate&libraries=places&v=weekly"
       defer
@@ -102,28 +102,8 @@
 
   {% else %}
     <!-- <h2 style="left: 35%; position: relative;"> Retrieved data</h2> -->
-  <div class="container est_result_back">
+  <div class="container est_result_back"  style="margin-top: -6%;">
     <div class="split left" >
-      <!-- search bar -->
-      <!-- <form action="" method="POST">
-        {% csrf_token %}
-        <div class="container centered h-100">
-          <div class="d-flex justify-content-center h-100">
-            <div id="pac-container" class="searchbar" style="position: absolute; top:2%;">
-              <input class="search_input" name="address" id="pac-input" type="text" name="" placeholder="Search...">
-              <a href="#" class="search_icon"><i class="fas fa-search" style='font-size:18px;color:rgb(255, 255, 255)'></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="submit">
-          <button class="btn btn-dark">Submit </button>
-        </div>
-        <div class="centered" style="position:absolute; top:50%;">      
-          <div id="map-home-estimate" style="height: 300px; width: 500px;"></div>
-        </div>
-      </form> -->
-      <!-- <form action="" method="POST">
-        {% csrf_token %} -->
         <div class="container centered h-100">
           <div class="d-flex justify-content-center h-100">
             <div id="pac-container" class="searchbar" style="position: absolute; top:2%;">
@@ -145,7 +125,7 @@
 
       
     <div class="split right">
-      <div class="centered">
+      <div class="centered_right" >
         {% for house in r %}
 
         <div class="card house-card">
@@ -164,6 +144,7 @@
               <br>
               <span class="lat-value" value="{{ house.latitude }}"></span>
               <span class="lon-value" value="{{ house.longitude }}"></span>
+              <span class="cashflow" value="{{ house.cash }}"></span>
               <!-- <span>Status: {{ house.status}}</span> -->
             </div>
           </div>
@@ -183,6 +164,6 @@
   
 
 </div></div>
-<br><br><br><br>
+
   
 {% endblock %}
