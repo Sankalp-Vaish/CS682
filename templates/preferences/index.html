@@ -8,11 +8,7 @@
   
 
 
-
-
-
 <div class="container mt-3">
-    <!--  -->
     <form action="{% url 'prefrences' %}" method="post">
         {% csrf_token %}
     <div class="col-sm-5">
@@ -36,6 +32,27 @@
     </form>
     </div>
 </div>
+
+<!-- <div>
+    <h4 style ="position:absolute; left:80px; top:80px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">My Favorites</h4>
+        <div>
+        <a href="add_link" class="rectangle">
+                            +
+                <br>
+                Your shortlisted properties</a>
+        </div>
+    </div> -->
+
+<!-- <div> 
+    <h4 style ="position:absolute; left:80px; top:80px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">My Favorites</h4>
+     
+    <a href="add_link" class="container_box">
+        <a href="add_link" class="content_box">
+        Your shortlisted properties
+        </a>
+    </a>
+</div> -->
+
 
 
 {% endblock %}

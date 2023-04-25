@@ -15,10 +15,16 @@ from django.views import generic
 from geopy.geocoders import Nominatim
 import threading
 
-def main(request):
+# def main(request):
+#   user = request.user
+#   context = {'user': user}
+#   template = loader.get_template('main.html')
+#   return HttpResponse(template.render(context, request))
+
+def LandingPage(request):
   user = request.user
   context = {'user': user}
-  template = loader.get_template('main.html')
+  template = loader.get_template('LandingPage.html')
   return HttpResponse(template.render(context, request))
 
 def home(request):

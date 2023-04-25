@@ -23,7 +23,7 @@
 <body class="gradient-background" onload="test();initMap();">
 
 <header class="header">
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 0%;">
     <div class="container-fluid">
       <a class="navbar-brand" href="/" style="position: absolute;">RTInvest</a>
 
@@ -67,7 +67,7 @@
 
 
       {% else %}
-      <div style="margin-left: 80%; float: right; text-align: right;">
+      <!-- <div style="margin-left: 80%; float: right; text-align: right;">
         <li class="dropdown">
           <a data-toggle="dropdown" href="/main">More<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -82,9 +82,16 @@
             <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           </ul>
-        </li></div>
+        </li></div> -->
+          <div style="margin-left: 70%; float: right; text-align: right;">
+              <a href="{% url 'login' %}" data-role="button">
+                  <span style="font-family: system-ui, sans-serif; font-weight: 400; color:aliceblue"><span class="glyphicon glyphicon-log-in"></span>  Login</span></span>
+              </a> &nbsp;&nbsp;&nbsp;
+              <a href="{% url 'signup' %}" data-role="button" margin-left="20px">
+                <span style="font-family: system-ui, sans-serif; font-weight: 400; color:aliceblue"><span class="glyphicon glyphicon-user"></span>  Sign Up</span></span>
+              </a>
+          </div>
       {% endif %}
-    </div>
   </nav>
 </header>
 
@@ -93,9 +100,9 @@
     {% endblock %}
   </div>
 
-  <footer class="panel-footer">
+  <!-- <footer class="panel-footer">
     <h3 class="footer">Investment made Simple!</h3>
-  </footer>
+  </footer> -->
 
   
 </body>
