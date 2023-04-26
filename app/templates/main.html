@@ -10,10 +10,11 @@
 
 {% block content %}
 <div style="position: relative; top: 50%; left: -10%;margin-top: 8%;">
-<div class="main">
+<div class="main" style="    left: 37%; position: relative;">
 
   {% if user.is_authenticated %}
     Hi {{ user.username }}!
+    pref:{{pref}}
     <p><a href="{% url 'logout' %}">Log Out</a></p>
   {% else %}
     <!--<p>You are not logged in</p>
@@ -25,9 +26,9 @@
 
 
   <!--<button onclick="myFunction()">Click me!</button>
-
-  <h3>Welcome</h3>-->
-
+-->
+  <h3>Welcome</h3>
+  pref:{{pref}}
   <div class="container">
   <div style="height: 500px; width: 500px;">
     <div id="map-element-main" style="height: 100%; width: 100%;">map click</div> -->

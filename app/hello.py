@@ -164,7 +164,7 @@ def get_dict(result, request):
         r["tax"]=house["data"]['home']['tax_history'][0]["tax"]
       else:
         r["tax"]=None
-      calc=Calculator.calculator(r["list_price"], r["unit"], r["tax"], r["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
+      calc=Calculator.calculator(request, r["list_price"], r["unit"], r["tax"], r["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
       r["cash"]=int(float(calc["Cashflow_per_unit_per_month"]))
       l.append(r)
       r=dict()

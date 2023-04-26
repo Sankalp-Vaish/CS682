@@ -1,13 +1,24 @@
 import numpy as np
+from UserPrefrences.models import UserPref, Property_Info, Environmentals, Financing, Income, Operating_Expenses, Pests, Cash_requirements
 
-def calculator(Fair_Market_Value=374000.00, Number_of_Units=6, Property_Taxes=5400.00, insurance_rate=0.003, First_Mtg_Interest_Rate=0.08, Average_rent_per_unit=800):
+def calculator(request, Fair_Market_Value=374000.00, Number_of_Units=6, Property_Taxes=5400.00, insurance_rate=0.003, First_Mtg_Interest_Rate=0.08, Average_rent_per_unit=800):
     # -------------------------
     # Property Info	
     # Address	91 Bellevue Rd
+
+    
+    prop=Property_Info.objects.get(user=request.user)
+    env=Environmentals.objects.get(user=request.user)
+    fin=Financing.objects.get(user=request.user)
+    inc=Income.objects.get(user=request.user)
+    op=Operating_Expenses.objects.get(user=request.user)
+    pest=Pests.objects.get(user=request.user)
+    cash=Cash_requirements.objects.get(user=request.user)
+
     Fair_Market_Value = float(Fair_Market_Value) #need to fetch from the api
-    Vacancy_Rate = 5.00/100 
-    Management_Rate = 5.00/100
-    Advertizing_Cost_per_Vacancy = 100.00 
+    Vacancy_Rate = float(prop.Vacancy_Rate)#5.00/100 
+    Management_Rate = float(prop.Management_Rate)#5.00/100
+    Advertizing_Cost_per_Vacancy = float(prop.Advertizing_Cost_per_Vacancy)#100.00 
     if Number_of_Units==None:
         Number_of_Units=6
     Number_of_Units	= int(Number_of_Units) #need to fetch from the api
@@ -24,11 +35,11 @@ def calculator(Fair_Market_Value=374000.00, Number_of_Units=6, Property_Taxes=54
     Lender_Fee = 0.01*Offer_Price
     Broker_Fee = (1.3/100)*Offer_Price
     # Environmentals 	=   
-    Inspections_Engineer_Report	= 700.00 
-    Appraisals = 700.00 
-    Misc = 500.00 
+    Inspections_Engineer_Report	= float(env.Inspections_Engineer_Report) #700.00
+    Appraisals = float(env.Appraisals) #700.00 
+    Misc = float(env.Misc)#500.00 
     Transfer_Tax = (Offer_Price/500)*2.28
-    Legal = 600.00 
+    Legal = float(env.Legal)#600.00 
 
     Real_Purchase_Price =  (Offer_Price + Repairs + Repairs_Contingency + Lender_Fee + Broker_Fee + Inspections_Engineer_Report + Appraisals + Misc + Transfer_Tax + Legal)
 
@@ -38,36 +49,36 @@ def calculator(Fair_Market_Value=374000.00, Number_of_Units=6, Property_Taxes=54
     if First_Mtg_Interest_Rate=="":
         First_Mtg_Interest_Rate=0.08
     First_Mtg_Interest_Rate	= float(First_Mtg_Interest_Rate) #need to give an option to be user defined 0.08
-    First_Mtg_Amortization_Period = 30 # in years
-    First_Mtg_CMHC_Fee = 0.00
+    First_Mtg_Amortization_Period = float(fin.First_Mtg_Amortization_Period)#30 # in years
+    First_Mtg_CMHC_Fee = float(fin.First_Mtg_CMHC_Fee)#0.00
     First_Mtg_Total_Principle_Incl_CMHC_Fees = First_Mtg_Principle_Borrowed + First_Mtg_CMHC_Fee
 
     # Calculating monthly payment with the formula Payment = pv* apr/12*(1+apr/12)^(nper*12)/((1+apr/12)^(nper*12)-1)
     # First_Mtg_Total_Monthly_Payment	= First_Mtg_Principle_Borrowed * First_Mtg_Interest_Rate/12 *(1+First_Mtg_Interest_Rate/12)**(First_Mtg_Amortization_Period*12)/((1+First_Mtg_Interest_Rate/12)**(First_Mtg_Amortization_Period*12)-1)
     First_Mtg_Total_Monthly_Payment = First_Mtg_Total_Principle_Incl_CMHC_Fees * ((((1+(First_Mtg_Interest_Rate/2))**(1/6))-1)/(1-(((1+(First_Mtg_Interest_Rate/2))**(1/6))**(First_Mtg_Amortization_Period*-12))))
 
-    Second_Mtg_Principle_Amount	= 0.00  
+    Second_Mtg_Principle_Amount	= float(fin.Second_Mtg_Principle_Amount)#0.00  
     Second_Mtg_Interest_Rate = 12/100.00
-    Second_Mtg_Amortization_Period	= 30 #in years
+    Second_Mtg_Amortization_Period	= float(fin.Second_Mtg_Amortization_Period)#30 #in years
 
     # Second_Mtg_Total_Monthly_Payment = Second_Mtg_Principle_Amount * Second_Mtg_Interest_Rate/12 *(1+Second_Mtg_Interest_Rate/12)**(Second_Mtg_Amortization_Period*12)/((1+Second_Mtg_Interest_Rate/12)**(Second_Mtg_Amortization_Period*12)-1)
     Second_Mtg_Total_Monthly_Payment = Second_Mtg_Principle_Amount * ((((1+(Second_Mtg_Interest_Rate/2))**(1/6))-1)/(1-(((1+(Second_Mtg_Interest_Rate/2))**(1/6))**(Second_Mtg_Amortization_Period*-12))))
 
 
-    Interest_Only_Principle_Amount	= 0.00   
-    Interest_Only_Interest_Rate	= 0.00   
-    Interest_Only_Total_Monthly_Payment	= 0.00   
-    Other_Monthly_Financing_Costs = 300.00 
+    Interest_Only_Principle_Amount	= float(fin.Interest_Only_Principle_Amount)#0.00   
+    Interest_Only_Interest_Rate	= float(fin.Interest_Only_Interest_Rate)#0.00   
+    Interest_Only_Total_Monthly_Payment	=float(fin.Interest_Only_Total_Monthly_Payment)# 0.00   
+    Other_Monthly_Financing_Costs = float(fin.Other_Monthly_Financing_Costs)#300.00 
 
     Cash_Required_to_Close_after_financing = Real_Purchase_Price - (First_Mtg_Principle_Borrowed + First_Mtg_Total_Monthly_Payment + Second_Mtg_Principle_Amount + Second_Mtg_Total_Monthly_Payment + Interest_Only_Principle_Amount) 
 
     # -------------------------
     # Income(Annual)
     Gross_Rents = (Number_of_Units*Average_rent_per_unit*12)
-    Parking	= 0.00	
-    Storage = 0.00		
-    Laundry_Vending	=0.00	
-    Other = 0.00  
+    Parking	= float(inc.Parking)#0.00	
+    Storage = float(inc.Storage)#0.00		
+    Laundry_Vending	=float(inc.Laundry_Vending)#0.00	
+    Other = float(inc.Other)#0.00  
     Total_Income = Gross_Rents +  Parking + Storage + Laundry_Vending + Other
     Vacancy_Loss = Total_Income * Vacancy_Rate #(% of Total Income)
     Effective_Gross_Income	= Total_Income - Vacancy_Loss
@@ -81,29 +92,29 @@ def calculator(Fair_Market_Value=374000.00, Number_of_Units=6, Property_Taxes=54
         insurance_rate=0.003
     Insurance = float(insurance_rate)*Fair_Market_Value #must fetch from the api 
     Repairs	= (5.00/100)*Gross_Rents
-    Electricity = 0.00
-    Gas = 0.00 
-    Lawn_Snow_Maintenance = 0.00	
+    Electricity = float(op.Electricity)#0.00
+    Gas = float(op.Gas)#0.00 
+    Lawn_Snow_Maintenance = float(op.Lawn_Snow_Maintenance)#0.00	
     Water_Sewer = 100*12 
     Cable = 100*12
     Management	= Total_Income*Management_Rate
     Caretaking	= 200*12
     Advertizing	= Number_of_Units * 12 * Vacancy_Rate/2 * Advertizing_Cost_per_Vacancy
-    Association_Fees = 0.00  
+    Association_Fees = float(op.Association_Fees)#0.00  
     # Pest_Control
     if(Number_of_Units<2):
         Pest_Control = 140 * Number_of_Units
     else:
         Pest_Control = 70 * Number_of_Units
     Security = Number_of_Units * 12 * Vacancy_Rate/1.5 * 50 
-    Trash_Removal = 0.00	
-    Miscellaneous = 0.00	
-    Common_Area_Maintenance	= 0.00 
-    Capital_Improvements = 0.00   
-    Accounting = 0.00	
-    Legal = 0.00	
-    Bad_Debts = 0.00	
-    Other = 0.00 # (licence, permits, bank charges, supplies, fees)		
+    Trash_Removal = float(pest.Trash_Removal)#0.00	
+    Miscellaneous = float(pest.Miscellaneous)#0.00	
+    Common_Area_Maintenance	= float(pest.Common_Area_Maintenance)#0.00 
+    Capital_Improvements = float(pest.Capital_Improvements)#0.00   
+    Accounting = float(pest.Accounting)#0.00	
+    Legal = float(pest.Legal)#0.00	
+    Bad_Debts = float(pest.Bad_Debts)#0.00	
+    Other = float(pest.Other)#0.00 # (licence, permits, bank charges, supplies, fees)		
     Evictions = Number_of_Units * 12 * Vacancy_Rate / 2 / 10 * 1000 
 
     Total_Expenses = (Property_Taxes + Insurance + Repairs + Electricity + Gas + Lawn_Snow_Maintenance + Water_Sewer + Cable + Management + Caretaking + Advertizing + Association_Fees + Pest_Control + Security + Trash_Removal + Miscellaneous + Common_Area_Maintenance + Capital_Improvements + Accounting + Legal + Bad_Debts + Other + Evictions)
@@ -114,8 +125,8 @@ def calculator(Fair_Market_Value=374000.00, Number_of_Units=6, Property_Taxes=54
 
     # -----------------------
     # Cash requirements
-    Deposit_made_with_Offer	= 0.00
-    Less_ProRation_of_Rents	= 0.00
+    Deposit_made_with_Offer	= float(cash.Deposit_made_with_Offer)#0.00
+    Less_ProRation_of_Rents	= float(cash.Less_ProRation_of_Rents)#0.00
     Cash_Required_to_Close = Cash_Required_to_Close_after_financing - Deposit_made_with_Offer
     Total_Cash_Required	= Cash_Required_to_Close + Deposit_made_with_Offer - Less_ProRation_of_Rents
 
