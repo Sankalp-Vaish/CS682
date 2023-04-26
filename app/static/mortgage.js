@@ -33,12 +33,32 @@ function initMap() {
     for (let i = 0; i < coordinates.length; i++) {
       const coordinate = coordinates[i];
       // console.log(coordinate);
-      new google.maps.Marker({
+
+      const contentString =
+    '<div id="content">' +
+    '<div id="bodyContent">' +
+    "<p><b>Cash on Cash ROI: " + (cash[i].attributes.value.value).toString() + "</b></p>" +
+    "</div>" +
+    "</div>";
+
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        ariaLabel: "Uluru",
+      });
+
+      const marker = new google.maps.Marker({
         map,
         //anchorPoint: new google.maps.Point(0, -29),
         position: { lat: parseFloat(coordinate[0]), lng: parseFloat(coordinate[1]) },
-        title: i.toString(),
-        label: (cash[i].attributes.value.value).toString(),
+        //title: i.toString(),
+        //label: (cash[i].attributes.value.value).toString(),
+      });
+      
+      marker.addListener("click", () => {
+        infowindow.open({
+          anchor: marker,
+          map,
+        });
       });
       map.setZoom(13);
       //var myLatlng = new google.maps.LatLng(parseFloat(coordinate[0]),parseFloat(coordinate[1]));
@@ -70,9 +90,9 @@ function initMap() {
       }
   
   
-      //marker.setPosition(place.geometry.location);
+      marker.setPosition(place.geometry.location);
       // console.log(place.geometry.location.lat(), place.geometry.location.lng());
-      //marker.setVisible(true);
+      marker.setVisible(true);
       // infowindowContent.children["place-name"].textContent = place.name;
       // infowindowContent.children["place-address"].textContent = place.formatted_address;
       // infowindow.open(map, marker);
