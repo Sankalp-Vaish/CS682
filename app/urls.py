@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView
 from .views import SignUpView
 
 urlpatterns = [
-    path('',  TemplateView.as_view(template_name='main.html'), name='main'),
+    path('',  TemplateView.as_view(template_name='LandingPage.html'), name='LandingPage'),
     path('home/', views.home, name='home'),
     path('form/', views.form, name='form'),
     path("accounts/", include("django.contrib.auth.urls")),
@@ -16,5 +16,6 @@ urlpatterns = [
     path('test2/', views.test2, name='test2'),
     path('test3/', views.test3, name='test3'),
     path('details/<int:id>/', views.house_details, name='house_details'),
-    path('displayPage', views.displayPage, name='displayPage'),
+    # path('displayPage', views.displayPage, name='displayPage'),
+    path('LandingPage/', views.LandingPage, name='LandingPage')
 ]

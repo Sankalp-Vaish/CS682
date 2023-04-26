@@ -16,13 +16,19 @@ from UserPrefrences.models import UserPref#, Property_Info, Environmentals, Fina
 from geopy.geocoders import Nominatim
 import threading
 
-def main(request):
+# def main(request):
+#   user = request.user
+#   pref=UserPref.objects.get(user=request.user)
+    # print("vv",pref.currency)
+    # context = {'user': user,
+    #           'pref': pref.currency}
+#   template = loader.get_template('main.html')
+#   return HttpResponse(template.render(context, request))
+
+def LandingPage(request):
   user = request.user
-  pref=UserPref.objects.get(user=request.user)
-  print("vv",pref.currency)
-  context = {'user': user,
-             'pref': pref.currency}
-  template = loader.get_template('main.html')
+  context = {'user': user}
+  template = loader.get_template('LandingPage.html')
   return HttpResponse(template.render(context, request))
 
 def home(request):

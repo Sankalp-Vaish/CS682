@@ -1,0 +1,26 @@
+{% extends 'master.html' %}
+
+{% block title %}Landing Page{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    Hi {{ user.username }}!
+    <p><a href="{% url 'logout' %}">Log Out</a></p>
+  {% else %}
+    <div style="background-image: url('../static/images/cropped.png'); width:100%; height:550px " >
+
+        <div class = LandingPage_info>
+            <a href="{% url 'login' %}">
+                <div class = info_style>
+                <li>
+                    Login to get a list of properties
+                    <br><br>
+                    Get a quick estimate on your shortlisted properties
+                </li>
+                </div>
+            </a>
+        </div>
+</div>
+{% endif %}
+{% endblock %}
