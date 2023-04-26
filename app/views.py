@@ -12,12 +12,16 @@ from .models import User_details
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
+from UserPrefrences.models import UserPref#, Property_Info, Environmentals, Financing, Income, Operating_Expenses, Pests, Cash_requirements
 from geopy.geocoders import Nominatim
 import threading
 
 # def main(request):
 #   user = request.user
-#   context = {'user': user}
+#   pref=UserPref.objects.get(user=request.user)
+    # print("vv",pref.currency)
+    # context = {'user': user,
+    #           'pref': pref.currency}
 #   template = loader.get_template('main.html')
 #   return HttpResponse(template.render(context, request))
 
@@ -213,7 +217,8 @@ def test3(request):
     }
     return HttpResponse(template.render(context, request))
   else:
-    print(request)
+    pref=UserPref.objects.get(user=request.user)
+    print("vv",pref.currency)
     cities=hello.read_city()
     states=hello.read_state()
     street_name=hello.read_street_name()
@@ -244,7 +249,7 @@ def house_details(request, id):
     print("after",house["property_id"])
   details=User_details.objects.get(user=request.user)
   print(details.First_Mtg_Interest_Rate)
-  result=Calculator.calculator(house["list_price"], house["unit"], house["tax"], house["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
+  result=Calculator.calculator(request, house["list_price"], house["unit"], house["tax"], house["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
   context = {
     "flag":"True",
     "y" : id,
@@ -256,7 +261,7 @@ def house_details(request, id):
 
 def displayPage(request):
   template = loader.get_template('displayPage.html')
-  result=Calculator.calculator()
+  result=Calculator.calculator(request)
   context = {
     "calc" : result
     }
