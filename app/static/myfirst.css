@@ -190,6 +190,10 @@ body {
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  /* background-image: radial-gradient(#3784b7 5%, transparent 5%), radial-gradient(#4bbac5 5%, transparent 5%);
+  background-color: #ffffff;
+  background-position: 0 0, 50px 50px;
+  background-size: 100px 100px; */
   
 }
 
@@ -366,8 +370,8 @@ color:#0D005A;
 
 /*
 button {
-  --b: 0.5px;   /* border thickness */
-  --s: 1px; /* size of the corner */
+  --b: 0.5px;   // border thickness 
+  --s: 1px; // size of the corner 
   --c: #68fffa;
   
   padding: calc(2px + var(--s)) calc(3px + var(--s));
@@ -385,8 +389,8 @@ button {
   color:#fa0000;
   cursor: pointer;
   border:none;
-  /* border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px; */
+  // border-top-left-radius: 2px;
+  //border-bottom-left-radius: 2px; 
   margin: 2%;
 
 }

@@ -115,7 +115,7 @@ def mortgage(request):
       else:
         User_details.objects.create(user=request.user, Average_rent_per_unit=request.POST.get("rent"), First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate"))   
       pin=request.POST.get('pincode')
-    print(pin)
+    #print(pin)
     id = hello.get_houses_id(pin)
     lock = threading.Lock()
     t=[]
@@ -124,6 +124,7 @@ def mortgage(request):
       t.append(threading.Thread(target=hello.get_house_list, name='t'+str(c+1), args=(id[i:(i+2)],lock,)))
       t[c].start()
       c=c+1
+      print(c)
       # if i ==2:
       #   break
     for i in range(2):
