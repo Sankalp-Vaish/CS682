@@ -16,6 +16,8 @@
       {{ form.username }}</p>
       {{ form.password.label}}
       <p>{{ form.password}}</p>
+
+      <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
     </div>
     <p style="margin-top: 7%;">
       <a class="btn btn-outline-primary" href="{% url 'signup' %}">New User</a>

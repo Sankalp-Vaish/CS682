@@ -38,7 +38,7 @@ function myFunction2() {
 
 //house details map
 async function setLocation(lati, lon) {
-  $("#map-element").animate({"height": "400px", "width": "550px"});
+  $("#map-element").css({"height": "400px", "width": "550px"});
   console.log(lati);
   const position = { lat: lati, lng: lon };
   // Request needed libraries.

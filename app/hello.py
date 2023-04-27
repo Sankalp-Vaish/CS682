@@ -97,7 +97,7 @@ def get_houses_id(pincode):
     }
     headers = {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "26ae97eb9emshad0cd9d923c9392p1e08b4jsna0070d71438f",
+        "X-RapidAPI-Key": "ea8552e940msh3f14dc78146fae7p16308ejsn1bedafc35b28",
         "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com"
     }
 
@@ -125,7 +125,7 @@ def get_house_list(property_id, lock):
         querystring = {"property_id":i}
 
         headers = {
-            "X-RapidAPI-Key": "26ae97eb9emshad0cd9d923c9392p1e08b4jsna0070d71438f",
+            "X-RapidAPI-Key": "ea8552e940msh3f14dc78146fae7p16308ejsn1bedafc35b28",
             "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com"
         }
 
@@ -143,6 +143,7 @@ def get_dict(result, request):
     l=[]
     details=User_details.objects.get(user=request.user)
     r=dict()
+    #r["length"]=len(result)
     for house in result:
       r["city"]=house["data"]["home"]["location"]["address"]["city"] 
       r["list_price"]=house["data"]["home"]["list_price"]

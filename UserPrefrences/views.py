@@ -23,11 +23,10 @@ def index(request):
     
     if exists2:
         prop=Property_Info.objects.get(user=request.user)
-        print("1")
-        print("gg", prop.Fair_Market_Value)
 
     else:
         Property_Info.objects.create(user=request.user)
+        prop=Property_Info.objects.get(user=request.user)
     
     if exists3:
         env=Environmentals.objects.get(user=request.user)
@@ -36,8 +35,6 @@ def index(request):
         op=Operating_Expenses.objects.get(user=request.user)
         # pest=Pests.objects.get(user=request.user)
         cash=Cash_requirements.objects.get(user=request.user)
-        print("1")
-        print("gg", prop.Fair_Market_Value)
 
     else:
         Environmentals.objects.create(user=request.user)
@@ -46,12 +43,19 @@ def index(request):
         Financing.objects.create(user=request.user)
         # Pests.objects.create(user=request.user)
         Cash_requirements.objects.create(user=request.user)
+        env=Environmentals.objects.get(user=request.user)
+        fin=Financing.objects.get(user=request.user)
+        inc=Income.objects.get(user=request.user)
+        op=Operating_Expenses.objects.get(user=request.user)
+        # pest=Pests.objects.get(user=request.user)
+        cash=Cash_requirements.objects.get(user=request.user)
 
     if exists4:
         pest=Pests.objects.get(user=request.user)
 
     else:
         Pests.objects.create(user=request.user)
+        pest=Pests.objects.get(user=request.user)
     
     if request.method== "POST":
         print(request.POST.get("Currency"))

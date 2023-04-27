@@ -8,6 +8,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('form/', views.form, name='form'),
     path("accounts/", include("django.contrib.auth.urls")),
+    path('login/', views.login_view, name='login_view'),
     path("signup/", SignUpView.as_view(), name="signup"),
     path('help/', views.help, name='ContactUs'),
     path('about/', views.about, name='About'),
@@ -17,5 +18,6 @@ urlpatterns = [
     path('test3/', views.test3, name='test3'),
     path('details/<int:id>/', views.house_details, name='house_details'),
     # path('displayPage', views.displayPage, name='displayPage'),
-    path('LandingPage/', views.LandingPage, name='LandingPage')
+    path('LandingPage/', views.LandingPage, name='LandingPage'),
+    path('main/', views.main, name='main')
 ]

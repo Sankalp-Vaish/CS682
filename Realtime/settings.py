@@ -131,3 +131,6 @@ LOGOUT_REDIRECT_URL = "/"
 
 # Google maps API Key
 GOOGLE_MAPS_API_KEY = 'AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak'
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
