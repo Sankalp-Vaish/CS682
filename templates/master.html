@@ -20,15 +20,16 @@
 <link rel="stylesheet" href="{% static 'myfirst.css' %}">
 {% endblock %}
 
-<body class="gradient-background" onload="test();initMap();">
+<body class="page_background" onload="test();initMap();">
 
 <header class="header">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-bottom: 0%;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/" style="position: absolute;">RTInvest</a>
+      <a class="navbar-brand" href="/" style="position: absolute; font-family: system-ui, sans-serif; font-weight: 600;">RTInvest</a>
 
       {% if user.is_authenticated %}
       <div class="container">
+        <div style="font-family: system-ui, sans-serif;">
         <ul class="navbar-nav" style="margin-left: 65px;">
           <li class="nav-item">
             <a class="nav-link link-light" href="/home">HOME</a>
@@ -40,30 +41,36 @@
             <a class="nav-link link-light" href="/test3">HOME ESTIMATE</a>
           </li>
         </ul>
+        </div>
       </div>
-      <div style="width: 20%; float: right; left: 5%; position: relative;">
-        <li class="dropdown">
-          <a class="glyphicon glyphicon-user" data-toggle="dropdown" href="/" style="color: white;"><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li class=" active">
-              <p style="float: left; margin: 2%; position: relative; left: 26%;">
-                Hi {{ user.username }}!
-              </p></li>
-            <li>
-              <a href="/prefrence">
-                <span class="glyphicon glyphicon-user"></span> USER PREFERENCES</a>
-            </li>
-            <li>
-              <a href="/help">
-                <span class="glyphicon glyphicon-envelope"></span> CONTACT US</a>
-            </li>
-            <li>
-              <a href="/about">
-                <span class="glyphicon glyphicon-info-sign"></span> About</a>
-            </li>
-            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
-          </ul>
-        </li></div>
+        <div style="width: 20%; float: right; left: 5%; position: relative;">
+          <li class="dropdown">
+            <a class="glyphicon glyphicon-user" data-toggle="dropdown" href="/" style="color: white;"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class=" active">
+                <div style="font-family: system-ui, sans-serif;">
+                <p style="float: left; margin: 2%; position: relative; left: 26%;">
+                  Hi {{ user.username }}!
+                </p> </div> </li>
+              <li>
+                <a href="/prefrence">
+                  <span class="glyphicon glyphicon-user"></span> USER PREFERENCES</a>
+              </li>
+              <li>
+                <a href="/help">
+                  <span class="glyphicon glyphicon-envelope"></span> CONTACT US</a>
+              </li>
+              <li>
+                <a href="/about">
+                  <span class="glyphicon glyphicon-info-sign"></span> About</a>
+              </li>
+              <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
+            </ul>
+          </li>
+        </div>
+      </div>
+      </div>
+
 
 
       {% else %}
@@ -95,18 +102,20 @@
   </nav>
 </header>
 
+
   <div class="anchor">
     {% block content %}
     {% endblock %}
   </div>
 
-  <br>
+
+  <!-- <br>
   <footer class="panel-footer">
     <h3 class="footer">Investment made Simple!</h3>
-  </footer>
-
+  </footer> -->
   
 </body>
+
 <script src="{% static 'app.js' %}"></script>
 <script src="{% static 'mortgage.js' %}"></script>
 <script src="{% static 'house_details.js' %}"></script>
