@@ -69,3 +69,10 @@
   left: 18%;
   margin-bottom: 1%;
   }
+
+  .gradient-background {
+    background: linear-gradient(60deg, rgb(1 127 164 / 69%), rgb(241 221 221 / 45%));
+    height: 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+  }
