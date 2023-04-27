@@ -16,3 +16,11 @@
   margin-right: 1%;
   padding: 1%;
 }
+
+.gradient-background {
+  background: linear-gradient(60deg, rgb(1 127 164 / 69%), rgb(241 221 221 / 45%));
+  height: 130rem;
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 100%;
+}

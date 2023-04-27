@@ -23,11 +23,10 @@ def index(request):
     
     if exists2:
         prop=Property_Info.objects.get(user=request.user)
-        print("1")
-        print("gg", prop.Fair_Market_Value)
 
     else:
         Property_Info.objects.create(user=request.user)
+        prop=Property_Info.objects.get(user=request.user)
     
     if exists3:
         env=Environmentals.objects.get(user=request.user)
@@ -36,8 +35,6 @@ def index(request):
         op=Operating_Expenses.objects.get(user=request.user)
         # pest=Pests.objects.get(user=request.user)
         cash=Cash_requirements.objects.get(user=request.user)
-        print("1")
-        print("gg", prop.Fair_Market_Value)
 
     else:
         Environmentals.objects.create(user=request.user)
@@ -46,12 +43,19 @@ def index(request):
         Financing.objects.create(user=request.user)
         # Pests.objects.create(user=request.user)
         Cash_requirements.objects.create(user=request.user)
+        env=Environmentals.objects.get(user=request.user)
+        fin=Financing.objects.get(user=request.user)
+        inc=Income.objects.get(user=request.user)
+        op=Operating_Expenses.objects.get(user=request.user)
+        # pest=Pests.objects.get(user=request.user)
+        cash=Cash_requirements.objects.get(user=request.user)
 
     if exists4:
         pest=Pests.objects.get(user=request.user)
 
     else:
         Pests.objects.create(user=request.user)
+        pest=Pests.objects.get(user=request.user)
     
     if request.method== "POST":
         print(request.POST.get("Currency"))
@@ -59,13 +63,7 @@ def index(request):
         Fair_Market_Val=request.POST.get("Fair_Market_Value")
         print("in",Fair_Market_Val)
         if exists2:            
-            
-
-            # # decimal.getcontext().prec = 50
-            # context = decimal.getcontext()
-            # context.traps[decimal.InvalidOperation] = 0
-            #prop.Fair_Market_Value="{:.2f}".format(Fair_Market_Value)
-            prop.Fair_Market_Value=Fair_Market_Val
+            #prop.Fair_Market_Value=Fair_Market_Val
             prop.Vacancy_Rate=request.POST.get("Vacancy_Rate")
             prop.Management_Rate=request.POST.get("Management_Rate")
             prop.Advertizing_Cost_per_Vacancy=request.POST.get("Advertizing_Cost_per_Vacancy")
@@ -84,7 +82,6 @@ def index(request):
             # my_value = decimal.Decimal(Fair_Market_Value)
             # my_integer = int(my_value)
             pass
-
             #Property_Info.objects.create(user=request.user, Fair_Market_Value=Fair_Market_Val, Vacancy_Rate=0.00)#, Management_Rate=0.0, Advertizing_Cost_per_Vacancy=0.0,Annual_Appreciation_Rate=0.0)
         if exists3:
             env.Inspections_Engineer_Report=request.POST.get("Inspections_Engineer_Report")
@@ -126,7 +123,7 @@ def index(request):
             pest.Other=request.POST.get("Other")
             pest.save()
 
-            cash.Deposit_made_with_Offer=request.POST.get("First_Mtg_Amortization_Period")
+            cash.Deposit_made_with_Offer=request.POST.get("Deposit_made_with_Offer")
             cash.Less_ProRation_of_Rents=request.POST.get("Less_ProRation_of_Rents")
             cash.save()
             

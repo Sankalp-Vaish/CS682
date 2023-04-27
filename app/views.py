@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
@@ -6,6 +6,8 @@ from Realtime import settings
 from .forms import firstform, Customizedsignupform, rent_per_unit
 from . import hello, Calculator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 #from .models import ToDoList
 
 from .models import User_details
@@ -16,14 +18,14 @@ from UserPrefrences.models import UserPref#, Property_Info, Environmentals, Fina
 from geopy.geocoders import Nominatim
 import threading
 
-# def main(request):
-#   user = request.user
-#   pref=UserPref.objects.get(user=request.user)
-    # print("vv",pref.currency)
-    # context = {'user': user,
-    #           'pref': pref.currency}
-#   template = loader.get_template('main.html')
-#   return HttpResponse(template.render(context, request))
+def main(request):
+  user = request.user
+  pref=UserPref.objects.get(user=request.user)
+  print("vv",pref.currency)
+  context = {'user': user,
+            'pref': pref.currency}
+  template = loader.get_template('main.html')
+  return HttpResponse(template.render(context, request))
 
 def LandingPage(request):
   user = request.user
@@ -67,6 +69,20 @@ class SignUpView(generic.CreateView):
     form_class = Customizedsignupform
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
+
+def login_view(request):
+  if request.method=="POST":
+    username = request.POST["Username"]
+    password = request.POST["Password"]
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+      login(request, user)
+      return redirect("home")
+    else:
+      messages.success(request, ("There was an Error"))
+      return redirect("login_view")
+  else:
+    return render(request, "registration\login_test.html")
 
 def help(request):
   user = request.user
@@ -115,7 +131,7 @@ def mortgage(request):
       else:
         User_details.objects.create(user=request.user, Average_rent_per_unit=request.POST.get("rent"), First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate"))   
       pin=request.POST.get('pincode')
-    print(pin)
+    #print(pin)
     id = hello.get_houses_id(pin)
     lock = threading.Lock()
     t=[]
@@ -124,6 +140,7 @@ def mortgage(request):
       t.append(threading.Thread(target=hello.get_house_list, name='t'+str(c+1), args=(id[i:(i+2)],lock,)))
       t[c].start()
       c=c+1
+      print(c)
       # if i ==2:
       #   break
     for i in range(2):
@@ -140,6 +157,7 @@ def mortgage(request):
     else:
       l=hello.get_dict(result, request)
       context = {
+      "len":len(result),
       "r":l,
       "z":"",
       "flag":"True",
