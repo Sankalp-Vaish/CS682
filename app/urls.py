@@ -19,5 +19,6 @@ urlpatterns = [
     path('details/<int:id>/', views.house_details, name='house_details'),
     # path('displayPage', views.displayPage, name='displayPage'),
     path('LandingPage/', views.LandingPage, name='LandingPage'),
-    path('main/', views.main, name='main')
+    path('main/', views.main, name='main'),
+    # path('fav/<int:id>/', views.fav, name='fav')
 ]

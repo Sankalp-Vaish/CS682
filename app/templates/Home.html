@@ -29,7 +29,7 @@
         <p>Did you Login?</p>
         {% endif %}
   
-  <form action="" method="POST">
+  <!-- <form action="" method="POST">
     {% csrf_token %}
   <div id="pac-container">
     <input name="address" id="pac-input" type="text" placeholder="Enter a location" />
@@ -38,7 +38,39 @@
     <button class="btn btn-dark">Submit </button>
   </div>
   <div id="map" style="height: 300px; width: 500px;"></div>
-  </form>
+  </form> -->
+
+  <div class="container">
+    <div>
+      {% if fav %}
+      {% for house in fav %}.
+      <div>
+        <div class="card house-card">
+          <div class="card-body" style="width: 100%;">
+            <div style="width: 50%; float: left;">
+              <a href="{% url 'house_details' house.property_id %}">
+              <img id="img_data" src= "{{house.link}}" ></a>
+            </div>
+            <div style="width: 50%; float: left;">
+              <h4>{{ house.street_name }}, {{ house.city }}, {{ house.postal_code }}</h4>
+              <span>{{ house.stories }} Story built in {{ house.year_built }}</span>
+              <br>
+              <span>Unit: {{ house.unit }} | {{ house.beds }}B {{ house.baths }}B</span>
+              <br>
+              <span>Listed price: ${{ house.list_price}}</span>
+              <br>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      nope
+      {% endif %}
+    </div>
+  
+
 </div></div>
 </div></div>
   

@@ -64,7 +64,7 @@ let map, infoWindow;
 async function initMap_cp() {
   const { Map } = await google.maps.importLibrary("maps");
   const { Marker } = await google.maps.importLibrary("marker");
-  map = new google.maps.Map(document.getElementById("map-element"), {
+  map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: -34.397, lng: 150.644 },
     zoom: 6,
   });
