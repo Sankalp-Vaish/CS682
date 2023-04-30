@@ -30,6 +30,14 @@
         <span class="label_house">postal_code: </span>  <span class="val"> {{ house.postal_code }}</span><br>
         <span class="label_house">street_name: </span>  <span class="val"> {{ house.street_name }} </span><br>
         <span class="label_house">tax: </span>  <span class="val"> {{ house.tax }}</span><br>
+        <form action="{% url 'house_details' house.property_id %}" method="POST">
+          {% csrf_token %}
+          {% if bool %}
+        <button class="btn btn-lg "><span class="glyphicon glyphicon-heart" style="color: red;"></span></button>
+        {% else %}
+        <button class="btn btn-lg "><span class="glyphicon glyphicon-heart"></span></button>
+        {% endif %}
+        </form>
       </div>
     </div>
     <br><br>

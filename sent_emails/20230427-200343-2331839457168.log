@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: sankalp.vaish14@gmail.com
+Date: Fri, 28 Apr 2023 00:03:43 -0000
+Message-ID: <168264022334.42536.6808160348143040285@Sankalp_Vaish.ssw.umb.edu>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/accounts/reset/MQ/bnbzq7-31a0d9715b19379448b36fa145117e28/
+
+Your username, in case you’ve forgotten: Sankalp
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------

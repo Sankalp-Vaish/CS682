@@ -99,7 +99,7 @@
   height: 70rem;
   background-repeat: no-repeat;
   background-size: auto;
-  width: 100%;
+  width: 100vw;
 }
 .user_card {
   width: 350px;

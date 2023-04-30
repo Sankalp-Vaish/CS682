@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 #from .models import ToDoList
 
-from .models import User_details
+from .models import User_details, favourites
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -18,14 +18,7 @@ from UserPrefrences.models import UserPref#, Property_Info, Environmentals, Fina
 from geopy.geocoders import Nominatim
 import threading
 
-def main(request):
-  user = request.user
-  pref=UserPref.objects.get(user=request.user)
-  print("vv",pref.currency)
-  context = {'user': user,
-            'pref': pref.currency}
-  template = loader.get_template('main.html')
-  return HttpResponse(template.render(context, request))
+
 
 def LandingPage(request):
   user = request.user
@@ -253,7 +246,57 @@ def test3(request):
 
 def house_details(request, id):
   template = loader.get_template('house_details.html')
-  print("before",id)
+  flag=False
+  if request.method== "POST":
+    user = request.user
+    #favourites.objects.filter(user=user, property_id= id).delete()
+    if favourites.objects.filter(user=user, property_id= id).exists():
+      #print("before- ", favourites.objects.filter(user=user, property_id= id).exists)
+      fav=favourites.objects.filter(user=user, property_id= id)
+      fav.delete()
+      flag=False
+      #print("after- ",favourites.objects.filter(user=user, property_id= id).exists)
+      #fav.save()
+    else:
+    #print( "filter", favourites.objects.filter(user=user, property_id= 2896525175))
+    #if True:#request.method == "POST":
+      house=None
+      l=hello.get_id_list()
+      for i in l:
+        if int(i)==int(id):
+          #print("Yes")
+          house=hello.get_details(id)
+      if house==None:
+        house=hello.get_details_by_pin(id)
+      # exists=favourites.objects.filter(user=request.user).exists()
+      # if exists:
+      #   #fav=favourites.objects.get(user=request.user)
+      #   pass
+      # else:
+      fav= favourites(user=request.user, city= house["city"],
+      status = house["status"],
+      year_built = house["year_built"],
+      baths = house["baths"],
+      beds = house["beds"],
+      stories = house["stories"],
+      list_price = house["list_price"],
+      unit = house["unit"],
+      postal_code = house["postal_code"],
+      street_name = house["street_name"],
+      lat = house["lat"],
+      lon = house["lon"],
+      link = house["link"][0]["href"] ,
+      property_id = house["property_id"],
+      tax = house["tax"],
+      insurance_rate = house["insurance_rate"],
+      fav_toggle=True)
+      #fav=favourites.objects.get(user=request.user)
+      fav.save()
+      flag=True
+      print(house["link"])
+      print("fav", fav.link)
+  #else:
+  #print("before",id)
   l=hello.get_id_list()
   house=None
   for i in l:
@@ -261,18 +304,16 @@ def house_details(request, id):
       #print("Yes")
       house=hello.get_details(id)
   if house==None:
-    print("No")
     house=hello.get_details_by_pin(id)
-    print(house["city"])
-    print("after",house["property_id"])
   details=User_details.objects.get(user=request.user)
-  print(details.First_Mtg_Interest_Rate)
+  #print(details.First_Mtg_Interest_Rate)
   result=Calculator.calculator(request, house["list_price"], house["unit"], house["tax"], house["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
   context = {
     "flag":"True",
     "y" : id,
     "house" : house,
-    "calc" : result
+    "calc" : result,
+    "bool" : flag
     }
   return HttpResponse(template.render(context, request))
 
@@ -285,4 +326,70 @@ def displayPage(request):
     }
   return HttpResponse(template.render(context, request))
 
+def main(request):
+  user = request.user
+  pref=UserPref.objects.get(user=request.user)
+  #print("vv",pref.currency)
+  exists=favourites.objects.filter(user=request.user).exists()
+  if exists:
+    #fav=favourites.objects.get(user=request.user)
+    fav=favourites.objects.all().values()
+    context = {'user': user,
+            'pref': pref.currency,
+            'fav': fav}
+  else:
+    context = {'user': user,
+            'pref': pref.currency}
+  template = loader.get_template('main.html')
+  return HttpResponse(template.render(context, request))
 
+
+# def fav(request, id):
+#   user = request.user
+#   #favourites.objects.filter(user=user, property_id= id).delete()
+#   if favourites.objects.filter(user=user, property_id= id).exists():
+#     print("before- ", favourites.objects.filter(user=user, property_id= id).exists)
+#     fav=favourites.objects.filter(user=user, property_id= id)
+#     fav.delete()
+#     print("after- ",favourites.objects.filter(user=user, property_id= id).exists)
+#     #fav.save()
+#   else:
+#   #print( "filter", favourites.objects.filter(user=user, property_id= 2896525175))
+#   #if True:#request.method == "POST":
+#     house=None
+#     l=hello.get_id_list()
+#     for i in l:
+#       if int(i)==int(id):
+#         #print("Yes")
+#         house=hello.get_details(id)
+#     if house==None:
+#       house=hello.get_details_by_pin(id)
+#     # exists=favourites.objects.filter(user=request.user).exists()
+#     # if exists:
+#     #   #fav=favourites.objects.get(user=request.user)
+#     #   pass
+#     # else:
+#     fav= favourites(user=request.user, city= house["city"],
+#     status = house["status"],
+#     year_built = house["year_built"],
+#     baths = house["baths"],
+#     beds = house["beds"],
+#     stories = house["stories"],
+#     list_price = house["list_price"],
+#     unit = house["unit"],
+#     postal_code = house["postal_code"],
+#     street_name = house["street_name"],
+#     lat = house["lat"],
+#     lon = house["lon"],
+#     link = house["link"],
+#     property_id = house["property_id"],
+#     tax = house["tax"],
+#     insurance_rate = house["insurance_rate"],
+#     fav_toggle=True)
+#     #fav=favourites.objects.get(user=request.user)
+#     fav.save()
+#   #print("ppp")
+#   #print("lp", fav.property_id)
+    
+#   return HttpResponseRedirect(request.path_info)#house_details, id=id)#request.path_info)
+    
