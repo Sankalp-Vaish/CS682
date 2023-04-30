@@ -82,7 +82,7 @@ def login_view(request):
       messages.success(request, ("There was an Error"))
       return redirect("login_view")
   else:
-    return render(request, "registration\login_test.html")
+    return render(request, "registration\login.html")
 
 def help(request):
   user = request.user
