@@ -27,21 +27,34 @@ def LandingPage(request):
   return HttpResponse(template.render(context, request))
 
 def home(request):
+  # user = request.user
+  # if request.method== "POST":
+  #   add=request.POST.get("address")
+  #   #print(add)
+  #   geolocator = Nominatim(user_agent="geoapi")
+  #   try:
+  #     location = geolocator.geocode(add, timeout=10) 
+  #     data = location.raw
+  #     loc_data = data['display_name'].split()
+  #     print(loc_data[-3][:-1])
+  #   except:
+  #     print("some error")
+  # #else:
+  # my_location = {'latitude': 37.4224764, 'longitude': -122.0842499}
+  # context = {'user': user, 'my_location': my_location, 'google_api_key': settings.GOOGLE_MAPS_API_KEY}
   user = request.user
-  if request.method== "POST":
-    add=request.POST.get("address")
-    #print(add)
-    geolocator = Nominatim(user_agent="geoapi")
-    try:
-      location = geolocator.geocode(add, timeout=10) 
-      data = location.raw
-      loc_data = data['display_name'].split()
-      print(loc_data[-3][:-1])
-    except:
-      print("some error")
-  #else:
-  my_location = {'latitude': 37.4224764, 'longitude': -122.0842499}
-  context = {'user': user, 'my_location': my_location, 'google_api_key': settings.GOOGLE_MAPS_API_KEY}
+  pref=UserPref.objects.get(user=request.user)
+  #print("vv",pref.currency)
+  exists=favourites.objects.filter(user=request.user).exists()
+  if exists:
+    #fav=favourites.objects.get(user=request.user)
+    fav=favourites.objects.all().values()
+    context = {'user': user,
+            'pref': pref.currency,
+            'fav': fav}
+  else:
+    context = {'user': user,
+            'pref': pref.currency}
   template = loader.get_template('Home.html')
   return HttpResponse(template.render(context, request))
 
