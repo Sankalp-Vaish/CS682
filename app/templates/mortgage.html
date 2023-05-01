@@ -6,7 +6,7 @@
 
 
 {% block content %}
-<div style="position: relative; top: 0%;left: 0%;margin-top: 8%;">
+<div style="position: relative; top: 0%;left: 0%;">
 <div class="main">
   <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak&callback=initMapHomeEstimate&libraries=places&v=weekly"
@@ -66,27 +66,63 @@
       </form>
     </div></div>
   {% else %}
-    <div class="container mort_result_back"  style="margin-top: -7%;">
+    <div class="container mort_result_back">
       <div class="split left" >
       <form action="" method="POST">
         {% csrf_token %}
-        <div class="container centered h-100">
+        <div class="container centered h-100" style="z-index: 3">
           <div class="d-flex justify-content-center h-100">
             <div id="pac-container" class="searchbar" style="position: absolute; top:2%;">
-                <input class="search_input" name="address" id="pac-input" type="text" placeholder="Enter a location" />
-                <a class="search_icon"><i class="fas fa-search" style='font-size:18px;color:rgb(255, 255, 255)'></i></a>
+                <input class="search_input" name="address" id="pac-input" type="text" placeholder="Enter a location..." />
+                <a class="search_icon">
+                  <i class="glyphicon glyphicon-search"></i>
+                </a>
             </div>
           </div>
         </div>
 
       <div class="centered" style="position:absolute; top:50%;"> 
-      <div id="map-home-estimate" style="height: 300px; width: 500px;margin-top: 8%;"></div>
+      <div id="map-home-estimate" style="min-height: 600px; width: 700px;margin-top: 8%;"></div>
       </div>
       </form>
     </div>
     <div class="split right">
+
+      <div class="d-inline-flex p-3">
+        <div class="flex-fill" style="display: flex; width: 40%; margin: 0 2%;">
+          <div style="flex: 1; background-color: #E5E4E2; text-align: center;">
+            <label for="First_Mtg_Interest_Rate">Set Interest Rate:</label>
+          </div>
+          <div style="flex: 1; background: #085e72;">
+                {% if details.First_Mtg_Interest_Rate %}
+                <input name="First_Mtg_Interest_Rate" value="{{details.First_Mtg_Interest_Rate}}" 
+                style=" border: 0; outline: 0; background: #085e72; color: white; width: 100%; text-align: center;">
+                {% else %}
+              <input name="First_Mtg_Interest_Rate">
+              {% endif %}
+          </div>
+        </div>
+        <div class="flex-fill" style="display: flex; width: 30%; margin: 0 2%;">
+          <div style="flex: 1; background-color: #E5E4E2; text-align: center;">
+            <label for="Average_rent_per_unit">Average Rent:</label>
+          </div>
+          <div style="flex: 1; background: #085e72;">
+            <div style="border: 0; outline: 0; background: #085e72; color: white; width: 100%; text-align: center;">
+              {% if details.Average_rent_per_unit %}
+              {% endif %}
+          
+              {{ rent }}
+            </div>
+          </div>
+        </div>
+        <div class="flex-fill" style="width: 30%; margin: 0 2%;">
+          <button style="background: #085e72; color: white;">Set your default Preferences</button>
+        </div>
+      </div>
+      <span style="left: 5%; position: relative;">{{len}} Properties found!</span>
+      <hr>
       <div class="centered_right">
-    <h2 style="left: 5%; position: relative;">Available Properties- {{len}}</h2>
+    <!-- <h2 style="left: 5%; position: relative;">Available Properties- {{len}}</h2> -->
     {% if z == "No houses found" %}
     <p>{{z}}</p>
 

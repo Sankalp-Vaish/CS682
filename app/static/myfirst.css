@@ -257,7 +257,7 @@ body {
 
 .mort_result_back {
   width: 100%;
-  position: relative;
+  /* position: relative; */
   height: 500px;
 }
 
@@ -270,6 +270,9 @@ body {
   max-width: 50%;
 }
 
+.card-body:hover {
+  background-color: #E5E4E2;
+}
 
 
 
