@@ -70,8 +70,8 @@
       <div class="split left" >
       <form action="" method="POST">
         {% csrf_token %}
-        <div class="container centered h-100" style="z-index: 3">
-          <div class="d-flex justify-content-center h-100">
+        <div class="container centered" style="z-index: 3; height: 100px; top: 0; margin-top: 10%;">
+          <div class="d-flex justify-content-center" style="height: inherit;">
             <div id="pac-container" class="searchbar" style="position: absolute; top:2%;">
                 <input class="search_input" name="address" id="pac-input" type="text" placeholder="Enter a location..." />
                 <a class="search_icon">
@@ -82,12 +82,12 @@
         </div>
 
       <div class="centered" style="position:absolute; top:50%;"> 
-      <div id="map-home-estimate" style="min-height: 600px; width: 700px;margin-top: 8%;"></div>
+      <div id="map-home-estimate" style="min-height: 600px; width: 700px;margin-top: 12%;position: relative;"></div>
       </div>
       </form>
     </div>
     <div class="split right">
-
+      <div style="position: fixed; top: 0; margin-top: 62px; background: white; z-index: 1;">
       <div class="d-inline-flex p-3">
         <div class="flex-fill" style="display: flex; width: 40%; margin: 0 2%;">
           <div style="flex: 1; background-color: #E5E4E2; text-align: center;">
@@ -116,12 +116,16 @@
           </div>
         </div>
         <div class="flex-fill" style="width: 30%; margin: 0 2%;">
-          <button style="background: #085e72; color: white;">Set your default Preferences</button>
+          <button style="background: #085e72; color: white;">
+            <label>Set your default Preferences</label>
+          </button>
         </div>
       </div>
       <span style="left: 5%; position: relative;">{{len}} Properties found!</span>
       <hr>
-      <div class="centered_right">
+    </div>
+      
+      <div class="centered_right" style="margin-top: 20%;">
     <!-- <h2 style="left: 5%; position: relative;">Available Properties- {{len}}</h2> -->
     {% if z == "No houses found" %}
     <p>{{z}}</p>
