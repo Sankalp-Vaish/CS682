@@ -1,3 +1,5 @@
+let popup, Popup;
+
 function initMap() {
     const cash =document.getElementsByClassName("cashflow");
     for (let i=0; i<cash.length; i++) {
@@ -29,41 +31,111 @@ function initMap() {
       };
       const autocomplete = new google.maps.places.Autocomplete(input, options);
 
-      const marker = new google.maps.Marker({
-        map,
-        anchorPoint: new google.maps.Point(0, -29),
-      });
+      /**
+      * A customized popup on the map.
+      */
+      class Popup extends google.maps.OverlayView {
+        position;
+        containerDiv;
+        constructor(position, content) {
+          super();
+          this.position = position;
+          content.classList.add("popup-bubble");
+
+          // This zero-height div is positioned at the bottom of the bubble.
+          const bubbleAnchor = document.createElement("div");
+
+          bubbleAnchor.classList.add("popup-bubble-anchor");
+          bubbleAnchor.appendChild(content);
+          // This zero-height div is positioned at the bottom of the tip.
+          this.containerDiv = document.createElement("div");
+          this.containerDiv.classList.add("popup-container");
+          this.containerDiv.appendChild(bubbleAnchor);
+          // Optionally stop clicks, etc., from bubbling up to the map.
+          Popup.preventMapHitsAndGesturesFrom(this.containerDiv);
+        }
+        /** Called when the popup is added to the map. */
+        onAdd() {
+          this.getPanes().floatPane.appendChild(this.containerDiv);
+        }
+        /** Called when the popup is removed from the map. */
+        onRemove() {
+          if (this.containerDiv.parentElement) {
+            this.containerDiv.parentElement.removeChild(this.containerDiv);
+          }
+        }
+        /** Called each frame when the popup needs to draw itself. */
+        draw() {
+          const divPosition = this.getProjection().fromLatLngToDivPixel(
+            this.position
+          );
+          // Hide the popup when it is far out of view.
+          const display =
+            Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000
+              ? "block"
+              : "none";
+
+          if (display === "block") {
+            this.containerDiv.style.left = divPosition.x + "px";
+            this.containerDiv.style.top = divPosition.y + "px";
+          }
+
+          if (this.containerDiv.style.display !== display) {
+            this.containerDiv.style.display = display;
+          }
+        }
+      }
+
+      // const marker = new google.maps.Marker({
+      //   map,
+      //   anchorPoint: new google.maps.Point(0, -29),
+      // });
       for (let i = 0; i < coordinates.length; i++) {
         const coordinate = coordinates[i];
         // console.log(coordinate);
 
-        const contentString =
-          '<div id="content">' +
-          '<div id="bodyContent">' +
-          "<p><b>Cash on Cash ROI: " + (cash[i].attributes.value.value).toString() + "</b></p>" +
-          "</div>" +
-          "</div>";
+        // const contentString =
+        //   '<div id="content">' +
+        //   '<div id="bodyContent">' +
+        //   "<p><b>Cash on Cash ROI: " + (cash[i].attributes.value.value).toString() + "</b></p>" +
+        //   "</div>" +
+        //   "</div>";
+
+        const valueString = document.createElement("p");
+        valueString.textContent = "$ : " + (cash[i].attributes.value.value).toString();
+        const contentString = document.createElement("div");
+        contentString.appendChild(valueString);
+
+        const domElement = new DOMParser().parseFromString(contentString, "text/xml");
 
         const infowindow = new google.maps.InfoWindow({
           content: contentString,
           ariaLabel: "Uluru",
         });
 
-        const marker = new google.maps.Marker({
-          map,
-          //anchorPoint: new google.maps.Point(0, -29),
-          position: { lat: parseFloat(coordinate[0]), lng: parseFloat(coordinate[1]) },
-          //title: i.toString(),
-          //label: (cash[i].attributes.value.value).toString(),
-        });
+        popup = new Popup(
+          new google.maps.LatLng(parseFloat(coordinate[0]), parseFloat(coordinate[1])),
+          contentString
+        );
+        popup.setMap(map);
 
-        marker.addListener("click", () => {
-          infowindow.open({
-            anchor: marker,
-            map,
-          });
-        });
-        map.setZoom(13);
+        console.log(popup);
+
+        // const marker = new google.maps.Marker({
+        //   map,
+        //   //anchorPoint: new google.maps.Point(0, -29),
+        //   position: { lat: parseFloat(coordinate[0]), lng: parseFloat(coordinate[1]) },
+        //   //title: i.toString(),
+        //   //label: (cash[i].attributes.value.value).toString(),
+        // });
+
+        // marker.addListener("click", () => {
+        //   infowindow.open({
+        //     anchor: marker,
+        //     map,
+        //   });
+        // });
+        // map.setZoom(13);
         //var myLatlng = new google.maps.LatLng(parseFloat(coordinate[0]),parseFloat(coordinate[1]));
         //marker.setPosition(myLatlng);
         //marker.setVisible(true);
@@ -71,7 +143,10 @@ function initMap() {
       }
 
       autocomplete.addListener("place_changed", () => {
-        marker.setVisible(false);
+        const marker = new google.maps.Marker({
+          map,
+        });
+        //marker.setVisible(false);
     
         const place = autocomplete.getPlace();
     
