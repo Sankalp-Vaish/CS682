@@ -4,15 +4,17 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'house_detail.css' %}">
-<div style="position: absolute; top: 10%; left: 15%;">
+<div style="position: absolute; top: 13%; left: 2%;">
   
 
 
-<div class="container mt-3">
+<div class="container mt-0"> 
+        <!--mt -> margin top -->
     <form action="{% url 'prefrences' %}" method="post">
         {% csrf_token %}
     <div class="">
-        <label for="Currency">Choose a Currency:</label>
+        <!-- start of currency selection option -->
+        <!-- <label for="Currency">Choose a Currency:</label>
         <select class="form-select" name="Currency" id="Currency">
         {% if user_pref.currency %}
             <option name="Currency" selected value="{{user_pref.currency}}">{{user_pref.currency}}</option>
@@ -23,7 +25,8 @@
         <option value="{{cur}} - {{value}}">{{cur}} - {{value}}</option>
         <br>
         {% endfor %}
-        </select>
+        </select>  -->
+        <!-- end of currency selection option -->
         <br>
 
         <div class="info_details">
