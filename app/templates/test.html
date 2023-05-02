@@ -16,11 +16,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <script src="/static/test.js"></script>
 </head>
 
 
 <link rel="stylesheet" href="/static/myfirst.css">
-<body class="gradient-background" onload="test();initMap();">
+<body class="gradient-background" onload="initMap();">
 
 <header class="header">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -73,103 +74,18 @@
 
   <div class="anchor">
     
-<div style="position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-<div class="main">
-  <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak&callback=initMapHomeEstimate&libraries=places&v=weekly"
-  defer
-></script>
-  <!-- <h1>Real time investment</h1> -->
-  <!-- <h3>Mortgage</h3> -->
+<div style="position: relative; top: 0%; left: 0%; ">
   
- <br><br>
-
-
-  
-
-    <br><br>
-    <div class="container mort_result_back">
-      <div class="split left" >
-
-        <!-- <form onsubmit={functiox} method="POST">
-          {% csrf_token %} -->
-          <div class="container centered h-100">
-            <div class="d-flex justify-content-center h-100">
-              <div id="pac-container" class="searchbar" style="position: absolute; top:2%;">
-                  <input onsubmit={functiox} class="search_input" name="address" id="pac-input" type="text" placeholder="Enter a location" />
-                  <a href="/home" class="search_icon"><i class="fas fa-search" style='font-size:18px;color:rgb(255, 255, 255)'></i></a>
-              </div>
-            </div>
-          </div>
-  
-        <div class="centered" style="position:absolute; top:50%;"> 
-        <div id="map-home-estimate" style="height: 300px; width: 500px;margin-top: 8%;"></div>
-        </div>
-        <!-- </form> -->
-    </div>
-    <div class="split right">
-      <div class="centered">
-    <h2 style="left: 35%; position: relative;"> Retrieved data</h2>
-    
-    
-    
-    
-
-    <div class="card house-card">
-      <div class="card-body" style="width: 100%;">
-        <div style="width: 50%; float: left;">
-          <a href="/details/9143399093/">
-          <img id="img_data" src= "https://ap.rdcpix.com/4bb74a130ca41d9da66c2d32e6f1b6d6l-m3005136868s.jpg" ></a>
-        </div>
-        <div style="width: 50%; float: left;">
-          <h4>Rill, Dorchester, 02125</h4>
-          <span>1 Story built in 1905</span>
-          <br>
-          <span>Unit: 3 | 2B 2B</span>
-          <br>
-          <span>Listed price: $550000</span>
-          <br>
-          <span class="lat-value" value="42.311979"></span>
-              <span class="lon-value" value="-71.065141"></span>
-        </div>
-      </div>
-    </div>
-<br><br>
-    
-
-    <div class="card house-card">
-      <div class="card-body" style="width: 100%;">
-        <div style="width: 50%; float: left;">
-          <a href="/details/4915685066/">
-          <img id="img_data" src= "https://ap.rdcpix.com/032ee45c1e31c8c184c042fe541e0b77l-m4065148615s.jpg" ></a>
-        </div>
-        <div style="width: 50%; float: left;">
-          <h4>Savin Hill, Dorchester&#x27;s Savin Hill, 02125</h4>
-          <span>1 Story built in 2009</span>
-          <br>
-          <span>Unit: 3 | 2B 2B</span>
-          <br>
-          <span>Listed price: $749000</span>
-          <br>
-          <span class="lat-value" value="42.312295"></span>
-              <span class="lon-value" value="-71.047802"></span>
-        </div>
-      </div>
-    </div>
-<br><br>
-    
-    
-      </div></div>
-<br>
-
-  
-  
-    </div>
+  <div id="pac-container">
+    <input id="pac-input" type="text" placeholder="Enter a location" />
+    <input name="address" id="pac-input" type="text" placeholder="Enter a location" />
   </div>
+  <div class="submit">
+    <button class="btn btn-dark">Submit </button>
+  </div>
+  <div id="map" style="height: 300px; width: 500px;"></div>
+
 </div>
- 
-
-  </div>
 
   <footer class="panel-footer">
     <h3 class="footer">Investment made Simple!</h3>
@@ -177,5 +93,5 @@
 
   
 </body>
-<script src="/static/app.js"></script>
+
 </html>

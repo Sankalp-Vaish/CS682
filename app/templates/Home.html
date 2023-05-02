@@ -59,6 +59,11 @@
               <br>
               <span>Listed price: ${{ house.list_price}}</span>
               <br>
+              <form action="{% url 'home' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="prop_id" value="{{ house.property_id}}"></span>
+              <button class="btn btn-lg "><span class="glyphicon glyphicon-heart" style="color: red;"></span></button>
+              </form>
               </a>
             </div>
           </div>

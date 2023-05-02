@@ -44,17 +44,31 @@ def home(request):
   # context = {'user': user, 'my_location': my_location, 'google_api_key': settings.GOOGLE_MAPS_API_KEY}
   user = request.user
   pref=UserPref.objects.get(user=request.user)
+  #flag=False
   #print("vv",pref.currency)
+  if request.method== "POST":
+    id= request.POST.get("prop_id")
+    print(id)
+    if favourites.objects.filter(user=user, property_id= id).exists():
+      print("before delete")
+      fav=favourites.objects.filter(user=user, property_id= id)
+      fav.delete()
+      print("after delete")
+      #flag=False
+
   exists=favourites.objects.filter(user=request.user).exists()
   if exists:
     #fav=favourites.objects.get(user=request.user)
     fav=favourites.objects.all().values()
+    #flag=True
     context = {'user': user,
             'pref': pref.currency,
-            'fav': fav}
+            'fav': fav,
+            }
   else:
     context = {'user': user,
-            'pref': pref.currency}
+            'pref': pref.currency,
+            }
   template = loader.get_template('Home.html')
   return HttpResponse(template.render(context, request))
 
@@ -260,8 +274,11 @@ def test3(request):
 def house_details(request, id):
   template = loader.get_template('house_details.html')
   flag=False
+  user = request.user
+  if favourites.objects.filter(user=user, property_id= id).exists():
+    flag=True
   if request.method== "POST":
-    user = request.user
+    
     #favourites.objects.filter(user=user, property_id= id).delete()
     if favourites.objects.filter(user=user, property_id= id).exists():
       #print("before- ", favourites.objects.filter(user=user, property_id= id).exists)
@@ -341,18 +358,10 @@ def displayPage(request):
 
 def main(request):
   user = request.user
-  pref=UserPref.objects.get(user=request.user)
-  #print("vv",pref.currency)
-  exists=favourites.objects.filter(user=request.user).exists()
-  if exists:
-    #fav=favourites.objects.get(user=request.user)
-    fav=favourites.objects.all().values()
-    context = {'user': user,
-            'pref': pref.currency,
-            'fav': fav}
-  else:
-    context = {'user': user,
-            'pref': pref.currency}
+  my_location = {'latitude': 37.4224764, 'longitude': -122.0842499}
+  context = {'user': user,
+             'my_location': my_location,
+    'google_api_key': settings.GOOGLE_MAPS_API_KEY}
   template = loader.get_template('main.html')
   return HttpResponse(template.render(context, request))
 

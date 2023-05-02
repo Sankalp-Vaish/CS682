@@ -130,9 +130,10 @@
 
         <div class="card house-card">
           <div class="card-body" style="width: 100%;">
+            <a href="{% url 'house_details' house.property_id %}">
             <div style="width: 50%; float: left;">
-              <a href="{% url 'house_details' house.property_id %}">
-              <img id="img_data" src= "{{house.link}}" ></a>
+              
+              <img id="img_data" src= "{{house.link}}" >
             </div>
             <div style="width: 50%; float: left;">
               <h4>{{ house.street_name }}, {{ house.city }}, {{ house.postal_code }}</h4>
@@ -146,11 +147,15 @@
               <span class="lon-value" value="{{ house.longitude }}"></span>
               <span class="cashflow" value="{{ house.cash }}"></span>
               
-              
+                {% if house.bool %}
+              <div><span class="glyphicon glyphicon-star" style="color: rgb(255, 255, 0);"></span></div>
+              {% endif %}
+            
+            
                 
-              </a>
+              
               <!-- <span>Status: {{ house.status}}</span> -->
-            </div>
+            </div></a>
           </div>
         </div>
     

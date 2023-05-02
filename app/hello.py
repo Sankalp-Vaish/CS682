@@ -7,7 +7,7 @@ import time
 import plotly.express as px
 import plotly
 from . import Calculator
-from .models import User_details
+from .models import User_details, favourites
 
 First_Mtg_Interest_Rate=0.001
 def printHello(): 
@@ -115,6 +115,7 @@ prop_list=[]
 def get_house_list(property_id, lock):
     url = "https://realty-in-us.p.rapidapi.com/properties/v3/detail"
     global prop_list
+    prop_list=[]
     c=0
     for i in property_id:
         """c=c+1
@@ -161,6 +162,10 @@ def get_dict(result, request):
       r["latitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lat"]
       r["longitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lon"]
       r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
+      if favourites.objects.filter(user=request.user, property_id= r["property_id"]).exists():
+          r["bool"]=True
+      else:
+          r["bool"]=False
       if house["data"]['home']['tax_history']:
         r["tax"]=house["data"]['home']['tax_history'][0]["tax"]
       else:
