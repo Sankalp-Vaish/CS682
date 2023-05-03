@@ -1,0 +1,212 @@
+<div style="position: absolute; top: 13%; left: 2%;">
+  
+
+
+    <div class="container mt-0"> 
+            <!--mt -> margin top -->
+        <form action="{% url 'prefrences' %}" method="post">
+            {% csrf_token %}
+        <div class=""> 
+            <!-- Guess this refers no class ("" -> empty class) -->
+            
+            <!-- start of currency selection option -->
+            <!-- <label for="Currency">Choose a Currency:</label>
+            <select class="form-select" name="Currency" id="Currency">
+            {% if user_pref.currency %}
+                <option name="Currency" selected value="{{user_pref.currency}}">{{user_pref.currency}}</option>
+            {% endif %}
+            
+                {% for cur,value in c %}
+            <option value="{{cur}} - {{value}}">{{cur}} - {{value}}</option>
+            <br>
+            {% endfor %}
+            </select>  -->
+            <!-- end of currency selection option -->  
+            <br>
+    
+            <div class="info_details">
+                <h4>Property Info	</h4>
+            <div>Fair_Market_Value</div>
+            <div>
+            {% if prop.Fair_Market_Value %}
+                    <input name="Fair_Market_Value" value="{{prop.Fair_Market_Value}}">
+                    {% else %}
+                  <input name="Fair_Market_Value">
+                  {% endif %}
+                </div>
+    
+                <div>Vacancy_Rate </div>
+                <div>
+                    {% if prop.Vacancy_Rate %}
+                            <input name="Vacancy_Rate" value="{{prop.Vacancy_Rate}}">
+                            {% else %}
+                          <input name="Vacancy_Rate">
+                          {% endif %}
+                        </div>
+        <div>Management_Rate </div>
+        <div>
+            {% if prop.Management_Rate %}
+                    <input name="Management_Rate" value="{{prop.Management_Rate}}">
+                    {% else %}
+                  <input name="Management_Rate">
+                  {% endif %}
+                </div>
+        <div>Advertizing_Cost_per_Vacancy </div>
+        <div>
+                    <input name="Advertizing_Cost_per_Vacancy" value="{{prop.Advertizing_Cost_per_Vacancy}}">
+    
+                </div>
+            <div>Annual_Appreciation_Rate </div>
+            <div>
+                    <input name="Annual_Appreciation_Rate" value="{{prop.Annual_Appreciation_Rate}}">
+            </div>
+        </div>
+    
+    
+            <div class="info_details">
+                <div><h3> Purchase Info	</h3></div>
+                    <div><h4> Environmentals</h4> </div>
+                    <div>Inspections_Engineer_Report </div>
+                    <div>
+                            <input name="Inspections_Engineer_Report" value="{{env.Inspections_Engineer_Report}}">
+                    </div>
+                <div>Appraisals </div>
+                <div>
+                        <input name="Appraisals" value="{{env.Appraisals}}">
+                </div>
+                <div>Misc</div>
+                <div>
+                        <input name="Misc" value="{{env.Misc}}">
+                </div>
+                <div>Legal</div>
+                <div>
+                        <input name="Legal" value="{{env.Legal}}">
+                </div>
+            </div>
+            <div class="info_details">
+               <h4>Financing (Monthly)</h4>
+                <div>First_Mtg_Amortization_Period </div>
+                <div>
+                        <input name="First_Mtg_Amortization_Period" value="{{fin.First_Mtg_Amortization_Period}}">
+                </div>
+                <div>First_Mtg_CMHC_Fee</div>
+                <div>
+                        <input name="First_Mtg_CMHC_Fee" value="{{fin.First_Mtg_CMHC_Fee}}">
+                </div>
+                <div>Second_Mtg_Principle_Amount</div>
+                <div>
+                        <input name="Second_Mtg_Principle_Amount" value="{{fin.Second_Mtg_Principle_Amount}}">
+                </div>
+                <!-- <div>#Second_Mtg_Interest_Rate</div> -->
+                <div>Second_Mtg_Amortization_Period </div>
+                <div>
+                        <input name="Second_Mtg_Amortization_Period" value="{{fin.Second_Mtg_Amortization_Period}}">
+                </div>
+                <div>Interest_Only_Principle_Amount</div>
+                <div>
+                        <input name="Interest_Only_Principle_Amount" value="{{fin.Interest_Only_Principle_Amount}}">
+                </div>
+                <div>Interest_Only_Interest_Rate</div>
+                <div>
+                        <input name="Interest_Only_Interest_Rate" value="{{fin.Interest_Only_Interest_Rate}}">
+                </div>
+                <div>Interest_Only_Total_Monthly_Payment</div>
+                <div>
+                        <input name="Interest_Only_Total_Monthly_Payment" value="{{fin.Interest_Only_Total_Monthly_Payment}}">
+                </div>
+                <div>Other_Monthly_Financing_Costs</div>
+                <div>
+                        <input name="Other_Monthly_Financing_Costs" value="{{fin.Other_Monthly_Financing_Costs}}">
+                </div></div>
+    
+    
+                <div class="info_details">
+                <h4>Income(Annual)</h4>
+                <div>Parking</div>
+                <div>
+                        <input name="Parking" value="{{inc.Parking}}">
+                </div>
+                <div>Storage</div>
+                <div>
+                        <input name="Storage" value="{{inc.Storage}}">
+                </div>
+                <div>Laundry_Vending</div>
+                <div>
+                        <input name="Laundry_Vending" value="{{inc.Laundry_Vending}}">
+                </div>
+                <div>Other</div>
+                <div>
+                        <input name="Other" value="{{inc.Other}}">
+                </div></div>
+    
+                <div class="info_details">
+                <div>Operating Expenses (Annual)</div>
+                <div>Electricity </div>
+                <div>
+                        <input name="Electricity" value="{{op.Electricity}}">
+                </div>
+                <div>Gas</div>
+                <div>
+                        <input name="Gas" value="{{op.Gas}}">
+                </div>
+                <div>Lawn_Snow_Maintenance</div>
+                <div>
+                        <input name="Lawn_Snow_Maintenance" value="{{op.Lawn_Snow_Maintenance}}">
+                </div>
+                <div>Association_Fees</div>
+                <div>
+                        <input name="Association_Fees" value="{{op.Association_Fees}}">
+                </div></div>
+    
+                <div class="info_details">
+                <div>#Pest Control</div>
+                <div>Trash_Removal </div>
+                <div>
+                        <input name="Trash_Removal" value="{{pest.Trash_Removal}}">
+                </div>
+                <div>Miscellaneous</div>
+                <div>
+                        <input name="Miscellaneous" value="{{pest.Miscellaneous}}">
+                </div>
+                <div>Common_Area_Maintenance</div>
+                <div>
+                        <input name="Common_Area_Maintenance" value="{{pest.Common_Area_Maintenance}}">
+                </div>
+                <div>Capital_Improvements</div>
+                <div>
+                        <input name="Capital_Improvements" value="{{pest.Capital_Improvements}}">
+                </div>
+                <div>Accounting</div>
+                <div>
+                        <input name="Accounting" value="{{pest.Accounting}}">
+                </div>
+                <div>Legal</div>
+                <div>
+                        <input name="Legal" value="{{pest.Legal}}">
+                </div>
+                <div>Bad_Debts</div>
+                <div>
+                        <input name="Bad_Debts" value="{{pest.Bad_Debts}}">
+                </div>
+                <div>Other</div>
+                <div>
+                        <input name="Other" value="{{pest.Other}}">
+                </div></div>
+    
+                <div class="info_details">
+                <div>Cash requirements</div>
+                <div>Deposit_made_with_Offer</div>
+                <div>
+                        <input name="Deposit_made_with_Offer" value="{{cash.Deposit_made_with_Offer}}">
+                </div>
+                <div>Less_ProRation_of_Rents</div>
+                <div>
+                        <input name="Less_ProRation_of_Rents" value="{{cash.Less_ProRation_of_Rents}}">
+                </div></div>
+            <div class="col-sm-1" style="margin: 6%;margin-bottom: 12%;">
+                <button class="btn btn-dark">Submit </button>
+              </div>
+          </div>
+        </form>
+        </div>
+    </div>
