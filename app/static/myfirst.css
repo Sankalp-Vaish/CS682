@@ -232,13 +232,6 @@ body {
   left: 59px;
 }
 
-.home_back{
-  text-align: center;
-  background-color: #ddd;
-  max-width: 50%;
-
-}
-
 .est_back{
   text-align: center;
   background-color: #ddd;
@@ -370,14 +363,14 @@ body {
   transform: translate(-50%, -50%);
 } */
 
-.home_b {
+/* .home_b {
     
   position: relative;
   top: 12%;
   left: 15%;
   margin-top: 5%;
 
-}
+} */
 
 .LandingPage_info{
   position: absolute;

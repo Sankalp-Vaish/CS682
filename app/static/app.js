@@ -18,6 +18,7 @@ function myFunction2() {
   filter = input.value.toUpperCase();
   console.log(filter);
   table = document.getElementById("myTable");
+  console.log(table);
   tr = table.getElementsByTagName("tr");
 
   // Loop through all table rows, and hide those who don't match the search query
@@ -35,6 +36,8 @@ function myFunction2() {
     }
   }
 }
+
+
 
 //house details map
 async function setLocation(lati, lon) {

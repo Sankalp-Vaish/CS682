@@ -304,9 +304,9 @@ def house_details(request, id):
       for i in l:
         if int(i)==int(id):
           #print("Yes")
-          house=hello.get_details(id)
+          house=hello.get_details(id, request)
       if house==None:
-        house=hello.get_details_by_pin(id)
+        house=hello.get_details_by_pin(id, request)
       # exists=favourites.objects.filter(user=request.user).exists()
       # if exists:
       #   #fav=favourites.objects.get(user=request.user)
@@ -328,7 +328,10 @@ def house_details(request, id):
       property_id = house["property_id"],
       tax = house["tax"],
       insurance_rate = house["insurance_rate"],
+      Cashflow_per_unit_per_month= house["cash"],
+      Cash_On_Cash_ROI= house["Cash_On_Cash_ROI"],
       fav_toggle=True)
+      print(house["cash"])
       #fav=favourites.objects.get(user=request.user)
       fav.save()
       flag=True
@@ -341,9 +344,9 @@ def house_details(request, id):
   for i in l:
     if int(i)==int(id):
       #print("Yes")
-      house=hello.get_details(id)
+      house=hello.get_details(id, request)
   if house==None:
-    house=hello.get_details_by_pin(id)
+    house=hello.get_details_by_pin(id, request)
   details=User_details.objects.get(user=request.user)
   #print(details.First_Mtg_Interest_Rate)
   result=Calculator.calculator(request, house["list_price"], house["unit"], house["tax"], house["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)

@@ -31,6 +31,8 @@ class favourites(models.Model):
     tax= models.CharField(max_length=30, null=True)
     insurance_rate= models.CharField(max_length=30, null=True)
     fav_toggle= models.BooleanField(default=False)
+    Cash_On_Cash_ROI=models.CharField(max_length=30, null=True)
+    Cashflow_per_unit_per_month=models.CharField(max_length=30, null=True)
 
     def __str__(self):
         return str(self.user) + "s" + "favourites"

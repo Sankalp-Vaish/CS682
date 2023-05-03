@@ -1,0 +1,28 @@
+.home_back{
+    text-align: center;
+    background-color: #ddd;
+    max-width: 75%;
+    /* height: 500px; */
+    max-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  
+  }
+
+  .house-card {
+    margin-bottom: 5px;
+    width: 70%;
+  }
+
+  .card-body:hover {
+    background-color: #E5E4E2;
+  }
+
+  .home_b {
+    max-width: 60%;
+    position: relative;
+    /* top: 12%; */
+    margin-left: 15%;
+    margin-top: 1%;
+  
+  }

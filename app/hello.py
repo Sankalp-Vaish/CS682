@@ -172,15 +172,17 @@ def get_dict(result, request):
         r["tax"]=None
       calc=Calculator.calculator(request, r["list_price"], r["unit"], r["tax"], r["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
       r["cash"]=int(float(calc["Cashflow_per_unit_per_month"]))
+      r["Cash_On_Cash_ROI"]=int(float(calc["Cash_On_Cash_ROI"]))
       l.append(r)
       r=dict()
     
     return l
 
 
-def get_details(id):
+def get_details(id, request):
     r=dict()
     d=json.load(open(r"app/data_file.json"))
+    details=User_details.objects.get(user=request.user)
     for house in d:
         #print("house ", type(house["data"]["home"]["property_id"]))
         if house["data"]["home"]["property_id"]==str(id):
@@ -205,6 +207,9 @@ def get_details(id):
                 r["tax"]=None
             r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
             r["First_Mtg_Interest_Rate"]=First_Mtg_Interest_Rate
+            calc=Calculator.calculator(request, r["list_price"], r["unit"], r["tax"], r["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
+            r["cash"]=int(float(calc["Cashflow_per_unit_per_month"]))
+            r["Cash_On_Cash_ROI"]=int(float(calc["Cash_On_Cash_ROI"]))
             print(r["tax"])
             y=[]
             t=[]
@@ -219,7 +224,8 @@ def get_details(id):
     return r
 
 
-def get_details_by_pin(id):
+def get_details_by_pin(id, request):
+    details=User_details.objects.get(user=request.user)
     r=dict()
     url = "https://realty-in-us.p.rapidapi.com/properties/v3/detail"
 
@@ -253,6 +259,9 @@ def get_details_by_pin(id):
         r["tax"]=None
     r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
     r["First_Mtg_Interest_Rate"]=First_Mtg_Interest_Rate
+    calc=Calculator.calculator(request, r["list_price"], r["unit"], r["tax"], r["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
+    r["cash"]=int(float(calc["Cashflow_per_unit_per_month"]))
+    r["Cash_On_Cash_ROI"]=int(float(calc["Cash_On_Cash_ROI"]))
     print(r["tax"])
     #print(r["city"])
     return r
