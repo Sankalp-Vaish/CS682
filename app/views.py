@@ -146,6 +146,7 @@ def mortgage(request):
         if request.POST.get("First_Mtg_Interest_Rate")!= "":
           details.First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate")
         if request.POST.get("rent")!="":
+          form=rent_per_unit(initial={"rent": [str(request.POST.get("rent")), request.POST.get("rent")]})
           details.Average_rent_per_unit= request.POST.get("rent")
         details.save()
       else:
@@ -181,8 +182,9 @@ def mortgage(request):
       "r":l,
       "z":"",
       "flag":"True",
-      "rent": rent_per_unit(),
-      "details":details
+      "rent": form,
+      "details":details,
+      "pin":pin
       }
     return HttpResponse(template.render(context, request))
   else:
@@ -209,6 +211,7 @@ def test2(request):
 def test3(request):
   template = loader.get_template('test3.html')
   exists=User_details.objects.filter(user=request.user).exists()
+  
   details=None
   if exists:
     details=User_details.objects.get(user=request.user)
@@ -233,6 +236,10 @@ def test3(request):
           details.First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate")
         if request.POST.get("rent")!="":
           details.Average_rent_per_unit= request.POST.get("rent")
+          form=rent_per_unit(initial={"rent": [str(request.POST.get("rent")), request.POST.get("rent")]})
+          print(form)
+          #print()
+          # rent_per_unit.rent.initial= request.POST.get("rent")
         details.save()
       else:
         User_details.objects.create(user=request.user, Average_rent_per_unit=request.POST.get("rent"), First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate"))
@@ -249,6 +256,8 @@ def test3(request):
     "r":l,
     "flag":"True",
     "details":details,
+    "f":form,
+    "rent": rent_per_unit(),
     'user': user,
     'my_location': my_location,
     'google_api_key': settings.GOOGLE_MAPS_API_KEY

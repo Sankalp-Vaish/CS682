@@ -42,13 +42,13 @@
           </div>
 
           <div class="col-sm-5">
-            <label for="Average_rent_per_unit">Choose a Average</label>
+            <label for="Average_rent_per_unit">Choose a Average Rent</label>
             <div>
             {% if details.Average_rent_per_unit %}
             <!-- <option name="rent" selected value="{{details.Average_rent_per_unit}}">{{details.Average_rent_per_unit}}</option> -->
             {% endif %}
             
-              {{ rent }}
+              {{ rent.rent }}
             </div>
             </select>
           </div>
@@ -89,6 +89,8 @@
     <div class="split right">
       <div style="position: fixed; top: 0; margin-top: 62px; background: white; z-index: 1;">
       <div class="d-inline-flex p-3">
+        <form action="" method="POST">
+          {% csrf_token %}
         <div class="flex-fill" style="display: flex; width: 40%; margin: 0 2%;">
           <div style="flex: 1; background-color: #E5E4E2; text-align: center;">
             <label for="First_Mtg_Interest_Rate">Set Interest Rate:</label>
@@ -107,21 +109,26 @@
             <label for="Average_rent_per_unit">Average Rent:</label>
           </div>
           <div style="flex: 1; background: #085e72;">
-            <div style="border: 0; outline: 0; background: #085e72; color: white; width: 100%; text-align: center;">
-              {% if details.Average_rent_per_unit %}
-              {% endif %}
+            <div style="border: 0; outline: 0; background: #085e72; color: rgb(0, 0, 0); width: 100%; text-align: center;">
           
-              {{ rent }}
+              {{ rent.rent }}
             </div>
           </div>
         </div>
+        <input type="hidden" name="pincode" value="{{ pin }}">
+        <div class="submit">
+          <label></label>
+          <button class="btn btn-dark" >Submit</button>
+        </div>
+        </form>
         <div class="flex-fill" style="width: 30%; margin: 0 2%;">
           <button style="background: #085e72; color: white;">
             <label>Set your default Preferences</label>
           </button>
         </div>
       </div>
-      <span style="left: 5%; position: relative;">{{len}} Properties found!</span>
+
+      <div style="left: 5%; position: relative;">{{len}} Properties found!</div>
       <hr>
     </div>
       
