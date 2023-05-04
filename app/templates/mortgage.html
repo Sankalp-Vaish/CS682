@@ -87,10 +87,10 @@
       </form>
     </div>
     <div class="split right">
-      <div style="position: fixed; top: 0; margin-top: 62px; background: white; z-index: 1;">
-      <div class="d-inline-flex p-3">
+      <div style="position: fixed; top: 0; margin-top: 62px; background: white; z-index: 1; width: 100%; padding-top: 20px;">
         <form action="" method="POST">
           {% csrf_token %}
+          <div class="d-inline-flex p-3" style="width: 50%;">
         <div class="flex-fill" style="display: flex; width: 40%; margin: 0 2%;">
           <div style="flex: 1; background-color: #E5E4E2; text-align: center;">
             <label for="First_Mtg_Interest_Rate">Set Interest Rate:</label>
@@ -104,7 +104,7 @@
               {% endif %}
           </div>
         </div>
-        <div class="flex-fill" style="display: flex; width: 30%; margin: 0 2%;">
+        <div class="flex-fill" style="display: flex; width: 40%; margin: 0 2%;">
           <div style="flex: 1; background-color: #E5E4E2; text-align: center;">
             <label for="Average_rent_per_unit">Average Rent:</label>
           </div>
@@ -116,23 +116,23 @@
           </div>
         </div>
         <input type="hidden" name="pincode" value="{{ pin }}">
-        <div class="submit">
+        <div class="submit flex-fill" style="width: 20%; margin: 0 2%;">
           <label></label>
           <button class="btn btn-dark" >Submit</button>
         </div>
+      </div>
         </form>
-        <div class="flex-fill" style="width: 30%; margin: 0 2%;">
+        <!-- <div class="flex-fill" style="width: 30%; margin: 0 2%;">
           <button style="background: #085e72; color: white;">
             <label>Set your default Preferences</label>
           </button>
-        </div>
-      </div>
+        </div> -->
 
       <div style="left: 5%; position: relative;">{{len}} Properties found!</div>
       <hr>
     </div>
       
-      <div class="centered_right" style="margin-top: 20%;">
+      <div class="centered_right" style="margin-top: 20%; width: 100%;">
     <!-- <h2 style="left: 5%; position: relative;">Available Properties- {{len}}</h2> -->
     {% if z == "No houses found" %}
     <p>{{z}}</p>
