@@ -126,16 +126,24 @@
     padding: 0;
 }
 
-html {
+.pref{
     height: 100%;
     background: #6441A5; /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #6441A5, #2a0845); /* Chrome 10-25, Safari 5.1-6 */
+    font-family: montserrat, arial, verdana;
+    background: transparent;
+    margin-bottom: 5%;
+}
+/* html {
+    height: 100%;
+    background: #6441A5;
+    background: -webkit-linear-gradient(to left, #6441A5, #2a0845); 
 }
 
 body {
     font-family: montserrat, arial, verdana;
     background: transparent;
-}
+} */
 
 /*form styles*/
 #msform {
@@ -180,7 +188,7 @@ body {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    border: 1px solid #ee0979;
+    border: 1px solid #0c69bb;
     outline-width: 0;
     transition: All 0.5s ease-in;
     -webkit-transition: All 0.5s ease-in;
@@ -191,7 +199,7 @@ body {
 /*buttons*/
 #msform .action-button {
     width: 100px;
-    background: #ee0979;
+    background: #0c69bb;;
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -202,12 +210,12 @@ body {
 }
 
 #msform .action-button:hover, #msform .action-button:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #0c69bb;
 }
 
 #msform .action-button-previous {
     width: 100px;
-    background: #C5C5F1;
+    background: #000000d1;
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -218,7 +226,7 @@ body {
 }
 
 #msform .action-button-previous:hover, #msform .action-button-previous:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #000000d1;
 }
 
 /*headings*/
@@ -251,7 +259,7 @@ body {
     color: white;
     text-transform: uppercase;
     font-size: 9px;
-    width: 33.33%;
+    width: 16.66%;
     float: left;
     position: relative;
     letter-spacing: 1px;
@@ -291,7 +299,7 @@ body {
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before, #progressbar li.active:after {
-    background: #ee0979;
+    background: #0c69bb;
     color: white;
 }
 
@@ -304,7 +312,7 @@ body {
 .dme_link a {
     background: #FFF;
     font-weight: bold;
-    color: #ee0979;
+    color: #0c69bb;
     border: 0 none;
     border-radius: 25px;
     cursor: pointer;
@@ -313,6 +321,6 @@ body {
 }
 
 .dme_link a:hover, .dme_link a:focus {
-    background: #C5C5F1;
+    background: #000000d1;
     text-decoration: none;
 }
