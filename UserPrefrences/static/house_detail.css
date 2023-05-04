@@ -25,6 +25,7 @@
   width: 100%;
 }
 
+/* Styles for current white box view */
 .center {
   margin: auto;
   width: 50%;
@@ -112,7 +113,7 @@
 	color:red;
 	font-weight:normal;
 }
-
+/* End of styles for current white box view */
 
 
 
