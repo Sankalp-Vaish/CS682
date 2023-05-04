@@ -7,7 +7,7 @@ import time
 import plotly.express as px
 import plotly
 from . import Calculator
-from .models import User_details
+from .models import User_details, favourites
 
 First_Mtg_Interest_Rate=0.001
 def printHello(): 
@@ -115,6 +115,7 @@ prop_list=[]
 def get_house_list(property_id, lock):
     url = "https://realty-in-us.p.rapidapi.com/properties/v3/detail"
     global prop_list
+    prop_list=[]
     c=0
     for i in property_id:
         """c=c+1
@@ -161,21 +162,27 @@ def get_dict(result, request):
       r["latitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lat"]
       r["longitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lon"]
       r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
+      if favourites.objects.filter(user=request.user, property_id= r["property_id"]).exists():
+          r["bool"]=True
+      else:
+          r["bool"]=False
       if house["data"]['home']['tax_history']:
         r["tax"]=house["data"]['home']['tax_history'][0]["tax"]
       else:
         r["tax"]=None
       calc=Calculator.calculator(request, r["list_price"], r["unit"], r["tax"], r["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
       r["cash"]=int(float(calc["Cashflow_per_unit_per_month"]))
+      r["Cash_On_Cash_ROI"]=int(float(calc["Cash_On_Cash_ROI"]))
       l.append(r)
       r=dict()
     
     return l
 
 
-def get_details(id):
+def get_details(id, request):
     r=dict()
     d=json.load(open(r"app/data_file.json"))
+    details=User_details.objects.get(user=request.user)
     for house in d:
         #print("house ", type(house["data"]["home"]["property_id"]))
         if house["data"]["home"]["property_id"]==str(id):
@@ -200,6 +207,9 @@ def get_details(id):
                 r["tax"]=None
             r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
             r["First_Mtg_Interest_Rate"]=First_Mtg_Interest_Rate
+            calc=Calculator.calculator(request, r["list_price"], r["unit"], r["tax"], r["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
+            r["cash"]=int(float(calc["Cashflow_per_unit_per_month"]))
+            r["Cash_On_Cash_ROI"]=int(float(calc["Cash_On_Cash_ROI"]))
             print(r["tax"])
             y=[]
             t=[]
@@ -214,7 +224,8 @@ def get_details(id):
     return r
 
 
-def get_details_by_pin(id):
+def get_details_by_pin(id, request):
+    details=User_details.objects.get(user=request.user)
     r=dict()
     url = "https://realty-in-us.p.rapidapi.com/properties/v3/detail"
 
@@ -248,6 +259,9 @@ def get_details_by_pin(id):
         r["tax"]=None
     r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
     r["First_Mtg_Interest_Rate"]=First_Mtg_Interest_Rate
+    calc=Calculator.calculator(request, r["list_price"], r["unit"], r["tax"], r["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
+    r["cash"]=int(float(calc["Cashflow_per_unit_per_month"]))
+    r["Cash_On_Cash_ROI"]=int(float(calc["Cash_On_Cash_ROI"]))
     print(r["tax"])
     #print(r["city"])
     return r

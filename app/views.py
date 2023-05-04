@@ -44,17 +44,31 @@ def home(request):
   # context = {'user': user, 'my_location': my_location, 'google_api_key': settings.GOOGLE_MAPS_API_KEY}
   user = request.user
   pref=UserPref.objects.get(user=request.user)
+  #flag=False
   #print("vv",pref.currency)
+  if request.method== "POST":
+    id= request.POST.get("prop_id")
+    print(id)
+    if favourites.objects.filter(user=user, property_id= id).exists():
+      print("before delete")
+      fav=favourites.objects.filter(user=user, property_id= id)
+      fav.delete()
+      print("after delete")
+      #flag=False
+
   exists=favourites.objects.filter(user=request.user).exists()
   if exists:
     #fav=favourites.objects.get(user=request.user)
     fav=favourites.objects.all().values()
+    #flag=True
     context = {'user': user,
             'pref': pref.currency,
-            'fav': fav}
+            'fav': fav,
+            }
   else:
     context = {'user': user,
-            'pref': pref.currency}
+            'pref': pref.currency,
+            }
   template = loader.get_template('Home.html')
   return HttpResponse(template.render(context, request))
 
@@ -132,6 +146,7 @@ def mortgage(request):
         if request.POST.get("First_Mtg_Interest_Rate")!= "":
           details.First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate")
         if request.POST.get("rent")!="":
+          form=rent_per_unit(initial={"rent": [str(request.POST.get("rent")), request.POST.get("rent")]})
           details.Average_rent_per_unit= request.POST.get("rent")
         details.save()
       else:
@@ -167,8 +182,9 @@ def mortgage(request):
       "r":l,
       "z":"",
       "flag":"True",
-      "rent": rent_per_unit(),
-      "details":details
+      "rent": form,
+      "details":details,
+      "pin":pin
       }
     return HttpResponse(template.render(context, request))
   else:
@@ -195,6 +211,7 @@ def test2(request):
 def test3(request):
   template = loader.get_template('test3.html')
   exists=User_details.objects.filter(user=request.user).exists()
+  
   details=None
   if exists:
     details=User_details.objects.get(user=request.user)
@@ -219,6 +236,10 @@ def test3(request):
           details.First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate")
         if request.POST.get("rent")!="":
           details.Average_rent_per_unit= request.POST.get("rent")
+          form=rent_per_unit(initial={"rent": [str(request.POST.get("rent")), request.POST.get("rent")]})
+          print(form)
+          #print()
+          # rent_per_unit.rent.initial= request.POST.get("rent")
         details.save()
       else:
         User_details.objects.create(user=request.user, Average_rent_per_unit=request.POST.get("rent"), First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate"))
@@ -235,6 +256,8 @@ def test3(request):
     "r":l,
     "flag":"True",
     "details":details,
+    "f":form,
+    "rent": rent_per_unit(),
     'user': user,
     'my_location': my_location,
     'google_api_key': settings.GOOGLE_MAPS_API_KEY
@@ -260,8 +283,11 @@ def test3(request):
 def house_details(request, id):
   template = loader.get_template('house_details.html')
   flag=False
+  user = request.user
+  if favourites.objects.filter(user=user, property_id= id).exists():
+    flag=True
   if request.method== "POST":
-    user = request.user
+    
     #favourites.objects.filter(user=user, property_id= id).delete()
     if favourites.objects.filter(user=user, property_id= id).exists():
       #print("before- ", favourites.objects.filter(user=user, property_id= id).exists)
@@ -278,9 +304,9 @@ def house_details(request, id):
       for i in l:
         if int(i)==int(id):
           #print("Yes")
-          house=hello.get_details(id)
+          house=hello.get_details(id, request)
       if house==None:
-        house=hello.get_details_by_pin(id)
+        house=hello.get_details_by_pin(id, request)
       # exists=favourites.objects.filter(user=request.user).exists()
       # if exists:
       #   #fav=favourites.objects.get(user=request.user)
@@ -302,7 +328,10 @@ def house_details(request, id):
       property_id = house["property_id"],
       tax = house["tax"],
       insurance_rate = house["insurance_rate"],
+      Cashflow_per_unit_per_month= house["cash"],
+      Cash_On_Cash_ROI= house["Cash_On_Cash_ROI"],
       fav_toggle=True)
+      print(house["cash"])
       #fav=favourites.objects.get(user=request.user)
       fav.save()
       flag=True
@@ -315,9 +344,9 @@ def house_details(request, id):
   for i in l:
     if int(i)==int(id):
       #print("Yes")
-      house=hello.get_details(id)
+      house=hello.get_details(id, request)
   if house==None:
-    house=hello.get_details_by_pin(id)
+    house=hello.get_details_by_pin(id, request)
   details=User_details.objects.get(user=request.user)
   #print(details.First_Mtg_Interest_Rate)
   result=Calculator.calculator(request, house["list_price"], house["unit"], house["tax"], house["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)
@@ -341,18 +370,10 @@ def displayPage(request):
 
 def main(request):
   user = request.user
-  pref=UserPref.objects.get(user=request.user)
-  #print("vv",pref.currency)
-  exists=favourites.objects.filter(user=request.user).exists()
-  if exists:
-    #fav=favourites.objects.get(user=request.user)
-    fav=favourites.objects.all().values()
-    context = {'user': user,
-            'pref': pref.currency,
-            'fav': fav}
-  else:
-    context = {'user': user,
-            'pref': pref.currency}
+  my_location = {'latitude': 37.4224764, 'longitude': -122.0842499}
+  context = {'user': user,
+             'my_location': my_location,
+    'google_api_key': settings.GOOGLE_MAPS_API_KEY}
   template = loader.get_template('main.html')
   return HttpResponse(template.render(context, request))
 
