@@ -155,12 +155,14 @@ def get_dict(result, request):
       r["beds"]=house["data"]["home"]["description"]["beds"]
       r["stories"]=house["data"]["home"]["description"]["stories"]
       r["unit"]=house["data"]['home']['description']['units']
-      r["link"]=house["data"]["home"]["photos"][0]["href"] 
+      if house["data"]["home"]["photos"]:
+        r["link"]=house["data"]["home"]["photos"][0]["href"] 
       r["property_id"]=house["data"]["home"]["property_id"]
-      r["lat"]= house["data"]['home']["location"]["address"]["coordinate"]["lat"]
-      r["lon"]= house["data"]['home']["location"]["address"]["coordinate"]["lon"]
-      r["latitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lat"]
-      r["longitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lon"]
+      if house["data"]['home']["location"]["address"]["coordinate"]:
+        r["lat"]= house["data"]['home']["location"]["address"]["coordinate"]["lat"]
+        r["lon"]= house["data"]['home']["location"]["address"]["coordinate"]["lon"]
+        r["latitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lat"]
+        r["longitude"]=house["data"]["home"]["location"]["address"]["coordinate"]["lon"]
       r["insurance_rate"]=house["data"]['home']['mortgage']["insurance_rate"]
       if favourites.objects.filter(user=request.user, property_id= r["property_id"]).exists():
           r["bool"]=True
@@ -197,9 +199,11 @@ def get_details(id, request):
             r["unit"]=house["data"]['home']['description']['units']
             r["postal_code"]=house["data"]["home"]["location"]["address"]["postal_code"]
             r["street_name"]=house["data"]["home"]["location"]["address"]["street_name"]
-            r["lat"]= house["data"]['home']["location"]["address"]["coordinate"]["lat"]
-            r["lon"]= house["data"]['home']["location"]["address"]["coordinate"]["lon"]
-            r["link"]=house["data"]["home"]["photos"] 
+            if house["data"]['home']["location"]["address"]["coordinate"]:
+                r["lat"]= house["data"]['home']["location"]["address"]["coordinate"]["lat"]
+                r["lon"]= house["data"]['home']["location"]["address"]["coordinate"]["lon"]
+            if house["data"]["home"]["photos"]:
+                r["link"]=house["data"]["home"]["photos"]
             r["property_id"]=house["data"]["home"]["property_id"]
             if house["data"]['home']['tax_history']:
                 r["tax"]=house["data"]['home']['tax_history'][0]["tax"]
@@ -249,9 +253,11 @@ def get_details_by_pin(id, request):
     r["unit"]=house["data"]['home']['description']['units']
     r["postal_code"]=house["data"]["home"]["location"]["address"]["postal_code"]
     r["street_name"]=house["data"]["home"]["location"]["address"]["street_name"]
-    r["link"]=house["data"]["home"]["photos"]
-    r["lat"]= house["data"]['home']["location"]["address"]["coordinate"]["lat"]
-    r["lon"]= house["data"]['home']["location"]["address"]["coordinate"]["lon"]
+    if house["data"]["home"]["photos"]:
+        r["link"]=house["data"]["home"]["photos"]
+    if house["data"]['home']["location"]["address"]["coordinate"]:
+        r["lat"]= house["data"]['home']["location"]["address"]["coordinate"]["lat"]
+        r["lon"]= house["data"]['home']["location"]["address"]["coordinate"]["lon"]
     r["property_id"]=house["data"]["home"]["property_id"]
     if house["data"]['home']['tax_history']:
         r["tax"]=house["data"]['home']['tax_history'][0]["tax"]

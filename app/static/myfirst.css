@@ -495,3 +495,10 @@ label {
   border-top-color: #ae1111;
 }
 
+.real-mid {
+  background: #fbff12;
+  color: white;
+}
+.real-mid::after {
+  border-top-color: #fbff12;
+}

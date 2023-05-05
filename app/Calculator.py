@@ -59,11 +59,11 @@ def calculator(request, Fair_Market_Value=374000.00, Number_of_Units=6, Property
 
     Second_Mtg_Principle_Amount	= float(fin.Second_Mtg_Principle_Amount)#0.00  
     Second_Mtg_Interest_Rate = 12/100.00
-    Second_Mtg_Amortization_Period	= float(fin.Second_Mtg_Amortization_Period)#30 #in years
+    Second_Mtg_Amortization_Period	= float(fin.Second_Mtg_Amortization_Period)#30 #in years...........
 
     # Second_Mtg_Total_Monthly_Payment = Second_Mtg_Principle_Amount * Second_Mtg_Interest_Rate/12 *(1+Second_Mtg_Interest_Rate/12)**(Second_Mtg_Amortization_Period*12)/((1+Second_Mtg_Interest_Rate/12)**(Second_Mtg_Amortization_Period*12)-1)
     Second_Mtg_Total_Monthly_Payment = Second_Mtg_Principle_Amount * ((((1+(Second_Mtg_Interest_Rate/2))**(1/6))-1)/(1-(((1+(Second_Mtg_Interest_Rate/2))**(1/6))**(Second_Mtg_Amortization_Period*-12))))
-
+    print("Second_Mtg_Total_Monthly_Payment ", Second_Mtg_Total_Monthly_Payment)
 
     Interest_Only_Principle_Amount	= float(fin.Interest_Only_Principle_Amount)#0.00   
     Interest_Only_Interest_Rate	= float(fin.Interest_Only_Interest_Rate)#0.00   
@@ -81,7 +81,12 @@ def calculator(request, Fair_Market_Value=374000.00, Number_of_Units=6, Property
     Other = float(inc.Other)#0.00  
     Total_Income = Gross_Rents +  Parking + Storage + Laundry_Vending + Other
     Vacancy_Loss = Total_Income * Vacancy_Rate #(% of Total Income)
+    print("Vacancy_Rate", Vacancy_Rate)
+    print("Total_Income ", Total_Income)
+    print("Vacancy_Loss ", Vacancy_Loss)
+
     Effective_Gross_Income	= Total_Income - Vacancy_Loss
+    print("Effective_Gross_Income ", Effective_Gross_Income)
 
     # -------------------------
     # Operating Expenses (Annual)	
@@ -118,10 +123,14 @@ def calculator(request, Fair_Market_Value=374000.00, Number_of_Units=6, Property
     Evictions = Number_of_Units * 12 * Vacancy_Rate / 2 / 10 * 1000 
 
     Total_Expenses = (Property_Taxes + Insurance + Repairs + Electricity + Gas + Lawn_Snow_Maintenance + Water_Sewer + Cable + Management + Caretaking + Advertizing + Association_Fees + Pest_Control + Security + Trash_Removal + Miscellaneous + Common_Area_Maintenance + Capital_Improvements + Accounting + Legal + Bad_Debts + Other + Evictions)
-
+    print("Total_Expenses ", Total_Expenses)
     # -----------------------
     # Net Operating Income(Annual)
     Net_Operating_Income = Effective_Gross_Income - Total_Expenses
+
+    print("Effective_Gross_Income ", Effective_Gross_Income)
+    print("Net_Operating_Income ", Net_Operating_Income)
+    
 
     # -----------------------
     # Cash requirements
@@ -129,6 +138,7 @@ def calculator(request, Fair_Market_Value=374000.00, Number_of_Units=6, Property
     Less_ProRation_of_Rents	= float(cash.Less_ProRation_of_Rents)#0.00
     Cash_Required_to_Close = Cash_Required_to_Close_after_financing - Deposit_made_with_Offer
     Total_Cash_Required	= Cash_Required_to_Close + Deposit_made_with_Offer - Less_ProRation_of_Rents
+    print("Total_Cash_Required ", Total_Cash_Required)
 
 
     # -----------------------
@@ -141,6 +151,9 @@ def calculator(request, Fair_Market_Value=374000.00, Number_of_Units=6, Property
     Annual_Profit_or_Loss = NOI + Debt_Servicing_costs
     Total_Monthly_Profit_or_Loss = Annual_Profit_or_Loss/12
     Cashflow_per_unit_per_month = Total_Monthly_Profit_or_Loss/Number_of_Units 
+    print("Annual_Profit_or_Loss ", Annual_Profit_or_Loss)
+    print("Debt_Servicing_costs ", Debt_Servicing_costs)
+    print("NOI", NOI)
 
     # Quick Analysis
     First_Mtg_LTV = (First_Mtg_Principle_Borrowed / Fair_Market_Value) * 100

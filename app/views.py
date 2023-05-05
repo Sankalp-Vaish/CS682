@@ -152,30 +152,31 @@ def mortgage(request):
       else:
         User_details.objects.create(user=request.user, Average_rent_per_unit=request.POST.get("rent"), First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate"))   
       pin=request.POST.get('pincode')
-    #print(pin)
+    
     id = hello.get_houses_id(pin)
-    lock = threading.Lock()
-    t=[]
-    c=0
-    for i in range(0,3,2):
-      t.append(threading.Thread(target=hello.get_house_list, name='t'+str(c+1), args=(id[i:(i+2)],lock,)))
-      t[c].start()
-      c=c+1
-      print(c)
-      # if i ==2:
-      #   break
-    for i in range(2):
-      t[i].join()
-
-    result = hello.get_prop_list()
-    #print(result)
-    if result==[]:
+    #print(id)
+    if id==None:
       context = {
       "z":"No houses found",
       "flag":"True",
       }
-      
+
     else:
+      lock = threading.Lock()
+      t=[]
+      c=0
+      for i in range(0,3,2):
+        t.append(threading.Thread(target=hello.get_house_list, name='t'+str(c+1), args=(id[i:(i+2)],lock,)))
+        t[c].start()
+        c=c+1
+        print(c)
+        # if i ==2:
+        #   break
+      for i in range(2):
+        t[i].join()
+
+      result = hello.get_prop_list()
+      print("res",result)
       l=hello.get_dict(result, request)
       context = {
       "len":len(result),
