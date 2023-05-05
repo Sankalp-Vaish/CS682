@@ -41,7 +41,7 @@ function myFunction2() {
 
 //house details map
 async function setLocation(lati, lon) {
-  $("#map-element").css({"height": "400px", "width": "550px"});
+  $("#map-element").css({"height": "200px", "width": "400px"});
   console.log(lati);
   const position = { lat: lati, lng: lon };
   // Request needed libraries.
@@ -49,7 +49,7 @@ async function setLocation(lati, lon) {
   const { Marker } = await google.maps.importLibrary("marker");
 
   let map = new Map(document.getElementById("map-element"), {
-    zoom: 8,
+    zoom: 10,
     center: position,
     mapId: "DEMO_MAP_ID",
   });
