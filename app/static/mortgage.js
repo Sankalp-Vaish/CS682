@@ -37,7 +37,7 @@ function initMap() {
       class Popup extends google.maps.OverlayView {
         position;
         containerDiv;
-        constructor(position, content) {
+        constructor(position, content, betterValue) {
           super();
           this.position = position;
           content.classList.add("popup-bubble");
@@ -51,6 +51,16 @@ function initMap() {
           this.containerDiv = document.createElement("div");
           this.containerDiv.classList.add("popup-container");
           this.containerDiv.appendChild(bubbleAnchor);
+
+          // Adding classes for color
+          if (betterValue == true) {
+            content.classList.add("real-good");
+            bubbleAnchor.classList.add("real-good");
+          } else {
+            content.classList.add("real-bad");
+            bubbleAnchor.classList.add("real-bad");
+          }
+
           // Optionally stop clicks, etc., from bubbling up to the map.
           Popup.preventMapHitsAndGesturesFrom(this.containerDiv);
         }
@@ -113,9 +123,14 @@ function initMap() {
           ariaLabel: "Uluru",
         });
 
+        let betterValue = false;
+        if (cash[i].attributes.value.value > 0) {
+          betterValue = true;
+        }
+
         popup = new Popup(
           new google.maps.LatLng(parseFloat(coordinate[0]), parseFloat(coordinate[1])),
-          contentString
+          contentString, betterValue
         );
         popup.setMap(map);
 

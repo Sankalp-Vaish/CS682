@@ -479,3 +479,19 @@ label {
   max-width: 100%;
   font-weight: 600;
 }
+
+.real-good  {
+  background: green;
+  color: white;
+}
+.real-bad {
+  background: #ae1111;
+  color: white;
+}
+.real-good::after  {
+  border-top-color: green;
+}
+.real-bad::after {
+  border-top-color: #ae1111;
+}
+
