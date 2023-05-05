@@ -110,9 +110,11 @@
 
 
   <br>
-  <footer class="panel-footer fixed-bottom">
+  {% if user.is_authenticated %}
+  <footer class="panel-footer">
     <h3 class="footer">RTInvest © Copyright 2023</h3>
   </footer>
+  {% endif %}
   
 </body>
 

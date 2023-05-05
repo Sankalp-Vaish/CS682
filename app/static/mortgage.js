@@ -57,9 +57,13 @@ function initMap() {
           if (betterValue == true) {
             content.classList.add("real-good");
             bubbleAnchor.classList.add("real-good");
-          } else {
+          } else if (betterValue == false){
             content.classList.add("real-bad");
             bubbleAnchor.classList.add("real-bad");
+          }
+          else{
+            content.classList.add("real-mid");
+            bubbleAnchor.classList.add("real-mid");
           }
 
           // Optionally stop clicks, etc., from bubbling up to the map.
@@ -129,9 +133,12 @@ function initMap() {
           ariaLabel: "Uluru",
         });
 
-        let betterValue = false;
+        let betterValue = NaN;
         if (cash[i].attributes.value.value > 0) {
           betterValue = true;
+        }
+        if (cash[i].attributes.value.value < -200) {
+          betterValue = false;
         }
 
         popup = new Popup(
