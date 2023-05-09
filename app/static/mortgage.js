@@ -2,6 +2,7 @@ let popup, Popup;
 
 function initMap() {
     const cash =document.getElementsByClassName("cashflow");
+    const linkValues = document.getElementsByClassName("link-to-prop-details");
     for (let i=0; i<cash.length; i++) {
       console.log(cash[i].attributes.value.value);
     }
@@ -120,6 +121,11 @@ function initMap() {
         const contentString = document.createElement("div");
         contentString.appendChild(valueString);
 
+        // linking map with details
+        const linkVal = document.createElement("a");
+        linkVal.href = linkValues[i].attributes['href'].value;
+        linkVal.appendChild(contentString);
+
         const domElement = new DOMParser().parseFromString(contentString, "text/xml");
 
         const infowindow = new google.maps.InfoWindow({
@@ -137,7 +143,7 @@ function initMap() {
 
         popup = new Popup(
           new google.maps.LatLng(parseFloat(coordinate[0]), parseFloat(coordinate[1])),
-          contentString, betterValue
+          linkVal, betterValue
         );
         popup.setMap(map);
 

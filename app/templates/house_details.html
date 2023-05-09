@@ -5,15 +5,139 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'house_details.css' %}">
 <div>
-<div class="marq">
+<!-- <div class="marq">
 <marquee id="abcd" scrollamount="10" onmouseover="this.stop()" onmouseout="this.start()">
   {% for i in house.link %}
     <img id={{forloop.counter}} src={{i.href}} height="150px">
   {% endfor %}
   </marquee>
+</div> -->
+
+<div class="container mort_result_back">
+  <div class="split left" >
+    <div class="centered">
+      <div class="d-flex justify-content-center slideshow-container" style="width: 400px;height: 200px;padding: 30px;border: 2px solid grey;">
+        <!--for image-->
+        {% for i in house.link %}
+        <div class="mySlides fade">
+          <img src={{i.href}} style="width:100%; height: 150px;">
+        </div>
+        {% endfor %}
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+
+      <div style="width: 100%; height: 100px;">
+        <!--for details-->
+        <div style="width: 80%; float: left;">
+          <h4>{{ house.street_name }}, {{ house.city }}, {{ house.postal_code }}</h4>
+          <div style="width: 40%; float: left;">
+            <h4>${{ house.list_price}}</h4>
+          </div>
+          <div style="width: 40%; float: left;">
+            <div style="width: 50%; float: left;">
+              <div style="font-weight: bold;">{{ house.beds }}</div>
+              <div>Bed</div>
+            </div>
+            <div style="width: 50%; float: left;">
+              <div style="font-weight: bold;">{{ house.baths }}</div>
+              <div>Bath</div>
+            </div>           
+          </div>
+        </div>
+        <div style="width: 20%; float: left;">
+          <!--for star-->
+          <form action="{% url 'house_details' house.property_id %}" method="POST">
+            {% csrf_token %}
+            {% if bool %}
+            <button class="btn btn-lg "><span class="glyphicon glyphicon-heart" style="color: red;"></span></button>
+            {% else %}
+            <button class="btn btn-lg "><span class="glyphicon glyphicon-heart"></span></button>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+      <hr>
+      <div style="width: 100%;">
+        <div style="width: 40%; float: left; text-align: left; font-weight: bold;">
+          Number of Units
+        </div>
+        <div style="width: 60%; float: left;">
+          {{ house.unit }}
+        </div>
+      </div>
+      <div style="width: 100%; text-align: left; margin-top: 15%;">
+        <div style="font-weight: bold;">Description</div>
+        <div>{{ house.stories }} Story house built in {{ house.year_built }}</div>
+      </div>
+
+      
+      <div onClick="setLocation({{house.lat}}, {{house.lon}})">
+        <div id="map-element" class="btn btn-dark submit">View Location</div>
+        <!-- prettier-ignore -->
+        <script>(g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
+            ({ key: "AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak", v: "weekly" });
+          var mapElement = document.getElementById('map-element');
+
+          mapElement.addEventListener('load', function () {
+            // setLocation();
+          });
+        </script>
+      </div>
+        
+    </div>
+  </div>
+
+  <div class="split right" style="margin-top: 5%;">
+    <div class="centered_right">
+      <div class="container">
+        <div class="info_details">
+          <h3 style="text-align: center;">Cashflow Analysis</h3>
+          <div><span class="label_house">Total_Monthly_Profit_or_Loss: </span>  $<span class="val result">{{ calc.Total_Monthly_Profit_or_Loss }}</span></div>
+          <div><span class="label_house">Cashflow per unit per month: </span>  $<span class="val result">{{ calc.Cashflow_per_unit_per_month }}</span></div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="container">
+        <div class="info_details">
+          <h3 style="text-align: center;">Quick Analysis</h3>
+          <div><span class="label_house">First_Mtg_LTV: </span>  <span class="val">{{ calc.First_Mtg_LTV }} %</span> </div>
+          <div><span class="label_house">First_Mtg_LTPP: </span>  <span class="val">{{ calc.First_Mtg_LTPP }} %</span></div>
+          <div><span class="label_house">Second_Mtg_LTV: </span>  <span class="val">{{ calc.Second_Mtg_LTV }} %</span></div>
+          <div><span class="label_house">Second_Mtg_LTPP: </span>  <span class="val">{{ calc.Second_Mtg_LTPP }} %</span></div>
+          <div><span class="label_house">CapRate_on_PP: </span>  <span class="val">{{ calc.CapRate_on_PP}} %</span></div>
+          <div><span class="label_house">CapRate_on_FMV: </span>  <span class="val">{{ calc.CapRate_on_FMV }} %</span></div>
+          <div><span class="label_house">Average_Rent: </span>  <span class="val">${{ calc.Average_Rent }}</span></div>
+          <div><span class="label_house">GRM: </span>  <span class="val result">{{ calc.GRM }}</span></div>
+          <div><span class="label_house">DCR: </span>  <span class="val result">{{ calc.DCR }}</span></div>
+          <div><span class="label_house">Cash_On_Cash_ROI: </span>  <span class="val result">{{ calc.Cash_On_Cash_ROI}}</span>%</div>
+          <div><span class="label_house">Equity_ROI: </span>  <span class="val result">{{ calc.Equity_ROI}}</span>%</div>
+          <div><span class="label_house">Appreciation_ROI: </span>  <span class="val result">{{ calc.Appreciation_ROI}}</span>%</div>
+          <div><span class="label_house">Total_ROI: </span>  <span class="val result">{{ calc.Total_ROI }}</span>%</div>
+          <div><span class="label_house">Forced_App_ROI: </span>  <span class="val result">{{ calc.Forced_App_ROI}}</span>%</div>
+          <div><span class="label_house">Expense_to_income_ratio: </span>  <span class="val result">{{ calc.Expense_to_income_ratio}}</span>%</div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="container">
+        <div class="info_details">
+          <h3 style="text-align: center;">Tax history</h3>
+          <div class="graph">
+            <img style="width: 100%;" src="{% static 'images\tax.jpeg' %}" alt="My image">
+          </div>
+        </div>
+      </div>      
+
+    </div>
+  </div>
 </div>
 
-<div class="house_main" style="top: 25%;">
+<!-- <div class="house_main" style="top: 25%;">
   <div>
     
       <div class="back_details">
@@ -74,9 +198,9 @@
     
     <div class="container">
     <div class="details_map" onClick="setLocation({{house.lat}}, {{house.lon}})" >
-      <div id="map-element" class="btn btn-dark submit">View Location</div>
+      <div id="map-element" class="btn btn-dark submit">View Location</div> -->
       <!-- prettier-ignore -->
-      <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+      <!-- <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
         ({key: "AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak", v: "weekly"});
         var mapElement = document.getElementById('map-element');
   
@@ -92,7 +216,7 @@
 
 
 
-</div>
+</div> -->
 </div>
 
 {% endblock %}
