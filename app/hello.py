@@ -112,16 +112,14 @@ def get_houses_id(pincode):
 
 
 prop_list=[]
+c=0
 def get_house_list(property_id, lock):
     url = "https://realty-in-us.p.rapidapi.com/properties/v3/detail"
     global prop_list
     prop_list=[]
-    c=0
+    global c
     for i in property_id:
-        """c=c+1
-        if c==4:
-            c=0
-            time.sleep(2)"""
+        
         
         querystring = {"property_id":i}
 
@@ -130,10 +128,15 @@ def get_house_list(property_id, lock):
             "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com"
         }
 
-        response = requests.request("GET", url, headers=headers, params=querystring)
+        
 
         #print(response.text)
         lock.acquire()
+        c=c+1
+        if c==4:
+            c=0
+            time.sleep(1)
+        response = requests.request("GET", url, headers=headers, params=querystring)
         prop_list.append(response.json())
         lock.release()
 
