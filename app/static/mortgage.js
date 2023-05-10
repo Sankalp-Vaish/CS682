@@ -2,6 +2,7 @@ let popup, Popup;
 
 function initMap() {
     const cash =document.getElementsByClassName("cashflow");
+    const cash_roi =document.getElementsByClassName("coc_roi");
     const linkValues = document.getElementsByClassName("link-to-prop-details");
     for (let i=0; i<cash.length; i++) {
       console.log(cash[i].attributes.value.value);
@@ -117,19 +118,34 @@ function initMap() {
         //   "</div>";
 
         const imgElement = document.createElement("img");
-        imgElement.src = "../static/images/cash_on_cash.png";
-        imgElement.title = "Cash on Cash ROI";
+        imgElement.src = "../static/images/cash_flow.png";
+        imgElement.title = "Cashflow";
         imgElement.style.maxWidth = "30px";
 
+        const imgElementROI = document.createElement("img");
+        imgElementROI.src = "../static/images/cash_on_cash.png";
+        imgElementROI.title = "Cash on Cash ROI";
+        imgElementROI.style.maxWidth = "30px";
+
         const valueString = document.createElement("p");
+        valueString.style.margin = "0px";
         valueString.appendChild(imgElement);
 
-        const cocValueString = document.createElement("span");
-        cocValueString.textContent = " : " + (cash[i].attributes.value.value).toString();
-        valueString.appendChild(cocValueString);
+        const cashflowValueString = document.createElement("span");
+        cashflowValueString.textContent = " : $" + (cash[i].attributes.value.value).toString();
+        valueString.appendChild(cashflowValueString);
+
+        const valueStringROI = document.createElement("p");
+        valueStringROI.style.margin = "0px";
+        valueStringROI.appendChild(imgElementROI);
+
+        const cocValueStringROI = document.createElement("span");
+        cocValueStringROI.textContent = " : " + (cash_roi[i].attributes.value.value).toString() + "%";
+        valueStringROI.appendChild(cocValueStringROI);
         
         const contentString = document.createElement("div");
         contentString.appendChild(valueString);
+        contentString.appendChild(valueStringROI);
 
         // linking map with details
         const linkVal = document.createElement("a");
@@ -144,10 +160,10 @@ function initMap() {
         });
 
         let betterValue = NaN;
-        if (cash[i].attributes.value.value > 100) {
+        if (cash[i].attributes.value.value > 100 && cash_roi[i].attributes.value.value > 12) {
           betterValue = true;
         }
-        if (cash[i].attributes.value.value < 0) {
+        if (cash[i].attributes.value.value < 0 && cash_roi[i].attributes.value.value < 6) {
           betterValue = false;
         }
 
