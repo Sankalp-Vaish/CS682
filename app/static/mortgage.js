@@ -116,8 +116,18 @@ function initMap() {
         //   "</div>" +
         //   "</div>";
 
+        const imgElement = document.createElement("img");
+        imgElement.src = "../static/images/cash_on_cash.png";
+        imgElement.title = "Cash on Cash ROI";
+        imgElement.style.maxWidth = "30px";
+
         const valueString = document.createElement("p");
-        valueString.textContent = "$ : " + (cash[i].attributes.value.value).toString();
+        valueString.appendChild(imgElement);
+
+        const cocValueString = document.createElement("span");
+        cocValueString.textContent = " : " + (cash[i].attributes.value.value).toString();
+        valueString.appendChild(cocValueString);
+        
         const contentString = document.createElement("div");
         contentString.appendChild(valueString);
 
