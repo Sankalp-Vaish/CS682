@@ -81,6 +81,11 @@
   /* display: flex; */
 }
 
+.dropdown{
+  float:left;
+  display:flex;
+}
+
 .dropdown-menu{
 padding:none;
 margin:none;
