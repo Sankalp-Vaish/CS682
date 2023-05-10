@@ -151,6 +151,8 @@ function initMap() {
         const linkVal = document.createElement("a");
         linkVal.href = linkValues[i].attributes['href'].value;
         linkVal.appendChild(contentString);
+        linkVal.style.textDecoration = "none";
+        linkVal.style.color = "white";
 
         const domElement = new DOMParser().parseFromString(contentString, "text/xml");
 
