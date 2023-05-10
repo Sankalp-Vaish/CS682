@@ -22,7 +22,7 @@ function initMap() {
     if (mapElement) {
       const map = new google.maps.Map(document.getElementById("map-home-estimate"), {
         center: { lat: parseFloat(coordinates[0][0]), lng: parseFloat(coordinates[0][1]) },
-        zoom: 13,
+        zoom: 14,
         mapTypeControl: false,
       });
       const input = document.getElementById("pac-input");

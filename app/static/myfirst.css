@@ -493,10 +493,12 @@ label {
 .real-good  {
   background: green;
   color: white;
+  overflow-y: visible;
 }
 .real-bad {
   background: #ae1111;
   color: white;
+  overflow-y: visible;
 }
 .real-good::after  {
   border-top-color: green;
@@ -508,6 +510,7 @@ label {
 .real-mid {
   background: #fbff12;
   color: white;
+  overflow-y: visible;
 }
 .real-mid::after {
   border-top-color: #fbff12;
