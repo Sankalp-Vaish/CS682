@@ -272,6 +272,7 @@ body {
   position: relative;
   top: 50%;
   max-width: 50%;
+  margin-top: 8%
 }
 
 .card-body:hover {

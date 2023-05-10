@@ -55,7 +55,7 @@
 }
 
 .User_photo {
-  margin-left: auto;
+  margin-left: 30%;
   margin-right: auto;
   width: 150px;
   height: 150px;
@@ -63,7 +63,7 @@
     -moz-border-radius: 25px;
     border-radius: 25px; */
   border-color: black;
-  background: rgb(125, 42, 42);
+  background: rgb(242 163 163);
   border-radius: 50%;
 }
 
