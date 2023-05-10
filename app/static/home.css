@@ -1,15 +1,15 @@
 .home_back {
   text-align: center;
   background-color: #ddd;
-  max-width: 84%;
+  max-width: 99%;
   /* height: 500px; */
-  max-height: 400px;
+  max-height: 480px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
 
 .house-card {
-  margin-bottom: 5px;
+  margin-bottom: -5px;
   width: 100%;
 }
 

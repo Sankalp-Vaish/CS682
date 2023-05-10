@@ -130,6 +130,7 @@ def mortgage(request):
     if "address" in request.POST:
       print("Gotcha")
       add=request.POST.get("address")
+      form=rent_per_unit()
       print(add)
       geolocator = Nominatim(user_agent="geoapi")
       try:

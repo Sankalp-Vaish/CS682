@@ -52,11 +52,11 @@ let poly;
 let map_main;
 
 async function initMap_test() {
-  $("#map_test").css({"height": "200px", "width": "400px"});
+  $("#map_test").css({"height": "450px", "width": "1000px"});
   // console.log(55);
   const { Map } = await google.maps.importLibrary("maps");
   map_main = new Map(document.getElementById("map_test"), {
-    zoom: 7,
+    zoom: 13,
     center: { lat: 41.879, lng: -87.624 }, // Center the map on Chicago, USA.
   });
   poly = new google.maps.Polyline({
