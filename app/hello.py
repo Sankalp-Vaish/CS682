@@ -16,7 +16,7 @@ def printHello():
     querystring = {"property_id":"2186526216"}
 
     headers = {
-        "X-RapidAPI-Key": "ea8552e940msh3f14dc78146fae7p16308ejsn1bedafc35b28",
+        "X-RapidAPI-Key": "7d0c98131emsh226590410eaf3c3p1091dajsn998ab5d30677",
         "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com"
     }
 
@@ -97,7 +97,7 @@ def get_houses_id(pincode):
     }
     headers = {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "ea8552e940msh3f14dc78146fae7p16308ejsn1bedafc35b28",
+        "X-RapidAPI-Key": "7d0c98131emsh226590410eaf3c3p1091dajsn998ab5d30677",
         "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com"
     }
 
@@ -126,7 +126,7 @@ def get_house_list(property_id, lock):
         querystring = {"property_id":i}
 
         headers = {
-            "X-RapidAPI-Key": "ea8552e940msh3f14dc78146fae7p16308ejsn1bedafc35b28",
+            "X-RapidAPI-Key": "7d0c98131emsh226590410eaf3c3p1091dajsn998ab5d30677",
             "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com"
         }
 
@@ -236,7 +236,7 @@ def get_details_by_pin(id, request):
     querystring = {"property_id":id}
 
     headers = {
-        "X-RapidAPI-Key": "ea8552e940msh3f14dc78146fae7p16308ejsn1bedafc35b28",
+        "X-RapidAPI-Key": "7d0c98131emsh226590410eaf3c3p1091dajsn998ab5d30677",
         "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com"
     }
 
