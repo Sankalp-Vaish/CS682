@@ -1,0 +1,104 @@
+{% extends "master.html" %}
+{% load static %}
+{% block title %}
+  My_Home
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<div class="home_b">
+<div>
+    <h1>Real time investment</h1>
+    Hi {{ user.username }}!
+    <div>My favourites</div>
+    <div>
+      <a class="btn btn-dark" href="{% url 'Mortgage' %}">Add Property</a>
+      <input type="text" id="myInput" onkeyup="myFunction3()" placeholder="Search for street_names">
+    </div>
+    <div class="dropdown">
+      <a data-toggle="dropdown" href="/" style="color: rgb(0, 0, 0);">Sort<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li>
+        <div>
+          <button onclick="sort_ascending()">Sort: Ascending</button>
+        </div>
+      </li>
+      <li>
+        <div>
+          <button onclick="sort_descending()">Sort: Descending</button>
+        </div>
+      </li>
+      <li>
+        <div>
+          <button onclick="sort_price()">Sort: Price</button>
+        </div>
+      </li>
+    </ul>
+  
+  </div>
+    
+    <br><br>
+    <!-- <div>
+      <button onclick="sort_year()">Sort: Year</button>
+    </div> -->
+    <!-- <h3>Home</h3> -->
+    <div class="container">
+      <div class="home_back">
+        
+        <!-- <div><button class="btn btn-dark submit" onclick="sub();return false;">
+          Check
+        </button></div> -->
+
+        <!-- {% if user.is_authenticated %}
+        <p><a href="{% url 'logout' %}">Log Out</a></p>
+        <button class="btn btn-dark" onclick="location.href='/test'">Click To Execute Script</button> 
+        {% else %}
+        <p>Did you Login?</p>
+        {% endif %} -->
+  
+
+  <div class="container">
+    <div>
+      {% if fav %}
+      {% for house in fav %}.
+      <div>
+        <div class="card house-card">
+          <div class="card-body" style="width: 100%;">
+            <a href="{% url 'house_details' house.property_id %}">
+            <div style="width: 30%; float: left;">
+              
+              <img id="img_data" src= "{{house.link}}" >
+            </div>
+            <div class="lookUp" style="width: 70%; float: left;">
+              <h4 class="head" value="{{ house.street_name }}" >{{ house.street_name }}, {{ house.city }}, {{ house.postal_code }}</h4>
+              <span>{{ house.stories }} Story built in <span class="list_year">{{ house.year_built }}</span></span>
+              <br>
+              <span>Unit: {{ house.unit }} | {{ house.beds }}B {{ house.baths }}B</span>
+              <br>
+              <span>Listed price: $<span class="list_price">{{ house.list_price}}</span></span><br>
+              <span>Cashflow_per_unit_per_month: {{ house.Cashflow_per_unit_per_month }}</span> <br>
+              <span>Cash_On_Cash_ROI: {{ house.Cash_On_Cash_ROI }}</span>
+              <br>
+              
+              
+            </div></a>
+            <form action="{% url 'home' %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="prop_id" value="{{ house.property_id}}"></span>
+            <button class="btn btn-lg "><span class="glyphicon glyphicon-heart" style="color: red;"></span></button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      nope
+      {% endif %}
+    </div>
+  
+
+</div></div>
+</div></div>
+<script src="{% static 'home.js' %}"></script>
+{% endblock %}
