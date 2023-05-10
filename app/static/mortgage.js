@@ -144,10 +144,10 @@ function initMap() {
         });
 
         let betterValue = NaN;
-        if (cash[i].attributes.value.value > 0) {
+        if (cash[i].attributes.value.value > 100) {
           betterValue = true;
         }
-        if (cash[i].attributes.value.value < -200) {
+        if (cash[i].attributes.value.value < 0) {
           betterValue = false;
         }
 

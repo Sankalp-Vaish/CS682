@@ -143,6 +143,7 @@ margin:none;
   font-family: system-ui, sans-serif;
   text-align: center;
   display: flex;
+  justify-content: center;
 }
 
 .my_fav_head{
