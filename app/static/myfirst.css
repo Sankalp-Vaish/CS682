@@ -20,6 +20,7 @@
 .left {
   position: absolute; left: 50%;
   left: 0;
+  /* overflow-y: hidden; */
   /* background-color: #6b9595a8; */
 }
 
@@ -40,8 +41,16 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  /* overflow-y: hidden; */
 }
-
+.centered_house {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  /* transform: translate(-50%, -50%); */
+  text-align: center;
+  /* overflow-y: hidden; */
+}
 .centered_right {
   position: absolute;
   margin-top: 2%;
