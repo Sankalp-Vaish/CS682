@@ -176,8 +176,8 @@
 .panel-footer{
   flex: 0 0 50px;/*or just height:50px;*/
   margin-top: auto;
-  bottom: 0;
-  position: fixed;
+  /* bottom: 0;
+  position: fixed; */
   size: 10px;
 	background-color: #222;
   color: whitesmoke;

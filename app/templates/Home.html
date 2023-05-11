@@ -87,7 +87,7 @@
                 <div class="card house-card">
                   <div class="card-body" style="width: 100%;">
                     <a href="{% url 'house_details' house.property_id %}">
-                    <div style="width: 30%; float: left;">
+                    <div style="width: 30%; float: left; margin-top: 1.5%;">
                       
                       <img id="img_data" src= "{{house.link}}" >
                     </div>
@@ -107,7 +107,7 @@
                     <form action="{% url 'home' %}" method="POST">
                       {% csrf_token %}
                       <input type="hidden" name="prop_id" value="{{ house.property_id}}"></span>
-                    <button class="btn btn-lg " style="margin-left: 30%;"><span class="glyphicon glyphicon-heart" style="color: red;"></span></button>
+                    <button class="btn btn-lg " style="margin-left: 0%;"><span class="glyphicon glyphicon-heart" style="color: red;"></span></button>
                     </form>
                   </div>
                 </div>

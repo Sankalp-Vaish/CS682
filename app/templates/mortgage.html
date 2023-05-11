@@ -6,7 +6,7 @@
 
 
 {% block content %}
-<div style="position: relative; top: 0%;left: 0%;">
+<div style="position: relative; top: 0%;left: 0%; ">
 <div class="main">
   <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-fRkRcT8UPA8u_70e8ah3LOHWdt5bkak&callback=initMapHomeEstimate&libraries=places&v=weekly"
@@ -19,7 +19,7 @@
 
 
   {% if flag == "False" %}
-  <div class="container mort_back">
+  <div class="container mort_back" style="margin-bottom: 10.1%;">
     <div>
     <form action="" method="POST">
         {% csrf_token %}
