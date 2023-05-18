@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="{% static 'myfirst.css' %}">
 {% endblock %}
 
-<body class="page_background" onload="initMap_test();initMap();">
+<body class="page_background" onload="initMap();">
 
 <header class="header">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" style="margin-bottom: 0%; position: fixed; top: 0;">
@@ -74,22 +74,6 @@
 
 
       {% else %}
-      <!-- <div style="margin-left: 80%; float: right; text-align: right;">
-        <li class="dropdown">
-          <a data-toggle="dropdown" href="/main">More<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li class="">
-              <a href="/help">
-                <span class="glyphicon glyphicon-envelope"></span> CONTACT US</a>
-            </li>
-            <li>
-              <a href="/about">
-                <span class="glyphicon glyphicon-info-sign"></span> About</a>
-            </li>
-            <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          </ul>
-        </li></div> -->
           <div style="margin-left: 70%; float: right; text-align: right;">
               <a href="{% url 'login' %}" data-role="button">
                   <span style="font-family: system-ui, sans-serif; font-weight: 400; color:aliceblue"><span class="glyphicon glyphicon-log-in"></span>  Login</span></span>
@@ -119,7 +103,4 @@
 </body>
 
 <script src="{% static 'app.js' %}"></script>
-<script src="{% static 'mortgage.js' %}"></script>
-<script src="{% static 'house_details.js' %}"></script>
-<script src="{% static 'test.js' %}"></script>
 </html>

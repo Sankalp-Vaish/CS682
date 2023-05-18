@@ -58,20 +58,6 @@ class SignUpView(generic.CreateView):
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
 
-def login_view(request):
-  if request.method=="POST":
-    username = request.POST["Username"]
-    password = request.POST["Password"]
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-      login(request, user)
-      return redirect("home")
-    else:
-      messages.success(request, ("There was an Error"))
-      return redirect("login_view")
-  else:
-    return render(request, "registration\login.html")
-
 def help(request):
   user = request.user
   context = {'user': user}

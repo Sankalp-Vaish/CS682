@@ -2,9 +2,9 @@ from django.shortcuts import render
 from django.contrib import messages
 
 # Create your views here.
-import json
 from .models import UserPref, Property_Info, Environmentals, Financing, Income, Operating_Expenses, Pests, Cash_requirements
-import decimal
+
+# For the USer Prefrence page
 def index(request):
     exists=UserPref.objects.filter(user=request.user).exists()
     exists2=Property_Info.objects.filter(user=request.user).exists()
@@ -71,18 +71,7 @@ def index(request):
             print("in2",prop.Fair_Market_Value)
             prop.save()
         else:
-            # try:
-            #     decimal_value=decimal.Decimal(Fair_Market_Value)
-            #     if not decimal_value.is_finite():
-            #         raise decimal.InvalidOperation("Decimal is not finite.")
-            #     if decimal_value.is_nan() or decimal_value.is_infinite():
-            #         raise decimal.InvalidOperation("Decimal contains NaN or Infinity values.")
-            # except decimal.InvalidOperation:
-            #     print("error", decimal_value)
-            # my_value = decimal.Decimal(Fair_Market_Value)
-            # my_integer = int(my_value)
             pass
-            #Property_Info.objects.create(user=request.user, Fair_Market_Value=Fair_Market_Val, Vacancy_Rate=0.00)#, Management_Rate=0.0, Advertizing_Cost_per_Vacancy=0.0,Annual_Appreciation_Rate=0.0)
         if exists3:
             env.Inspections_Engineer_Report=request.POST.get("Inspections_Engineer_Report")
             env.Appraisals=request.POST.get("Appraisals")
@@ -134,9 +123,5 @@ def index(request):
             UserPref.objects.create(user=request.user, currency=curr)
         messages.success(request, "Changes saved")
         
-    d=json.load(open(r"UserPrefrences/currencies.json"))
-    l=[]
-    print(type(pref))
-    for cur, value in d.items():
-        l.append((cur, value))
-    return render(request, "preferences/index.html", {"c": l, "user_pref":pref, "prop":prop, "env":env, "cash":cash, "op":op, "fin":fin, "inc":inc, "pest":pest})
+
+    return render(request, "preferences/index.html", { "user_pref":pref, "prop":prop, "env":env, "cash":cash, "op":op, "fin":fin, "inc":inc, "pest":pest})

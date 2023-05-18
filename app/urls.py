@@ -7,12 +7,10 @@ urlpatterns = [
     path('',  TemplateView.as_view(template_name='LandingPage.html'), name='LandingPage'),
     path('home/', views.home, name='home'),
     path("accounts/", include("django.contrib.auth.urls")),
-    path('login/', views.login_view, name='login_view'),
     path("signup/", SignUpView.as_view(), name="signup"),
     path('help/', views.help, name='ContactUs'),
     path('about/', views.about, name='About'),
     path('mortgage/', views.mortgage, name='Mortgage'),
     path('details/<int:id>/', views.house_details, name='house_details'),
     path('LandingPage/', views.LandingPage, name='LandingPage'),
-    path('main/', views.main, name='main'),
 ]

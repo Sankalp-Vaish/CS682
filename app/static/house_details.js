@@ -61,3 +61,27 @@ function showSlides(n) {
   slides[slideIndex-1].style.opacity = "1";
   // dots[slideIndex-1].className += " active";
 }
+
+
+//house details map
+async function setLocation(lati, lon) {
+  $("#map-element").css({"height": "200px", "width": "400px"});
+  console.log(lati);
+  const position = { lat: lati, lng: lon };
+  // Request needed libraries.
+  const { Map } = await google.maps.importLibrary("maps");
+  const { Marker } = await google.maps.importLibrary("marker");
+
+  let map = new Map(document.getElementById("map-element"), {
+    zoom: 15,
+    center: position,
+    mapId: "DEMO_MAP_ID",
+  });
+
+  const marker = new Marker({
+    position: position,
+    map: map,
+  });
+
+  marker.setMap(map);
+}

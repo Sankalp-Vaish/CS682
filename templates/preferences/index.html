@@ -1,9 +1,9 @@
 {% extends 'master.html' %}
 {% load static %}
-{% block title %}Currency{% endblock %}
+{% block title %}User Prefrences{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'house_detail.css' %}">
+<link rel="stylesheet" href="{% static 'pref.css' %}">
 
 <!-- MultiStep Form -->
 <div class="pref">
@@ -175,181 +175,15 @@
             <input name="Less_ProRation_of_Rents" value="{{cash.Less_ProRation_of_Rents}}">
 
             <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-            <!-- <button>Save your defaults</button> -->
+
             <button class="action-button">Save</button>
-            <!-- <input type="submit" name="submit" class="submit action-button" value="Submit"/> -->
     
             </fieldset>
-            <!-- <button>Save your defaults</button> -->
         </form>
     </div>
 </div>
 </div>
-<!-- /.MultiStep Form -->
 
-
-
-<!-- <div style="align-self: start; overflow-y: auto; height:auto; margin:6%, 6%;
-padding:1%;">
-<div class="center">
-<div class="custom_form">
-<form action="{% url 'prefrences' %}" method="post">
-        {% csrf_token %}
-
-        Individual Property Information
-        <fieldset>
-         <legend>Property Information</legend>
-
-         <label for="Fair_Market_Value"><span>Fair Market Value </span></label>
-         <input name="Fair_Market_Value" value="{{prop.Fair_Market_Value}}">
-
-         <label for="Vacancy_Rate"><span>Vacancy Rate </span></label>
-         <input name="Vacancy_Rate" value="{{prop.Vacancy_Rate}}">
-
-         <label for="Management_Rate"><span>Management Rate </span></label>
-         <input name="Management_Rate" value="{{prop.Management_Rate}}">
-
-         <label for="Advertizing_Cost_per_Vacancy"><span>Advertizing Cost per Vacancy </span></label>
-         <input name="Advertizing_Cost_per_Vacancy" value="{{prop.Advertizing_Cost_per_Vacancy}}">
-
-         <label for="Annual_Appreciation_Rate"><span>Annual Appreciation Rate </span></label>
-         <input name="Annual_Appreciation_Rate" value="{{prop.Annual_Appreciation_Rate}}">
-
-        </fieldset>
-
-        Environmentals
-        <fieldset>
-        <legend>Environmentals</legend>
-        
-        <label for="Inspections_Engineer_Report"><span>Inspections Engineer Report </span></label>
-        <input name="Inspections_Engineer_Report" value="{{env.Inspections_Engineer_Report}}">
-
-        <label for="Appraisals"><span>Appraisals </span></label>
-        <input name="Appraisals" value="{{env.Appraisals}}">
-
-        <label for="Misc"><span>Miscellaneous </span></label>
-        <input name="Misc" value="{{env.Misc}}">
-
-        <label for="Legal"><span>Legal </span></label>
-        <input name="Legal" value="{{env.Legal}}">
-
-        </fieldset>
-
-        Financing (Monthly)
-        <fieldset>
-        <legend>Finance settings</legend>
-        
-        <label for="First_Mtg_Amortization_Period"><span>First Mortgage Amortization Period (years) </span></label>
-        <input name="First_Mtg_Amortization_Period" value="{{fin.First_Mtg_Amortization_Period}}">
-
-        <label for="First_Mtg_CMHC_Fee"><span>First Mortgage CMHC Fee </span></label>
-        <input name="First_Mtg_CMHC_Fee" value="{{fin.First_Mtg_CMHC_Fee}}">
-
-        <label for="Second_Mtg_Principle_Amount"><span>Second Mortagage Principle Amount ($) </span></label>
-        <input name="Second_Mtg_Principle_Amount" value="{{fin.Second_Mtg_Principle_Amount}}">
-
-        <label for="Second_Mtg_Amortization_Period"><span>Second Mortagage Amortization Period (years) </span></label>
-        <input name="Second_Mtg_Amortization_Period" value="{{fin.Second_Mtg_Amortization_Period}}">
-
-        <label for="Interest_Only_Principle_Amount"><span>Principle amount based on interest only</span></label>
-        <input name="Interest_Only_Principle_Amount" value="{{fin.Interest_Only_Principle_Amount}}">
-
-        <label for="Interest_Only_Principle_Amount"><span>Principle amount based on interest only</span></label>
-        <input name="Interest_Only_Principle_Amount" value="{{fin.Interest_Only_Principle_Amount}}">
-
-        <label for="Interest_Only_Interest_Rate"><span>Interest Only Interest Rate</span></label>
-        <input name="Interest_Only_Interest_Rate" value="{{fin.Interest_Only_Interest_Rate}}">
-
-        <label for="Interest_Only_Total_Monthly_Payment"><span>Total Monthly Payment with Interest Only</span></label>
-        <input name="Interest_Only_Total_Monthly_Payment" value="{{fin.Interest_Only_Total_Monthly_Payment}}">
-
-        <label for="Other_Monthly_Financing_Costs"><span>Other Monthly Financing Costs</span></label>
-        <input name="Other_Monthly_Financing_Costs" value="{{fin.Other_Monthly_Financing_Costs}}">
-
-        </fieldset>
-
-        Common expenses
-        <fieldset>
-        <legend>Common expenses</legend>
-        
-        <label for="Parking"><span>Parking</span></label>
-        <input name="Parking" value="{{inc.Parking}}">
-
-        <label for="Storage"><span>Storage </span></label>
-        <input name="Storage" value="{{inc.Storage}}">
-
-        <label for="Laundry_Vending"><span>Laundry Vending </span></label>
-        <input name="Laundry_Vending" value="{{inc.Laundry_Vending}}">
-
-        <label for="Other"><span>Other </span></label>
-        <input name="Other" value="{{inc.Other}}">
-
-        </fieldset>
-
-        Operating expenses
-        <fieldset>
-        <legend>Operating expenses (Annual)</legend>
-        
-        <label for="Electricity"><span>Electricity</span></label>
-        <input name="Electricity" value="{{op.Electricity}}">
-
-        <label for="Gas"><span>Gas </span></label>
-        <input name="Gas" value="{{op.Gas}}">
-
-        <label for="Lawn_Snow_Maintenance"><span>Lawn/Snow Maintenance </span></label>
-        <input name="Lawn_Snow_Maintenance" value="{{op.Lawn_Snow_Maintenance}}">
-
-        <label for="Association_Fees"><span>Association Fee </span></label>
-        <input name="Association_Fees" value="{{op.Association_Fees}}">
-
-        <label for="Trash_Removal"><span>Trash Removal </span></label>
-        <input name="Trash_Removal" value="{{pest.Trash_Removal}}">
-
-        <label for="Miscellaneous"><span>Miscellaneous </span></label>
-        <input name="Miscellaneous" value="{{pest.Miscellaneous}}">
-
-        <label for="Common_Area_Maintenance"><span>Common Area Maintenance </span></label>
-        <input name="Common_Area_Maintenance" value="{{pest.Common_Area_Maintenance}}">
-
-        <label for="Capital_Improvements"><span>Capital Improvements </span></label>
-        <input name="Capital_Improvements" value="{{pest.Capital_Improvements}}">
-
-        <label for="Accounting"><span>Accounting </span></label>
-        <input name="Accounting" value="{{pest.Accounting}}">
-
-        <label for="Legal"><span>Legal </span></label>
-        <input name="Legal" value="{{pest.Legal}}">
-
-        <label for="Bad_Debts"><span>Bad Debts </span></label>
-        <input name="Bad_Debts" value="{{pest.Bad_Debts}}">
-
-        <label for="Other"><span>Other </span></label>
-        <input name="Other" value="{{pest.Other}}">
-
-        </fieldset>
-
-        Cash Requirements
-        <fieldset>
-        <legend>Cash requirements</legend>
-
-        <label for="Deposit_made_with_Offer"><span>Deposit made with Offer </span></label>
-        <input name="Deposit_made_with_Offer" value="{{cash.Deposit_made_with_Offer}}">
-
-        <label for="Less_ProRation_of_Rents"><span>Less ProRation of Rents </span></label>
-        <input name="Less_ProRation_of_Rents" value="{{cash.Less_ProRation_of_Rents}}">
-
-        </fieldset>
-
-        Submit button
-        <div class="col-sm-1" style="margin-bottom: 12%; margin-left: 100%;">
-        <button class="btn btn-dark">Save your defaults</button>
-
-        </div>
-
-       </form>
-    </div>
-</div> -->
-<!-- </div>        -->
 <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
-<script src="{% static 'house_detail.js' %}"></script>
+<script src="{% static 'pref.js' %}"></script>
 {% endblock %}
