@@ -2,16 +2,12 @@ from django.shortcuts import render
 from django.contrib import messages
 
 # Create your views here.
-from .models import UserPref, Property_Info, Environmentals, Financing, Income, Operating_Expenses, Pests, Cash_requirements
+from .models import Property_Info, Environmentals, Financing, Income, Operating_Expenses, Pests, Cash_requirements
 
 # For the USer Prefrence page
 def index(request):
-    exists=UserPref.objects.filter(user=request.user).exists()
-    exists2=Property_Info.objects.filter(user=request.user).exists()
-    exists3=Income.objects.filter(user=request.user).exists()
-    exists4=Pests.objects.filter(user=request.user).exists()
+    exists=Property_Info.objects.filter(user=request.user).exists()
     prop=None
-    pref=None
     env=None
     fin=None
     op=None
@@ -19,50 +15,34 @@ def index(request):
     pest=None
     cash=None
     if exists:
-        pref=UserPref.objects.get(user=request.user)
-    
-    if exists2:
         prop=Property_Info.objects.get(user=request.user)
-
-    else:
-        Property_Info.objects.create(user=request.user)
-        prop=Property_Info.objects.get(user=request.user)
-    
-    if exists3:
         env=Environmentals.objects.get(user=request.user)
         fin=Financing.objects.get(user=request.user)
         inc=Income.objects.get(user=request.user)
         op=Operating_Expenses.objects.get(user=request.user)
-        # pest=Pests.objects.get(user=request.user)
+        pest=Pests.objects.get(user=request.user)
         cash=Cash_requirements.objects.get(user=request.user)
 
     else:
+        Property_Info.objects.create(user=request.user)
+        prop=Property_Info.objects.get(user=request.user)
         Environmentals.objects.create(user=request.user)
         Income.objects.create(user=request.user)
         Operating_Expenses.objects.create(user=request.user)
         Financing.objects.create(user=request.user)
-        # Pests.objects.create(user=request.user)
         Cash_requirements.objects.create(user=request.user)
         env=Environmentals.objects.get(user=request.user)
         fin=Financing.objects.get(user=request.user)
         inc=Income.objects.get(user=request.user)
         op=Operating_Expenses.objects.get(user=request.user)
-        # pest=Pests.objects.get(user=request.user)
         cash=Cash_requirements.objects.get(user=request.user)
 
-    if exists4:
-        pest=Pests.objects.get(user=request.user)
-
-    else:
         Pests.objects.create(user=request.user)
         pest=Pests.objects.get(user=request.user)
     
     if request.method== "POST":
-        print(request.POST.get("Currency"))
-        curr=request.POST.get("Currency")
-        Fair_Market_Val=request.POST.get("Fair_Market_Value")
-        print("in",Fair_Market_Val)
-        if exists2:            
+
+        if exists:            
             #prop.Fair_Market_Value=Fair_Market_Val
             prop.Vacancy_Rate=request.POST.get("Vacancy_Rate")
             prop.Management_Rate=request.POST.get("Management_Rate")
@@ -70,9 +50,7 @@ def index(request):
             prop.Annual_Appreciation_Rate=request.POST.get("Annual_Appreciation_Rate")
             print("in2",prop.Fair_Market_Value)
             prop.save()
-        else:
-            pass
-        if exists3:
+
             env.Inspections_Engineer_Report=request.POST.get("Inspections_Engineer_Report")
             env.Appraisals=request.POST.get("Appraisals")
             env.Misc=request.POST.get("Misc")
@@ -115,13 +93,10 @@ def index(request):
             cash.Deposit_made_with_Offer=request.POST.get("Deposit_made_with_Offer")
             cash.Less_ProRation_of_Rents=request.POST.get("Less_ProRation_of_Rents")
             cash.save()
-            
-        if exists:            
-            pref.currency=curr
-            pref.save()
+
         else:
-            UserPref.objects.create(user=request.user, currency=curr)
+            pass
         messages.success(request, "Changes saved")
         
 
-    return render(request, "preferences/index.html", { "user_pref":pref, "prop":prop, "env":env, "cash":cash, "op":op, "fin":fin, "inc":inc, "pest":pest})
+    return render(request, "preferences/index.html", { "prop":prop, "env":env, "cash":cash, "op":op, "fin":fin, "inc":inc, "pest":pest})

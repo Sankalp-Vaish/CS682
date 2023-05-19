@@ -1,8 +1,5 @@
 import requests
 from urllib.request import urlopen
-from six import BytesIO #Used internally by PIL 
-from PIL import Image, ImageDraw, ImageFont
-import json
 import time
 import plotly.express as px
 import plotly

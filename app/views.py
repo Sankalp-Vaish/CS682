@@ -9,7 +9,7 @@ from django.template import loader
 
 from Realtime import settings
 from .forms import Customizedsignupform, rent_per_unit
-from . import hello, Calculator
+from . import fetch, Calculator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -18,7 +18,6 @@ from .models import User_details, favourites
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from UserPrefrences.models import UserPref
 from geopy.geocoders import Nominatim
 import threading
 
@@ -33,7 +32,6 @@ def LandingPage(request):
 #Home Page
 def home(request):
   user = request.user
-  pref=UserPref.objects.get(user=request.user)
   if request.method== "POST":
     id= request.POST.get("prop_id")
     if favourites.objects.filter(user=user, property_id= id).exists():
@@ -44,12 +42,10 @@ def home(request):
   if exists:
     fav=favourites.objects.all().values()
     context = {'user': user,
-            'pref': pref.currency,
             'fav': fav,
             }
   else:
     context = {'user': user,
-            'pref': pref.currency,
             }
   template = loader.get_template('Home.html')
   return HttpResponse(template.render(context, request))
@@ -106,10 +102,11 @@ def mortgage(request):
           details.Average_rent_per_unit= request.POST.get("rent")
         details.save()
       else:
+        form=rent_per_unit()
         User_details.objects.create(user=request.user, Average_rent_per_unit=request.POST.get("rent"), First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate"))   
       pin=request.POST.get('pincode')
     
-    id = hello.get_houses_id(pin)
+    id = fetch.get_houses_id(pin)
     if id==None:
       context = {
       "z":"No houses found",
@@ -121,15 +118,15 @@ def mortgage(request):
       t=[]
       c=0
       for i in range(0,5,2):#29
-        t.append(threading.Thread(target=hello.get_house_list, name='t'+str(c+1), args=(id[i:(i+2)],lock,)))
+        t.append(threading.Thread(target=fetch.get_house_list, name='t'+str(c+1), args=(id[i:(i+2)],lock,)))
         t[c].start()
         c=c+1
       for i in range(3):#15
         t[i].join()
 
-      result = hello.get_prop_list()
+      result = fetch.get_prop_list()
       # print("res",result)
-      l=hello.get_dict(result, request)
+      l=fetch.get_dict(result, request)
       context = {
       "len":len(result),
       "r":l,
@@ -166,7 +163,7 @@ def house_details(request, id):
     else:             # Add to Favourites List
       house=None
       if house==None:
-        house=hello.get_details_by_pin(id, request)
+        house=fetch.get_details_by_pin(id, request)
       fav= favourites(user=request.user, city= house["city"],
       status = house["status"],
       year_built = house["year_built"],
@@ -192,7 +189,7 @@ def house_details(request, id):
 
   house=None
   if house==None:
-    house=hello.get_details_by_pin(id, request)
+    house=fetch.get_details_by_pin(id, request)
   details=User_details.objects.get(user=request.user)
   #print(details.First_Mtg_Interest_Rate)
   result=Calculator.calculator(request, house["list_price"], house["unit"], house["tax"], house["insurance_rate"], details.First_Mtg_Interest_Rate, details.Average_rent_per_unit)

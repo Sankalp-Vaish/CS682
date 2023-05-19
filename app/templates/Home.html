@@ -68,16 +68,7 @@
 
         <div class="home_back">
           
-          <!-- <div><button class="btn btn-dark submit" onclick="sub();return false;">
-            Check
-          </button></div> -->
-  
-          <!-- {% if user.is_authenticated %}
-          <p><a href="{% url 'logout' %}">Log Out</a></p>
-          <button class="btn btn-dark" onclick="location.href='/test'">Click To Execute Script</button> 
-          {% else %}
-          <p>Did you Login?</p>
-          {% endif %} -->
+
     
           <div class="container">
             <div>
@@ -114,7 +105,12 @@
               </div>
               {% endfor %}
               {% else %}
-              nope
+              <div style="margin-right: 10%;">
+              No Saved Properties
+              <div>
+              <a href="{% url 'Mortgage' %}">
+              <img src="{% static '\images\Home_default.jpg' %}"  style="height: 400px;border-radius: 15px;margin-top: 15px;"></a>
+              </div></div>
               {% endif %}
             </div>
     
