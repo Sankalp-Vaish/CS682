@@ -1,3 +1,8 @@
+"""
+The controller contains logic that updates the model and/or view in response to input from the users of the app.
+
+These functions have which pages to be rendered and with what context. 
+"""
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
@@ -18,25 +23,22 @@ from geopy.geocoders import Nominatim
 import threading
 
 
-
+#Main Page Or Landing Page
 def LandingPage(request):
   user = request.user
   context = {'user': user}
   template = loader.get_template('LandingPage.html')
   return HttpResponse(template.render(context, request))
 
+#Home Page
 def home(request):
-
   user = request.user
   pref=UserPref.objects.get(user=request.user)
   if request.method== "POST":
     id= request.POST.get("prop_id")
-    print(id)
     if favourites.objects.filter(user=user, property_id= id).exists():
-      print("before delete")
       fav=favourites.objects.filter(user=user, property_id= id)
       fav.delete()
-      print("after delete")
 
   exists=favourites.objects.filter(user=request.user).exists()
   if exists:
@@ -52,25 +54,27 @@ def home(request):
   template = loader.get_template('Home.html')
   return HttpResponse(template.render(context, request))
 
-  
+#Signup Page  
 class SignUpView(generic.CreateView):
     form_class = Customizedsignupform
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
 
+#Contact Us Page
 def help(request):
   user = request.user
   context = {'user': user}
   template = loader.get_template('ContactUs.html')
   return HttpResponse(template.render(context, request))
 
+#About Page
 def about(request):
   user = request.user
   context = {'user': user}
   template = loader.get_template('about.html')
   return HttpResponse(template.render(context, request))
 
-
+#Propert Search Page
 @login_required(login_url="/accounts/login/")
 def mortgage(request):
   template = loader.get_template('mortgage.html')
@@ -82,22 +86,19 @@ def mortgage(request):
   if request.method== "POST":
 
     if "address" in request.POST:
-      print("Gotcha")
+
       add=request.POST.get("address")
       form=rent_per_unit()
-      print(add)
       geolocator = Nominatim(user_agent="geoapi")
       try:
         location = geolocator.geocode(add, timeout=10) 
         data = location.raw
         loc_data = data['display_name'].split()
-        print(loc_data[-3][:-1])
         pin=(loc_data[-3][:-1])
       except:
-        print("some error")
+        print("Error in Extrancting Pincode")
     else:
       if exists:
-        print(request.POST.get("First_Mtg_Interest_Rate"))
         if request.POST.get("First_Mtg_Interest_Rate")!= "":
           details.First_Mtg_Interest_Rate=request.POST.get("First_Mtg_Interest_Rate")
         if request.POST.get("rent")!="":
@@ -109,7 +110,6 @@ def mortgage(request):
       pin=request.POST.get('pincode')
     
     id = hello.get_houses_id(pin)
-    #print(id)
     if id==None:
       context = {
       "z":"No houses found",
@@ -124,14 +124,11 @@ def mortgage(request):
         t.append(threading.Thread(target=hello.get_house_list, name='t'+str(c+1), args=(id[i:(i+2)],lock,)))
         t[c].start()
         c=c+1
-        print(c)
-        # if i ==2:
-        #   break
       for i in range(3):#15
         t[i].join()
 
       result = hello.get_prop_list()
-      print("res",result)
+      # print("res",result)
       l=hello.get_dict(result, request)
       context = {
       "len":len(result),
@@ -151,22 +148,22 @@ def mortgage(request):
     }
     return HttpResponse(template.render(context, request))
 
-
-  
-
+# House Detail Page
 def house_details(request, id):
   template = loader.get_template('house_details.html')
   flag=False
   user = request.user
   if favourites.objects.filter(user=user, property_id= id).exists():
     flag=True
-  if request.method== "POST":
-    if favourites.objects.filter(user=user, property_id= id).exists():
+
+  # If user Clicks on Fav Icon only then this if condition will execute  
+  if request.method== "POST":   
+    if favourites.objects.filter(user=user, property_id= id).exists():  #If for remove from Favourites List
       fav=favourites.objects.filter(user=user, property_id= id)
       fav.delete()
       flag=False
-    else:
-
+    
+    else:             # Add to Favourites List
       house=None
       if house==None:
         house=hello.get_details_by_pin(id, request)
@@ -189,12 +186,9 @@ def house_details(request, id):
       Cashflow_per_unit_per_month= house["cash"],
       Cash_On_Cash_ROI= house["Cash_On_Cash_ROI"],
       fav_toggle=True)
-      print(house["cash"])
-      #fav=favourites.objects.get(user=request.user)
       fav.save()
       flag=True
-      print(house["link"])
-      print("fav", fav.link)
+
 
   house=None
   if house==None:
@@ -210,15 +204,3 @@ def house_details(request, id):
     "bool" : flag
     }
   return HttpResponse(template.render(context, request))
-
-
-
-def main(request):
-  user = request.user
-  my_location = {'latitude': 37.4224764, 'longitude': -122.0842499}
-  context = {'user': user,
-             'my_location': my_location,
-    'google_api_key': settings.GOOGLE_MAPS_API_KEY}
-  template = loader.get_template('main.html')
-  return HttpResponse(template.render(context, request))
-

@@ -1,3 +1,5 @@
+#This file contains the paths to different pages and which functions to be directed for page rendering. 
+
 from django.urls import path, include
 from . import views
 from django.views.generic.base import TemplateView

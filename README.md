@@ -32,6 +32,14 @@ python manage.py runserver
 
 ## Installations required
 
+pip install django
+pip install django-bootstrap-v5
+pip install numpy
+pip install googlemaps
+pip install geopy
+pip install --upgrade "kaleido==0.1.*"
+pip3 install pandas
+pip3 install plotly
 
 ## Tools and Technologies used
 

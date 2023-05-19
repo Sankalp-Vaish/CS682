@@ -25,9 +25,10 @@
 <header class="header">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" style="margin-bottom: 0%; position: fixed; top: 0;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/" style="position: absolute; font-family: system-ui, sans-serif; font-weight: 600;">RTInvest</a>
-
+      
       {% if user.is_authenticated %}
+      <a class="navbar-brand" href="/home" style="position: absolute; font-family: system-ui, sans-serif; font-weight: 600;">RTInvest</a>
+
       <div class="container">
         <div style="font-family: system-ui, sans-serif;">
         <ul class="navbar-nav" style="margin-left: 65px;">
@@ -74,6 +75,8 @@
 
 
       {% else %}
+      <a class="navbar-brand" href="/" style="position: absolute; font-family: system-ui, sans-serif; font-weight: 600;">RTInvest</a>
+
           <div style="margin-left: 70%; float: right; text-align: right;">
               <a href="{% url 'login' %}" data-role="button">
                   <span style="font-family: system-ui, sans-serif; font-weight: 400; color:aliceblue"><span class="glyphicon glyphicon-log-in"></span>  Login</span></span>
