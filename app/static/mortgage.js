@@ -1,5 +1,6 @@
 let popup, Popup;
 
+// render map on Search page
 function initMap() {
     const cash =document.getElementsByClassName("cashflow");
     const cash_roi =document.getElementsByClassName("coc_roi");
@@ -117,6 +118,7 @@ function initMap() {
         //   "</div>" +
         //   "</div>";
 
+        //details to be displayed on the custom popup markers
         const imgElement = document.createElement("img");
         imgElement.src = "../static/images/cash_flow.png";
         imgElement.title = "Cashflow";
@@ -177,25 +179,6 @@ function initMap() {
 
         console.log(popup);
 
-        // const marker = new google.maps.Marker({
-        //   map,
-        //   //anchorPoint: new google.maps.Point(0, -29),
-        //   position: { lat: parseFloat(coordinate[0]), lng: parseFloat(coordinate[1]) },
-        //   //title: i.toString(),
-        //   //label: (cash[i].attributes.value.value).toString(),
-        // });
-
-        // marker.addListener("click", () => {
-        //   infowindow.open({
-        //     anchor: marker,
-        //     map,
-        //   });
-        // });
-        // map.setZoom(13);
-        //var myLatlng = new google.maps.LatLng(parseFloat(coordinate[0]),parseFloat(coordinate[1]));
-        //marker.setPosition(myLatlng);
-        //marker.setVisible(true);
-        //marker.setMap(map);
       }
 
       autocomplete.addListener("place_changed", () => {

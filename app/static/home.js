@@ -1,5 +1,6 @@
 //$(document).ready(function myFunction3(){
-function myFunction3() {
+  // search the houses listed in the favorites list
+function houseSearch() {
     // Declare variables
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
@@ -62,6 +63,7 @@ function myFunction3() {
 //   }
 // }
 
+// sort the houses listed in the favorites list in ascending order
 function sort_ascending(){
   var j;
   const tr = document.getElementsByClassName("head");
@@ -82,6 +84,7 @@ function sort_ascending(){
   }
 }
 
+// sort the houses listed in the favorites list in descending order
 function sort_descending(){
   var j;
   const tr = document.getElementsByClassName("head");
@@ -102,35 +105,8 @@ function sort_descending(){
   }
 }
 
-// function sort_descending(){
-//   tr = document.getElementsByClassName("head");
-//   min=tr[0];
-//   for (i = 1; i < tr.length; i++) {
-//     td=tr[i];
-//     if (td.innerText.toUpperCase() > min.innerText.toUpperCase()) {
-//       d1=td.parentElement.parentElement.parentElement.parentElement.parentElement;
-//       d2=min.parentElement.parentElement.parentElement.parentElement.parentElement;
-//       console.log(d1.parentNode);
-//       d1.parentNode.insertBefore(d1,d2)
-//       min=td;
-//     }
-//   }
-// }
 
-// function sort_price(){
-//   tr = document.getElementsByClassName("list_price");
-//   min=tr[0];
-//   for (i = 1; i < tr.length; i++) {
-//     td=tr[i];
-//     if (td.innerText.toUpperCase() > min.innerText.toUpperCase()) {
-//       d1=td.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-//       d2=min.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-//       console.log(d1.parentNode);
-//       d1.parentNode.insertBefore(d1,d2)
-//       min=td;
-//     }
-//   }
-// }
+// sort the houses listed based on the price
 let flag=false;
 function sort_price(){
   flag=!flag
@@ -160,38 +136,3 @@ function sort_price(){
     }
   }
 }
-
-// let flag_year=false;
-// function sort_year(){
-//   flag_year=!flag_year
-//   var j;
-//   const tr = document.getElementsByClassName("list_year");
-//   //console.log(tr);
-//   switching = true;
-//   while (switching) {
-//     switching = false;
-//     for (j=0; j< tr.length-1; j++){
-//       if (flag_year){
-//         if (parseInt(tr[j].innerText.toUpperCase()) > parseInt(tr[j+1].innerText.toUpperCase())) {
-//           console.log(parseInt(tr[j].innerText.toUpperCase())) ;
-//           switching = true;
-//           break;
-//         }
-//       }
-//       else{
-//         if (parseInt(tr[j].innerText.toUpperCase()) < parseInt(tr[j+1].innerText.toUpperCase())) {
-//           console.log(parseInt(tr[j].innerText.toUpperCase())) ;
-//           switching = true;
-//           break;
-//         }
-//       }
-//     }
-//     if (switching){
-//       console.log("switch");
-//       d1=tr[j+1].parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-//       d2=tr[j].parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-//       console.log(d1);
-//       d1.parentNode.insertBefore(d1,d2)
-//     }
-//   }
-// }
