@@ -1,27 +1,26 @@
 # RTInvest
 
 <img src="https://img.shields.io/badge/Version-v1.0-blue.svg?logo=LOGO">
-<br>
 
 ## Objective/Description
 Web application that uses information fetched from APIs to calculate and generate Cash Flow Analysis of properties available in the country.
 <br>
 
 ## Structure
-The application uses is based out of a Django framework. 
+The application is based on a Django framework. The application follows the MVC architecture. The backend of the application fetches the details of properties in a specified pincode from real estate apis and sends it to a python based calculator. The front end displays the properties on a google map along with their ROI results. Each property is displayed along with a report on the cashflow analysis given by the investment calculator of the application.
 <br>
 
 ## Usage
 Steps for new user to run project 
 <ol>
 
-<li>Step 1: Clone the project from the github repository to a new folder on your system terminal.
+<li> Clone the project from the github repository to a new folder on your system terminal.
 git clone https://github.com/Sankalp-Vaish/CS682.git</li>
 
-<li>Step 2: Navigate into the project folder
+<li> Navigate into the project folder
 cd CS682</li>
 
-<li>Step 3: Start the application using the below command.
+<li> Start the application using the below command.
 
 > py manage.py runserver<br>
 > OR<br>
