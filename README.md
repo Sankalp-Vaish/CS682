@@ -58,8 +58,6 @@ cd CS682</li>
 <img src="https://img.shields.io/badge/Bootstrap-v4.2-blue.svg?logo=LOGO">
 <img src="https://img.shields.io/badge/VSCode-v1.77-blue.svg?logo=LOGO">
 
-<br>
-
 
 ## Documentation of related libraries
 
