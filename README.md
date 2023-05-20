@@ -29,12 +29,12 @@ cd CS682</li>
 <br>
  
 ## Pre-requisites
-<ol>
+<ul>
 <li> Google API key is required - Replace the current Google API key with your new key in places it is currently being used (settings.py, mortgage.html).</li>
 <li> Python </li>
 <li> Django -v 4.1.7 </li>
 <li> IDE of your choice </li>
-</ol>
+</ul>
 <br>
 
 ## Installations required
@@ -49,6 +49,7 @@ cd CS682</li>
 > pip3 install plotly
 
 <br>
+
 ## Tools and Technologies used
 
 <img src="https://img.shields.io/badge/HTML-v5-blue.svg?logo=LOGO">
@@ -57,13 +58,19 @@ cd CS682</li>
 <img src="https://img.shields.io/badge/Bootstrap-v4.2-blue.svg?logo=LOGO">
 <img src="https://img.shields.io/badge/VSCode-v1.77-blue.svg?logo=LOGO">
 
+<br>
+
+
 ## Documentation of related libraries
 
 [Bootstrap](https://getbootstrap.com/)
 
 ## Future scope
-* Integrate drawing feature into the map that helps focus on custom area
-
+Some of the many ideas that can be implemented onto the application:
+* Integrate drawing feature into the map that helps focus on custom area.
+* Various filters to help make the user experience better.
+* Interaction feature that helps set a platform for the seller and investor to interact with each.
+<br>
 
 ## Collaborators
 Prarthana Prathap
