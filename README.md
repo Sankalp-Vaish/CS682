@@ -24,6 +24,10 @@ py manage.py runserver
 OR
 python manage.py runserver
 
+Default login:
+Username: Sankalp
+Password: 1234
+
 ## Pre-requisites
 1. Google API key is required - Replace the current Google API key with your new key in places it is currently being used (settings.py, mortgage.html).
 2. Python
