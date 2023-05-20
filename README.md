@@ -8,7 +8,7 @@ Web application that uses information fetched from APIs to calculate and generat
 
 ## Structure
 The application is based on a Django framework. The application follows the MVC architecture. The backend of the application fetches the details of properties in a specified pincode from real estate apis and sends it to a python based calculator. The front end displays the properties on a google map along with their ROI results. Each property is displayed along with a report on the cashflow analysis given by the investment calculator of the application.
-<br>
+
 
 ## Usage
 Steps for new user to run project 
@@ -26,7 +26,7 @@ cd CS682</li>
 > OR<br>
 > python manage.py runserver
 </ol>
-<br>
+
  
 ## Pre-requisites
 <ul>
@@ -35,7 +35,7 @@ cd CS682</li>
 <li> Django -v 4.1.7 </li>
 <li> IDE of your choice </li>
 </ul>
-<br>
+
 
 ## Installations required
 
@@ -48,7 +48,6 @@ cd CS682</li>
 > pip3 install pandas<br>
 > pip3 install plotly
 
-<br>
 
 ## Tools and Technologies used
 
@@ -57,14 +56,14 @@ cd CS682</li>
 <img src="https://img.shields.io/badge/Django-v4.2-blue.svg?logo=LOGO">
 <img src="https://img.shields.io/badge/Bootstrap-v4.2-blue.svg?logo=LOGO">
 <img src="https://img.shields.io/badge/VSCode-v1.77-blue.svg?logo=LOGO">
-<br>
+
 
 ## Future scope
 Some of the many ideas that can be implemented onto the application:
 * Integrate drawing feature into the map that helps focus on custom area.
 * Various filters to help make the user experience better.
 * Interaction feature that helps set a platform for the seller and investor to interact with each.
-<br>
+
 
 ## Collaborators
 Prarthana Prathap
