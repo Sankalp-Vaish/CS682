@@ -1,50 +1,55 @@
 # RTInvest
 
 <img src="https://img.shields.io/badge/Version-v1.0-blue.svg?logo=LOGO">
+<br>
 
 ## Objective/Description
 Web application that uses information fetched from APIs to calculate and generate Cash Flow Analysis of properties available in the country.
+<br>
 
 ## Structure
--Apps
--realtime
--views
+The application uses is based out of a Django framework. 
+<br>
 
 ## Usage
 Steps for new user to run project 
+<ol>
 
-Step 1: Clone the project from the github repository to a new folder on your system terminal.
-git clone https://github.com/Sankalp-Vaish/CS682.git
+<li>Step 1: Clone the project from the github repository to a new folder on your system terminal.
+git clone https://github.com/Sankalp-Vaish/CS682.git</li>
 
-Step 2: Navigate into the project folder
-cd CS682
+<li>Step 2: Navigate into the project folder
+cd CS682</li>
 
-Step 3: Start the application using the below command.
-py manage.py runserver
-OR
-python manage.py runserver
+<li>Step 3: Start the application using the below command.
 
-Default login:
-Username: Sankalp
-Password: 1234
-
+> py manage.py runserver<br>
+> OR<br>
+> python manage.py runserver
+</ol>
+<br>
+ 
 ## Pre-requisites
-1. Google API key is required - Replace the current Google API key with your new key in places it is currently being used (settings.py, mortgage.html).
-2. Python
-3. Django -v 4.1.7
-4. IDE of your choice
+<ol>
+<li> Google API key is required - Replace the current Google API key with your new key in places it is currently being used (settings.py, mortgage.html).</li>
+<li> Python </li>
+<li> Django -v 4.1.7 </li>
+<li> IDE of your choice </li>
+</ol>
+<br>
 
 ## Installations required
 
-pip install django
-pip install django-bootstrap-v5
-pip install numpy
-pip install googlemaps
-pip install geopy
-pip install --upgrade "kaleido==0.1.*"
-pip3 install pandas
-pip3 install plotly
+> pip install django<br>
+> pip install django-bootstrap-v5<br>
+> pip install numpy<br>
+> pip install googlemaps<br>
+> pip install geopy<br>
+> pip install --upgrade "kaleido==0.1.*"<br>
+> pip3 install pandas<br>
+> pip3 install plotly
 
+<br>
 ## Tools and Technologies used
 
 <img src="https://img.shields.io/badge/HTML-v5-blue.svg?logo=LOGO">
